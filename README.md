@@ -1,2 +1,2 @@
-# Once_Info
+# Game_Info_GG
  
