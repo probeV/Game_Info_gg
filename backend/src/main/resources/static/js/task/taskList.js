@@ -29,13 +29,11 @@ function updateTasks() {
             const pveTasks = tasks.filter(task => task.modeType === 'PVE');
             const pvpTasks = tasks.filter(task => task.modeType === 'PVP');
 
-            if(mode == 'PVE'){
+            if (mode === 'PVE') {
                 renderTasks('PVE', pveTasks, tasksContainer, event);
-            }
-            else if(mode == 'PVP'){
+            } else if (mode === 'PVP') {
                 renderTasks('PVP', pvpTasks, tasksContainer, event);
-            }
-            else{
+            } else {
                 renderTasks('PVE', pveTasks, tasksContainer, event);
                 renderTasks('PVP', pvpTasks, tasksContainer, event);
             }
@@ -59,18 +57,9 @@ function renderTasks(modeType, tasks, container, event) {
         const weeklyContainer = document.createElement('div');
         weeklyContainer.innerHTML = '<h3><주간(WEEK)></h3>';
 
-        // 주간 작업이 없을 경우 메시지 추가
-        if(weeklyTasks.length == 0){
-            const message = getEventMessage(event);
-            weeklyContainer.innerHTML += `<p>${message}</p>`;
-        }
-
         // 주간 작업 목록 추가
         weeklyTasks.forEach(task => {
-            const taskElement = document.createElement('div');
-            taskElement.className = 'task';
-            taskElement.textContent = task.name;
-            taskElement.onclick = () => toggleTask(taskElement);
+            const taskElement = createTaskElement(task);
             weeklyContainer.appendChild(taskElement);
         });
 
@@ -78,19 +67,9 @@ function renderTasks(modeType, tasks, container, event) {
         const dailyContainer = document.createElement('div');
         dailyContainer.innerHTML = '<h3><일일(DAY)></h3>';
 
-        // 일일 작업이 없을 경우 메시지 추가
-        if(dailyTasks.length == 0){
-            const message = getEventMessage(event);
-
-            dailyContainer.innerHTML += `<p>${message}</p>`;
-        }
-
         // 일일 작업 목록 추가
         dailyTasks.forEach(task => {
-            const taskElement = document.createElement('div');
-            taskElement.className = 'task';
-            taskElement.textContent = task.name;
-            taskElement.onclick = () => toggleTask(taskElement);
+            const taskElement = createTaskElement(task);
             dailyContainer.appendChild(taskElement);
         });
 
@@ -98,24 +77,39 @@ function renderTasks(modeType, tasks, container, event) {
         taskList.appendChild(dailyContainer);
         modeContainer.appendChild(taskList);
     } else {
-        // 해당 모드의 작업이 없을 경우 메시지 추가
-        const taskList = document.createElement('div');
-        taskList.className = 'task-list';
-
         const message = getEventMessage(event);
-
-        const weeklyContainer = document.createElement('div');
-        weeklyContainer.innerHTML = '<h3><주간(WEEK)></h3>'+`<p>${message}</p>`;
-
-        const dailyContainer = document.createElement('div');
-        dailyContainer.innerHTML = '<h3><일일(DAY)></h3>'+`<p>${message}</p>`;
-
-        taskList.appendChild(weeklyContainer);
-        taskList.appendChild(dailyContainer);
-        modeContainer.appendChild(taskList);
+        modeContainer.innerHTML += `<p>${message}</p>`;
     }
 
     container.appendChild(modeContainer);
+}
+
+function createTaskElement(task) {
+    const taskElement = document.createElement('div');
+    taskElement.className = 'task';
+    taskElement.textContent = task.name;
+    taskElement.onclick = () => toggleTask(taskElement, task.id);
+    
+    // 로컬 스토리지에서 완료 상태 복원
+    const completedTasks = JSON.parse(localStorage.getItem('completedTasks')) || [];
+    if (completedTasks.includes(task.id)) {
+        taskElement.classList.add('completed');
+    }
+
+    return taskElement;
+}
+
+function toggleTask(taskElement, taskId) {
+    taskElement.classList.toggle('completed');
+
+    // 로컬 스토리지에 완료 상태 저장
+    let completedTasks = JSON.parse(localStorage.getItem('completedTasks')) || [];
+    if (taskElement.classList.contains('completed')) {
+        completedTasks.push(taskId);
+    } else {
+        completedTasks = completedTasks.filter(id => id !== taskId);
+    }
+    localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
 }
 
 function getEventMessage(event) {
@@ -131,8 +125,4 @@ function getEventMessage(event) {
         default:
             return '이벤트가 없습니다';
     }
-}
-
-function toggleTask(taskElement) {
-    taskElement.classList.toggle('completed');
 }

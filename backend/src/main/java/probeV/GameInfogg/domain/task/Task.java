@@ -18,8 +18,8 @@ import java.time.DayOfWeek;
 public class Task {
     /* PK */
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "task_id")
-    private Integer taskId;
+    @Column(name = "id")
+    private Integer id;
 
     /* Attribute */
     @Column(name = "name", nullable = false)

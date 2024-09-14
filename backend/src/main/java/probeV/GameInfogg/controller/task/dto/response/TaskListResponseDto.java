@@ -13,6 +13,7 @@ import java.time.DayOfWeek;
 @NoArgsConstructor
 public class TaskListResponseDto {
 
+    private Integer id;
     private String name;
     private ModeType modeType;
     private FrequencyType frequencyType;
@@ -21,6 +22,7 @@ public class TaskListResponseDto {
     private String time;
 
     public TaskListResponseDto(Task task) {
+        this.id = task.getId();
         this.name = task.getName();
         this.modeType = task.getModeType();
         this.frequencyType = task.getFrequencyType();
