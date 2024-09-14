@@ -6,6 +6,11 @@ import java.util.List;
 
 public interface TaskService {
 
-    // Task 전체 조회
-    List<TaskListResponseDto> viewTaskList();
+    // TaskList Filter 조회
+    List<TaskListResponseDto> getAllTaskList();
+    List<TaskListResponseDto> getFilteredByModeTaskList(String mode);
+    List<TaskListResponseDto> getFilteredByEventTaskList(String event);
+
+    List<TaskListResponseDto> getFilteredByModeEventTaskList(String mode, String event);
+
 }

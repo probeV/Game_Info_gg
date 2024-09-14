@@ -7,12 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import probeV.GameInfogg.domain.task.constant.FrequencyType;
 import probeV.GameInfogg.domain.task.constant.ModeType;
-import probeV.GameInfogg.domain.task.constant.TaskType;
+import probeV.GameInfogg.domain.task.constant.EventType;
 
-import java.lang.annotation.Target;
 import java.time.DayOfWeek;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter @Setter
 @NoArgsConstructor
@@ -36,9 +33,9 @@ public class Task {
     @Enumerated(EnumType.STRING)
     private FrequencyType frequencyType;
 
-    @Column(name = "task_type", nullable = false)
+    @Column(name = "event_type", nullable = false)
     @Enumerated(EnumType.STRING)
-    private TaskType taskType;
+    private EventType eventType;
 
     @Column(name = "day_of_week", nullable = true)
     @Enumerated(EnumType.STRING)
@@ -48,11 +45,11 @@ public class Task {
     private String time;
 
     @Builder
-    public Task(String name, ModeType modeType, FrequencyType frequencyType, TaskType taskType, DayOfWeek dayOfWeek, String time) {
+    public Task(String name, ModeType modeType, FrequencyType frequencyType, EventType eventType, DayOfWeek dayOfWeek, String time) {
         this.name = name;
         this.modeType = modeType;
         this.frequencyType = frequencyType;
-        this.taskType = taskType;
+        this.eventType = eventType;
         this.dayOfWeek = dayOfWeek;
         this.time = time;
     }

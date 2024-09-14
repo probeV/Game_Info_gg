@@ -1,0 +1,51 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.filter {
+    margin-bottom: 20px;
+}
+
+.tasks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tasks-container {
+    width: 80%;
+}
+
+.task-category {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.task-category h2 {
+    margin-bottom: 10px;
+}
+
+.task-list {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.task-list div {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.task {
+    padding: 10px;
+    margin: 5px 0;
+    background-color: white; /* 미완료 상태 */
+    cursor: pointer;
+    border: 1px solid #ccc;
+}
+
+.task.completed {
+    background-color: lightgreen; /* 완료 상태 */
+}

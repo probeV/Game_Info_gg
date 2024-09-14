@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import probeV.GameInfogg.domain.task.Task;
 import probeV.GameInfogg.domain.task.constant.FrequencyType;
 import probeV.GameInfogg.domain.task.constant.ModeType;
-import probeV.GameInfogg.domain.task.constant.TaskType;
+import probeV.GameInfogg.domain.task.constant.EventType;
 
 import java.time.DayOfWeek;
 
@@ -16,7 +16,7 @@ public class TaskListResponseDto {
     private String name;
     private ModeType modeType;
     private FrequencyType frequencyType;
-    private TaskType taskType;
+    private EventType eventType;
     private DayOfWeek dayOfWeek;
     private String time;
 
@@ -24,7 +24,7 @@ public class TaskListResponseDto {
         this.name = task.getName();
         this.modeType = task.getModeType();
         this.frequencyType = task.getFrequencyType();
-        this.taskType = task.getTaskType();
+        this.eventType = task.getEventType();
         this.dayOfWeek = task.getDayOfWeek();
         this.time = task.getTime();
     }

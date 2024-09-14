@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>숙제 체크 리스트</title>
+    <link rel="stylesheet" href="/css/taskList_styles.css">
+</head>
+<body>
+    <h1>숙제 체크 리스트</h1>
+    <div class="mode-filter">
+        <input type="radio" name="mode" value="ALL" checked> 모두 보기
+        <input type="radio" name="mode" value="PVE"> PVE
+        <input type="radio" name="mode" value="PVP"> PVP
+    </div>
+    <div class="event-filter">
+        <input type="radio" name="event" value="ALL" checked> 모두 보기
+        <input type="radio" name="event" value="NORMAL"> 일반 이벤트
+        <input type="radio" name="event" value="TIME"> 시간 이벤트
+        <input type="radio" name="event" value="SPECIAL"> 특별 이벤트
+    </div>
+    <div class="tasks">
+        <div class="tasks-container">
+            <!-- 필터링된 작업 목록이 여기에 표시됩니다 -->
+        </div>
+    </div>
+    <script src="/js/task/taskList.js"></script>
+</body>
+</html>

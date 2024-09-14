@@ -1,5 +1,5 @@
 package probeV.GameInfogg.domain.task.constant;
 
-public enum TaskType {
+public enum EventType {
     NORMAL, TIME, SPECIAL
 }
