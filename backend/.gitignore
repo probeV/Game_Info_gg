@@ -35,3 +35,10 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Spring ###
+application-oauth.properties
+application-dev.properties
+application-dev-db.properties
+application-real.properties
+application-real-db.properties
