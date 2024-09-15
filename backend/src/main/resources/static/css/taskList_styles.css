@@ -1,9 +1,18 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'NanumSquareNeo', Arial, sans-serif;
+    background-color: #f8f9fa; /* 연한 회색 배경색 */
+    color: #343a40;
 }
 
-.filter {
+.mode-filter, .event-filter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     margin-bottom: 20px;
+}
+
+.mode-filter label, .event-filter label {
+    margin-bottom: 10px;
 }
 
 .tasks {
@@ -13,21 +22,29 @@ body {
 }
 
 .tasks-container {
-    width: 80%;
+    width: 100%; /* 가로 크기 늘림 */
 }
 
 .task-category {
     text-align: center;
     margin-top: 20px;
+    background-color: #f1f3f5; /* 더 연한 회색 배경 */
+    padding: 10px;
+    border-radius: 5px; /* 모서리 둥글게 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    margin-bottom: 20px; /* 아래 여백 추가 */
 }
 
 .task-category h2 {
-    margin-bottom: 10px;
+    font-size: 2em; /* 제목 크기 */
+    font-weight: bold; /* 굵은 글씨체 */
+    margin: 0; /* 여백 제거 */
+    color: #000000; /* 검은색 */
 }
 
 .task-list {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* 주간과 일일 사이의 간격 줄임 */
     margin-bottom: 20px;
 }
 
@@ -35,15 +52,38 @@ body {
     width: 45%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-content: center;
 }
 
+.task-list h3 {
+    font-size: 1.2em; /* 소제목 크기 */
+    font-weight: normal; /* 얇은 글씨체 */
+    color: #fff; /* 흰색 글씨 */
+    background-color: #a9a9a9; /* 더 진한 회색 배경 */
+    padding: 5px 10px; /* 패딩 추가 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    width: 100%; /* 가로 크기 늘림 */
+    text-align: center; /* 중앙 정렬 */
+    margin-bottom: 10px;
+}
+
+.reset-button {
+    width: 40%;
+    margin: 0 auto; /* 중앙 정렬을 위한 마진 설정 */
+    display: block; /* 블록 요소로 변경하여 중앙 정렬 적용 */
+    margin-bottom: 10px;
+}
+
+
 .task {
-    padding: 10px;
-    margin: 5px 0;
+    padding: 5px;
     background-color: white; /* 미완료 상태 */
     cursor: pointer;
     border: 1px solid #ccc;
+    width: 120%; /* 가로 크기 더 늘림 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    margin: 0 auto; /* 중앙 정렬을 위한 마진 설정 */
+    margin-bottom: 3px;
 }
 
 .task.completed {
