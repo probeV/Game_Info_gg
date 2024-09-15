@@ -18,4 +18,4 @@ echo "> $JAR_NAME 에 실행 권한 추가"
 chmod +x $JAR_NAME
 
 echo "> JAR Name: $JAR_NAME"
-nohup java -jar -Dspring.config.location=classpath:/application.properties,/home/ec2-user/app/properties/application-oauth.properties,/home/ec2-user/app/properties/application-real.properties,/home/ec2-user/app/properties/application-real-db.properties nohup java -jar -Dspring.config.location=classpath:/application.properties,/home/ec2-user/app/properties/application-oauth.properties,/home/ec2-user/app/properties/application-real.properties,/home/ec2-user/app/properties/application-real-db.properties $REPOSITORY/Game_Info_gg/$JAR_NAME > $REPOSITORY/nohup.out 2>&1 &
+nohup java -jar -Dspring.config.location=classpath:/application.properties,/home/ec2-user/app/properties/application-oauth.properties,/home/ec2-user/app/properties/application-real.properties,/home/ec2-user/app/properties/application-real-db.properties $REPOSITORY/Game_Info_gg/$JAR_NAME > $REPOSITORY/nohup.out 2>&1 &
