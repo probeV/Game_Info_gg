@@ -21,6 +21,7 @@ public class TaskController {
 
     private final TaskService taskService;
 
+
     @GetMapping("/tasks")
     public String taskList() {
         return "TaskList";
