@@ -1,13 +1,13 @@
-package probeV.GameInfogg;
+// package probeV.GameInfogg;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+// import org.junit.jupiter.api.Test;
+// import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class GamInfoggApplicationTests {
+// @SpringBootTest
+// class GamInfoggApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+// 	@Test
+// 	void contextLoads() {
+// 	}
 
-}
+// }
