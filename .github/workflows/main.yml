@@ -53,16 +53,17 @@ jobs:
           distribution: 'temurin'
 
       # properties 만들기
-      - name: application-real.properties 만들기
+      # application.properties 덮어쓰기
+      - name: application.properties 덮어쓰기
         run: |
-          touch ./backend/src/main/resources/application-real.properties
-          echo "${{secrets.APPLICATION_REAL}}" > ./backend/src/main/resources/application-real.properties
-      - name: Upload application-real.properties
+          echo "${{secrets.APPLICATION_REAL}}" > ./backend/src/main/resources/application.properties
+      - name: Upload application.properties
         uses: actions/upload-artifact@v3
         with:
-          name: application-real.properties
-          path: ./backend/src/main/resources/application-real.properties
+          name: application.properties
+          path: ./backend/src/main/resources/application.properties
 
+      # application-real-db.properties 만들기
       - name: application-real-db.properties 만들기
         run: |
           touch ./backend/src/main/resources/application-real-db.properties

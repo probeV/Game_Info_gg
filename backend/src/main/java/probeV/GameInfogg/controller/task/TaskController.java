@@ -36,17 +36,22 @@ public class TaskController {
         // 모드, 이벤트에 따른 필터링 로직 수행
         List<TaskListResponseDto> tasks;
 
-        if ("ALL".equalsIgnoreCase(mode) && "ALL".equalsIgnoreCase(event)) {
-            tasks = taskService.getAllTaskList();
-        } else if ("ALL".equalsIgnoreCase(mode)) {
-            tasks = taskService.getFilteredByEventTaskList(event);
-        } else if ("ALL".equalsIgnoreCase(event)) {
-            tasks = taskService.getFilteredByModeTaskList(mode);
-        } else {
-            tasks = taskService.getFilteredByModeEventTaskList(mode, event);
-        }
+        try {
+            if ("ALL".equalsIgnoreCase(mode) && "ALL".equalsIgnoreCase(event)) {
+                tasks = taskService.getAllTaskList();
+            } else if ("ALL".equalsIgnoreCase(mode)) {
+                tasks = taskService.getFilteredByEventTaskList(event);
+            } else if ("ALL".equalsIgnoreCase(event)) {
+                tasks = taskService.getFilteredByModeTaskList(mode);
+            } else {
+                tasks = taskService.getFilteredByModeEventTaskList(mode, event);
+            }
 
-        // JSON으로 필터링된 데이터를 반환
-        return tasks;
+            // JSON으로 필터링된 데이터를 반환
+            return tasks;
+        } catch (Exception e) {
+            log.error("Error filtering tasks: {}", e.getMessage());
+            return null; // 에러 발생 시 null 반환
+        }
     }
 }
