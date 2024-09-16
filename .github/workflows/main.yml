@@ -53,18 +53,18 @@ jobs:
           distribution: 'temurin'
 
       #properties 만들기
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - run: touch ./backend/src/main/resources/application-real.properties
       - run: echo "${{secrets.APPLICATION_REAL}}" > ./backend/src/main/resources/application-real.properties
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: application-real.properties
           path: ./backend/src/main/resources/application-real.properties
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - run: touch ./backend/src/main/resources/application-real-db.properties
       - run: echo "${{secrets.APPLICATION_REAL_DB}}" > ./backend/src/main/resources/application-real-db.properties
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: application-real-db.properties
           path: ./backend/src/main/resources/application-real-db.properties
