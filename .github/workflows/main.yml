@@ -62,7 +62,7 @@ jobs:
           path: ./backend/src/main/resources/application-real.properties
 
       - uses: actions/checkout@v2
-        - run: touch ./backend/src/main/resources/application-real-db.properties
+      - run: touch ./backend/src/main/resources/application-real-db.properties
       - run: echo "${{secrets.APPLICATION_REAL_DB}}" > ./backend/src/main/resources/application-real-db.properties
       - uses: actions/upload-artifact@v2
         with:
