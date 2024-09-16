@@ -69,7 +69,6 @@ jobs:
           name: application-real-db.properties
           path: ./backend/src/main/resources/application-real-db.properties
 
-
       # 권한 부여
       - name: Grant execute permission for gradlew
         run: |
