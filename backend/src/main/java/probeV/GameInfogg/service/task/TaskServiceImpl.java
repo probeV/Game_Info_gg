@@ -1,15 +1,13 @@
-package probeV.GameInfogg.service.tast;
+package probeV.GameInfogg.service.task;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import probeV.GameInfogg.controller.task.dto.response.TaskListResponseDto;
-import probeV.GameInfogg.domain.task.Task;
 import probeV.GameInfogg.domain.task.constant.EventType;
 import probeV.GameInfogg.domain.task.constant.ModeType;
-import probeV.GameInfogg.repository.TaskRepository;
+import probeV.GameInfogg.repository.task.TaskRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
