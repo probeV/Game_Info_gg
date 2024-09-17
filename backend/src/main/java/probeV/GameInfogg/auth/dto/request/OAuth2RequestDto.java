@@ -6,7 +6,6 @@ import lombok.Setter;
 import probeV.GameInfogg.domain.user.User;
 import probeV.GameInfogg.domain.user.constant.RoleType;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Builder
@@ -16,16 +15,14 @@ public class OAuth2RequestDto {
     private String name;
     private String email;
     private String provider;
-    private Map<String, Object> attributes;
     private String nameAttributeKey;
     private String attributeCode;
 
     @Builder
-    public OAuth2RequestDto(String name, String email, String provider, Map<String, Object> attributes, String nameAttributeKey, String attributeCode) {
+    public OAuth2RequestDto(String name, String email, String provider, String nameAttributeKey, String attributeCode) {
         this.name = name;
         this.email = email;
         this.provider = provider;
-        this.attributes = attributes;
         this.nameAttributeKey = nameAttributeKey;
         this.attributeCode = attributeCode;
     }
@@ -45,7 +42,6 @@ public class OAuth2RequestDto {
                 .provider("naver")
                 .name((String) response.get("name"))
                 .email((String) response.get("email"))
-                .attributes(response)
                 .nameAttributeKey(userNameAttributeName)
                 .attributeCode((String) response.get("id"))
                 .build();
@@ -57,11 +53,10 @@ public class OAuth2RequestDto {
 
         return OAuth2RequestDto.builder()
                 .provider("kakao")
-                .name((String) kakaoProfile.get("nickname"))
-                .email((String) kakaoAccount.get("email"))
-                .attributes(attributes)
+                .name(kakaoProfile.get("nickname").toString())
+                .email(kakaoAccount.get("email").toString())
                 .nameAttributeKey(userNameAttributeName)
-                .attributeCode((String) attributes.get("id"))
+                .attributeCode(attributes.get("id").toString())
                 .build();
     }
 

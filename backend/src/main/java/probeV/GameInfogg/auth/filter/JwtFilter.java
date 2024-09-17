@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 import probeV.GameInfogg.auth.jwt.JwtTokenProvider;
 
@@ -24,7 +23,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
-    
+    // Spring Security Filter Chain 보다 먼저 체크
     @Value("${jwt.active.url}")
     List<String> activeToken;
     

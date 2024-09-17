@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import probeV.GameInfogg.controller.task.dto.response.TaskListResponseDto;
-import probeV.GameInfogg.service.tast.TaskService;
+import probeV.GameInfogg.service.task.TaskService;
 
 import java.util.List;
 

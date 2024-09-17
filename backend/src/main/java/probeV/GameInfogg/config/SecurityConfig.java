@@ -12,13 +12,12 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import probeV.GameInfogg.auth.CustomOAuth2UserService;
-import probeV.GameInfogg.auth.filter.JwtFilter;
 import probeV.GameInfogg.auth.handler.JwtAccessDeniedHandler;
 import probeV.GameInfogg.auth.handler.JwtAuthenticationEntryPoint;
+import probeV.GameInfogg.auth.handler.MyAuthenticationSuccessHandler;
 import probeV.GameInfogg.auth.jwt.JwtTokenProvider;
 
 @RequiredArgsConstructor
@@ -29,7 +28,7 @@ public class SecurityConfig {
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
     private final JwtTokenProvider jwtTokenProvider;
-
+    
     private final CustomOAuth2UserService customOAuth2UserService;
 
     @Bean
@@ -72,12 +71,10 @@ public class SecurityConfig {
                         .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                         .accessDeniedHandler(jwtAccessDeniedHandler))
 
-                // JWT 필터를 추가
-//                .addFilterBefore(new JwtFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
-
+                // oauth2 로그인 
                 .oauth2Login(oAuth2LoginConfigurer -> oAuth2LoginConfigurer
                         .loginPage("/api/v1/login")
-                        
+                        .successHandler(new MyAuthenticationSuccessHandler(jwtTokenProvider))
                         .userInfoEndpoint(userInfoEndpointConfig -> userInfoEndpointConfig
                                 .userService(customOAuth2UserService)));
 

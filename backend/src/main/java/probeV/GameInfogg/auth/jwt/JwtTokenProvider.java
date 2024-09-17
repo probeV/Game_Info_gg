@@ -16,7 +16,6 @@ import probeV.GameInfogg.auth.dto.response.AccessTokenResponseDto;
 import probeV.GameInfogg.auth.dto.response.RefreshTokenResponseDto;
 import org.springframework.security.core.Authentication;
 
-import java.security.Key;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;

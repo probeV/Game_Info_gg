@@ -27,6 +27,8 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 
+        log.info("로그인 성공 및 유저 저장");
+
         OAuth2UserService<OAuth2UserRequest, OAuth2User> service = new DefaultOAuth2UserService();
         OAuth2User oAuth2User = service.loadUser(userRequest); // OAuth2 정보를 가져옴
 
@@ -38,12 +40,9 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails()
                 .getUserInfoEndpoint().getUserNameAttributeName(); // 해당 소셜 서비스에서 유니크한 id값을 전달
 
-        System.out.println("registrationId: {}" + registrationId);
-        System.out.println("userNameAttributeName: {}" + userNameAttributeName);
-
         // OAuth2RequestDto 생성
         OAuth2RequestDto oAuth2RequestDto = OAuth2RequestDto.of(originAttributes, userNameAttributeName, registrationId);
-
+        
         // 서버로 부터 가져온 속성값들을 기반으로 Save or Update
         User user = saveOrUpdate(oAuth2RequestDto);
 

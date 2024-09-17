@@ -1,4 +1,4 @@
-package probeV.GameInfogg.service.tast;
+package probeV.GameInfogg.service.task;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
