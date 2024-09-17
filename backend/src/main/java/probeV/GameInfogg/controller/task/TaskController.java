@@ -23,7 +23,7 @@ public class TaskController {
 
     @GetMapping("/tasks")
     public String taskList() {
-        return "TaskList/TaskList";
+        return "pages/TaskListPages/TaskList";
     }
 
     // AJAX 요청을 처리하는 컨트롤러

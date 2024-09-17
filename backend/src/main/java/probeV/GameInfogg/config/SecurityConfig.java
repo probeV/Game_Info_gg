@@ -21,7 +21,6 @@ import probeV.GameInfogg.auth.handler.JwtAccessDeniedHandler;
 import probeV.GameInfogg.auth.handler.JwtAuthenticationEntryPoint;
 import probeV.GameInfogg.auth.jwt.JwtTokenProvider;
 
-
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
@@ -42,7 +41,8 @@ public class SecurityConfig {
     public WebSecurityCustomizer webSecurityCustomizer() { // security를 적용하지 않을 리소스
         return web -> web.ignoring()
                 // error endpoint를 열어줘야 함
-                .requestMatchers("/error");
+                .requestMatchers("/error", "/h2-console/*")
+                .requestMatchers("/css/**", "/js/**", "/images/**", "/fonts/**", "/favicon.ico", "/icon-*");
     }
 
     @Bean
@@ -62,13 +62,9 @@ public class SecurityConfig {
                 // request 인증, 인가 설정
                 .authorizeHttpRequests(request ->
                         request.requestMatchers(
-                                        new AntPathRequestMatcher("/"),
-                                        new AntPathRequestMatcher("/api/v1/tasks/*"),
-                                        new AntPathRequestMatcher("/api/v1/login")
-                                ).permitAll()
-                                .requestMatchers("/h2-console").permitAll()
-                                .requestMatchers("/favicon.ico").permitAll()
-                                .anyRequest().authenticated()
+                                        new AntPathRequestMatcher("/api/vi/admin")
+                                ).authenticated()
+                                .anyRequest().permitAll()
                 )
 
                 // 인증 예외 핸들링

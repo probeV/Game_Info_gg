@@ -1,15 +1,10 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>숙제 체크 리스트</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquareNeo@1.0/nanumsquareneo.css"> <!-- 폰트 링크 추가 -->
-    <link rel="stylesheet" href="/css/taskList_styles.css">
-    <link rel="stylesheet" href="/css/menu_styles.css"> <!-- 메뉴 스타일 시트 추가 -->
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/fragments/header :: header" />
+
 <body class="container mt-5">
-    {{ include 'Nav/Navbar.html' }}
+    <div th:replace="layout/fragments/navbar :: menu"/>
+
     <div class="mt-5 pt-5"> <!-- 메뉴바 아래 여백 추가 -->
         <h1 class="text-center mb-4">원스휴먼 숙제 체크 리스트</h1>
         <div class="mode-filter btn-group btn-group-toggle" data-toggle="buttons">
@@ -46,6 +41,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> <!-- jQuery 추가 -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="/js/taskList/taskList.js"></script> <!-- 경로 확인 -->
+    <script src="/js/TaskListPage/taskList.js"></script> <!-- 경로 확인 -->
 </body>
 </html>

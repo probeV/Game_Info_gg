@@ -14,7 +14,7 @@ public class AuthController {
 
     @GetMapping("/login")
     public String ToLoginPage(){
-        return "Login/Login";
+        return "pages/LoginPage/Login";
     }
 
 }

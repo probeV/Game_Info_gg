@@ -1,6 +1,7 @@
 package probeV.GameInfogg.auth;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -16,6 +17,7 @@ import probeV.GameInfogg.domain.user.User;
 import java.util.Collections;
 import java.util.Map;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
@@ -36,6 +38,9 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails()
                 .getUserInfoEndpoint().getUserNameAttributeName(); // 해당 소셜 서비스에서 유니크한 id값을 전달
 
+        System.out.println("registrationId: {}" + registrationId);
+        System.out.println("userNameAttributeName: {}" + userNameAttributeName);
+
         // OAuth2RequestDto 생성
         OAuth2RequestDto oAuth2RequestDto = OAuth2RequestDto.of(originAttributes, userNameAttributeName, registrationId);
 
@@ -45,7 +50,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         return new DefaultOAuth2User(
                 Collections.singleton(
                         new SimpleGrantedAuthority(user.getRoleType().toString())),
-                oAuth2RequestDto.getAttributes(),
+                originAttributes,
                 userNameAttributeName
         );
     }

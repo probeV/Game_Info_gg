@@ -11,6 +11,7 @@ import java.util.Map;
 
 @Builder
 @Getter @Setter
+@SuppressWarnings("unchecked")
 public class OAuth2RequestDto {
     private String name;
     private String email;
@@ -32,9 +33,9 @@ public class OAuth2RequestDto {
     // 카카오, 네이버 로그인 처리
     public static OAuth2RequestDto of(Map<String, Object> attributes, String userNameAttributeName, String registrationId) {
         if ("naver".equals(registrationId)) {
-            return ofNaver("id", attributes);
+            return ofNaver("response", attributes);
         }
-        return ofKakao("response", attributes);
+        return ofKakao("id", attributes);
     }
 
     private static OAuth2RequestDto ofNaver(String userNameAttributeName, Map<String, Object> attributes){

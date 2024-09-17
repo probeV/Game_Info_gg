@@ -38,7 +38,9 @@ public class JwtFilter extends OncePerRequestFilter {
         HttpServletResponse response, 
         FilterChain filterChain
         ) throws IOException, ServletException {
-        
+
+        log.info("현재 URI : " + request.getRequestURI());
+
         // 토큰이 필요없는 경우, 권한이 필요없는 요청 
         if(!activeToken.contains(request.getRequestURI())){
             filterChain.doFilter(request, response);
