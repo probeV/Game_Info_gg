@@ -3,7 +3,6 @@ package probeV.GameInfogg.controller.task;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +23,7 @@ public class TaskController {
 
     @GetMapping("/tasks")
     public String taskList() {
-        return "TaskList";
+        return "TaskList/TaskList";
     }
 
     // AJAX 요청을 처리하는 컨트롤러

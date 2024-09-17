@@ -13,7 +13,7 @@
 // import probeV.GameInfogg.domain.task.constant.FrequencyType;
 // import probeV.GameInfogg.domain.task.constant.ModeType;
 // import probeV.GameInfogg.domain.task.constant.EventType;
-// import probeV.GameInfogg.repository.TaskRepository;
+// import probeV.GameInfogg.repository.task.TaskRepository;
 
 // import java.time.DayOfWeek;
 // import java.util.List;
