@@ -55,11 +55,6 @@ function updateTasks() {
         const tasksContainer = $('.tasks-container');
         tasksContainer.empty(); // 이전 내용 제거
 
-        if (!Array.isArray(tasks)) {
-            console.error('Returned tasks is not an array:', tasks);
-            return; // 배열이 아닐 경우 함수 종료
-        }
-
         const pveTasks = tasks.filter(task => task.modeType === 'PVE');
         const pvpTasks = tasks.filter(task => task.modeType === 'PVP');
 

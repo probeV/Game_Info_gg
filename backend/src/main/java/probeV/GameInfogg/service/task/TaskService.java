@@ -1,4 +1,4 @@
-package probeV.GameInfogg.service.tast;
+package probeV.GameInfogg.service.task;
 
 import probeV.GameInfogg.controller.task.dto.response.TaskListResponseDto;
 
