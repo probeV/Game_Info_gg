@@ -1,0 +1,14 @@
+body {
+    padding-top: 40px;
+    font-family: 'NanumSquareNeo', Arial, sans-serif;
+    background-color: #f8f9fa; /* 연한 회색 배경색 */
+    color: #343a40;
+}
+
+.logo {
+    background-image: url('/images/logo/logo.png');
+    background-repeat: no-repeat; /* 이미지 반복 방지 */
+    background-size: contain; /* 이미지 크기 조정 */
+    background-position: center; /* 이미지 중앙 배치 */
+    /* width, height, cursor 는 사용할 때 마다 상황에 맞춰 조정 */
+}

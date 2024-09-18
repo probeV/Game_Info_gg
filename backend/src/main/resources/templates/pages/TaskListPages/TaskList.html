@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{layout/fragments/header :: header}" />
-
+<!-- Start of Selection -->
+<head>
+    <div th:replace="~{layout/fragments/header :: header}"></div>
+    <link rel="stylesheet" href="/css/taskList_styles.css" />
+</head>
+<!-- End of Selection -->
 <body class="container mt-5">
     <div th:replace="~{layout/fragments/navbar :: menu}"/>
 

@@ -1,9 +1,3 @@
-body {
-    font-family: 'NanumSquareNeo', Arial, sans-serif;
-    background-color: #f8f9fa; /* 연한 회색 배경색 */
-    color: #343a40;
-}
-
 .mode-filter, .event-filter {
     display: flex;
     flex-direction: row;
