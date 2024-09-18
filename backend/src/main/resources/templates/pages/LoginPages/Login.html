@@ -1,14 +1,31 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{layout/fragments/header :: header}" />
+<head >
+    <div th:replace="~{layout/fragments/header :: header}"></div>
+    <link rel="stylesheet" href="/css/login_styles.css">
+</head>
 <body class="container mt-5">
-    <div th:replace="~{layout/fragments/navbar :: menu}"/>
+    <div class="login-container d-flex flex-column justify-content-center align-items-center" style="margin-bottom: 30px; margin-top: 10px;">
+        <div class="logo" onclick="location.href='/'" style="cursor: pointer; width: 200px; height: 50px;"></div> 
+        <div class="login-title d-flex flex-column justify-content-center align-items-center">
+            <div>
+                <h6> 원스 인포 </h6>
+            </div>
+        </div>
+    </div>
 
-
-    <div class="mt-5 pt-5">
-        <div> 
-            <button onclick="location.href='http://localhost:8080/oauth2/authorization/naver'">네이버</button>
-            <button onclick="location.href='http://localhost:8080/oauth2/authorization/kakao'">카카오</button>
+    <div class="rounded-box" style="border: 1px solid #ccc; border-radius: 15px; padding: 20px; text-align: center; background-color: #f0f0f0; max-width: 50%; margin: auto;">
+        <div>
+            <h3> 로그인 </h3>
+        </div>
+        <div>
+            <h6> 소셜 로그인으로 로그인 해주세요. </h6>
+        </div>
+        <div class="mt-5 pt-5 pb-2 mb-2">
+            <div class="login-buttons"> 
+                <button class="login-button naver" onclick="location.href='http://localhost:8080/oauth2/authorization/naver'"></button>
+                <button class="login-button kakao" onclick="location.href='http://localhost:8080/oauth2/authorization/kakao'"></button>
+            </div>
         </div>
     </div>
 
