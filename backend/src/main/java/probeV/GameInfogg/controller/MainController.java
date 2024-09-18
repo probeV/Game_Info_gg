@@ -12,7 +12,17 @@ public class MainController {
 
     @GetMapping("/")
     public String redirectToTasks() {
-        return "redirect:/api/v1/tasks";
+        return "redirect:/tasks";
+    }
+
+    @GetMapping("/tasks")
+    public String taskList() {
+        return "pages/TaskListPages/DefaultTaskList";
+    }
+
+    @GetMapping("/logins")
+    public String ToLoginPage(){
+        return "pages/LoginPages/Login";
     }
 
 }

@@ -20,12 +20,6 @@ public class TaskController {
 
     private final TaskService taskService;
 
-
-    @GetMapping("/tasks")
-    public String taskList() {
-        return "pages/TaskListPages/TaskList";
-    }
-
     // AJAX 요청을 처리하는 컨트롤러
     @GetMapping("/tasks/filter")
     @ResponseBody

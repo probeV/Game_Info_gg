@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<script>
+    // 쿠키에서 AccessToken을 읽어 로컬 스토리지에 저장하고 쿠키를 삭제
+    function getCookie(name) {
+        let value = "; " + document.cookie;
+        let parts = value.split("; " + name + "=");
+        if (parts.length === 2) return parts.pop().split(";").shift();
+    }
+
+    const accessToken = getCookie('AccessToken');
+    if (accessToken) {
+        localStorage.setItem('accessToken', accessToken);
+
+        // 쿠키 삭제
+        document.cookie = "AccessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+        window.location.href = '/';
+    } else {
+        console.error('AccessToken이 없습니다.');
+    }
+</script>
+</body>
+<div th:replace="~{layout/fragments/footer :: footer}"></div>
+</html>

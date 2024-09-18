@@ -56,7 +56,9 @@ public class JwtTokenProvider implements InitializingBean {
         Date accessExprTime = new Date(now + this.accessTokenValidityInMilliseconds);
 
         DefaultOAuth2User defaultOAuth2User = (DefaultOAuth2User) authentication.getPrincipal();
+        // 소셜 플렛폼에서의 고유한 id
         Object id = defaultOAuth2User.getAttributes().get("id");
+        // 소셜 플렛폼에서의 이름
         String nameAttributeKey = defaultOAuth2User.getName();
         String provider;
         if(nameAttributeKey.equals("respoonse")){

@@ -38,10 +38,16 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
         refreshTokenCookie.setPath("/");
         response.addCookie(refreshTokenCookie);
 
-        // "/"로 리다이렉트
-        // AccessToken을 HTTP Header에 담아 전송
-        response.setHeader("Authorization", "Bearer " + accessTokenResponseDto.getAccessToken());
+        // AccessToken을 쿠키에 저장
+        Cookie accessTokenCookie = new Cookie("AccessToken", accessTokenResponseDto.getAccessToken());
+        accessTokenCookie.setHttpOnly(false); // 클라이언트에서 접근 가능하도록 설정
+        //accessTokenCookie.setSecure(true); // HTTPS에서만 전송
+        accessTokenCookie.setPath("/");
+        accessTokenCookie.setMaxAge(30); // 1분 동안 유효
+        response.addCookie(accessTokenCookie);
 
+        // redirect.html로 리다이렉트
+        response.sendRedirect("/api/v1/auths/redirect");
     }
     
 }

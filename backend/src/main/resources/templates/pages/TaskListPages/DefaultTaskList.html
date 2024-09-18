@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<!-- Start of Selection -->
 <head>
     <div th:replace="~{layout/fragments/header :: header}"></div>
     <link rel="stylesheet" href="/css/taskList_styles.css" />
 </head>
-<!-- End of Selection -->
 <body class="container mt-5">
     <div th:replace="~{layout/fragments/navbar :: menu}"/>
 
@@ -42,9 +40,7 @@
             <!-- 필터링된 작업 목록이 여기에 표시됩니다 -->
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> <!-- jQuery 추가 -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="/js/TaskListPages/TaskList.js"></script> <!-- 경로 확인 -->
+    <div th:replace="~{layout/fragments/footer :: footer}"></div>
+    <script src="/js/TaskListPages/DefaultTaskList.js"></script>
 </body>
 </html>
