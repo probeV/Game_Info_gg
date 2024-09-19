@@ -1,6 +1,7 @@
 package probeV.GameInfogg.service.admin;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import probeV.GameInfogg.domain.user.User;
 import probeV.GameInfogg.controller.admin.dto.response.UserListResponseDto;
-import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskSaveRequestDto;
-import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskUpdateDto;
+import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListSaveRequestDto;
+import java.util.Set;
+import java.util.Map;
+import java.util.function.Function;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Slf4j
@@ -31,46 +35,58 @@ public class AdminServiceImpl implements AdminService {
 
     // 기본 숙제 체크 리스트 항목 생성
     @Override
-    public void createTask(String mode, String frequency, String event, DefaultTaskSaveRequestDto requestDto) {
+    @Transactional
+    public void saveTasks(List<DefaultTaskListSaveRequestDto> requestDto) {
+        log.info("saveTasks 호출");
 
-        ModeType modeType = ModeType.valueOf(mode);
-        FrequencyType frequencyType = FrequencyType.valueOf(frequency);
-        EventType eventType = EventType.valueOf(event);
+        // DB에서 현재 존재하는 Task ID 목록 가져오기
+        List<DefaultTask> existingTasks = defaultTaskRepository.findAll();
 
+        // 존재하는 Task ID 목록 가져오기
+        Set<Integer> existingTaskIds = existingTasks.stream()
+            .map(DefaultTask::getId)
+            .collect(Collectors.toSet());
 
-        DefaultTask entity = DefaultTask.builder()
-            .name(requestDto.getName())
-            .modeType(modeType)
-            .frequencyType(frequencyType)
-            .eventType(eventType)
-            .dayOfWeek(requestDto.getDayOfWeek())
-            .time(requestDto.getTime())
-            .build();
+        // 존재하는 Task ID를 Key로, Task를 Value로 하는 Map 생성
+        Map<Integer, DefaultTask> taskMap = existingTasks.stream()
+            .collect(Collectors.toMap(DefaultTask::getId, Function.identity()));
 
-        defaultTaskRepository.save(entity);
+        // 수정 및 생성 처리
+        for (DefaultTaskListSaveRequestDto dto : requestDto) {
+            // 이미 존재하는 경우
+            if (dto.getId() != null && taskMap.containsKey(dto.getId())) {
+                // 수정 로직 호출
+                log.info("saveTasks 수정 로직 호출" + dto.getId());
+
+                DefaultTask task = taskMap.get(dto.getId());
+                task.update(dto.getName(), ModeType.valueOf(dto.getMode().toUpperCase()), FrequencyType.valueOf(dto.getFrequency().toUpperCase()), EventType.valueOf(dto.getEvent().toUpperCase()));
+                // existingTaskIds에서 제거
+                existingTaskIds.remove(dto.getId());
+            } 
+            // 존재하지 않는 경우
+            else if (dto.getId() == null) {
+                // 생성 로직
+                log.info("saveTasks 생성 로직 호출" + dto.getId());
+
+                defaultTaskRepository.save(dto.toEntity());
+            }
+            else {
+                log.error("saveTasks 오류 발생" + dto.getId());
+
+                throw new TaskNotFoundException("Task not found");
+            }
+        }
+
+        // 삭제 처리
+        for (Integer id : existingTaskIds) {
+            // 삭제 로직 호출
+            log.info("saveTasks 삭제 로직 호출" + id);
+
+            defaultTaskRepository.deleteById(id);
+        }
+
     }
 
-    // 기본 숙제 체크 리스트 항목 수정
-    @Override
-    public void updateTask(Integer id, String mode, String frequency, String event, DefaultTaskUpdateDto requestDto) {
-        DefaultTask entity = defaultTaskRepository.findById(id)
-            .orElseThrow(() -> new TaskNotFoundException("Task not found with id: " + id));
-
-        ModeType modeType = ModeType.valueOf(mode);
-        FrequencyType frequencyType = FrequencyType.valueOf(frequency);
-        EventType eventType = EventType.valueOf(event);
-
-        entity.update(requestDto.getName(), modeType, frequencyType, eventType, requestDto.getDayOfWeek(), requestDto.getTime() );    
-    }
-
-    // 기본 숙제 체크 리스트 항목 삭제
-    @Override
-    public void deleteTask(Integer id) {
-        DefaultTask entity = defaultTaskRepository.findById(id)
-            .orElseThrow(() -> new TaskNotFoundException("Task not found with id: " + id));
-
-        defaultTaskRepository.delete(entity);
-    }
 
     // 유저 목록 조회
     @Override

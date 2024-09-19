@@ -1,16 +1,16 @@
 package probeV.GameInfogg.service.task;
 
-import probeV.GameInfogg.controller.task.dto.response.TaskListResponseDto;
+import probeV.GameInfogg.controller.task.dto.response.DefaultTaskListResponseDto;
 
 import java.util.List;
 
 public interface DefaultTaskService {
 
     // TaskList Filter 조회
-    List<TaskListResponseDto> getAllTaskList();
-    List<TaskListResponseDto> getFilteredByModeTaskList(String mode);
-    List<TaskListResponseDto> getFilteredByEventTaskList(String event);
+    List<DefaultTaskListResponseDto> getAllTaskList();
+    List<DefaultTaskListResponseDto> getFilteredByModeTaskList(String mode);
+    List<DefaultTaskListResponseDto> getFilteredByEventTaskList(String event);
 
-    List<TaskListResponseDto> getFilteredByModeEventTaskList(String mode, String event);
+    List<DefaultTaskListResponseDto> getFilteredByModeEventTaskList(String mode, String event);
 
 }

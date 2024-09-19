@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import probeV.GameInfogg.controller.task.dto.response.TaskListResponseDto;
+import probeV.GameInfogg.controller.task.dto.response.DefaultTaskListResponseDto;
 import probeV.GameInfogg.domain.task.DefaultTask;
 import probeV.GameInfogg.domain.task.constant.FrequencyType;
 import probeV.GameInfogg.domain.task.constant.ModeType;
@@ -71,8 +71,6 @@ class DefaultTaskServiceImplTest {
                 .modeType(ModeType.PVE)
                 .frequencyType(FrequencyType.DAILY)
                 .eventType(EventType.TIME)
-                .dayOfWeek(null)
-                .time("01:00")
                 .build();
         defaultTaskRepository.save(defaultTask);
 
@@ -83,8 +81,6 @@ class DefaultTaskServiceImplTest {
                 .modeType(ModeType.PVP)
                 .frequencyType(FrequencyType.WEEKLY)
                 .eventType(EventType.TIME)
-                .dayOfWeek(DayOfWeek.TUESDAY)
-                .time("16:00")
                 .build();
         defaultTaskRepository.save(defaultTask);
     }
@@ -102,7 +98,7 @@ class DefaultTaskServiceImplTest {
          //given
 
          //when
-        List<TaskListResponseDto> responseDto = defaultTaskService.getAllTaskList();
+        List<DefaultTaskListResponseDto> responseDto = defaultTaskService.getAllTaskList();
 
          //then
         Assertions.assertThat(responseDto.get(0).getName()).isEqualTo("일일 필드 이벤트(3회)");
@@ -115,7 +111,7 @@ class DefaultTaskServiceImplTest {
          //given
 
          //when
-        List<TaskListResponseDto> responseDto = defaultTaskService.getFilteredByModeTaskList("pve");
+        List<DefaultTaskListResponseDto> responseDto = defaultTaskService.getFilteredByModeTaskList("pve");
 
          //then
         Assertions.assertThat(responseDto.get(0).getName()).isEqualTo("일일 필드 이벤트(3회)");

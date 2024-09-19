@@ -37,29 +37,18 @@ public class DefaultTask {
     @Enumerated(EnumType.STRING)
     private EventType eventType;
 
-    @Column(name = "day_of_week", nullable = true)
-    @Enumerated(EnumType.STRING)
-    private DayOfWeek dayOfWeek;
-
-    @Column(name = "time", nullable = true)
-    private String time;
-
     @Builder
-    public DefaultTask(String name, ModeType modeType, FrequencyType frequencyType, EventType eventType, DayOfWeek dayOfWeek, String time) {
+    public DefaultTask(String name, ModeType modeType, FrequencyType frequencyType, EventType eventType) {
         this.name = name;
         this.modeType = modeType;
         this.frequencyType = frequencyType;
         this.eventType = eventType;
-        this.dayOfWeek = dayOfWeek;
-        this.time = time;
     }
 
-    public void update(String name, ModeType modeType, FrequencyType frequencyType, EventType eventType, DayOfWeek dayOfWeek, String time) {
+    public void update(String name, ModeType modeType, FrequencyType frequencyType, EventType eventType) {
         this.name = name;
         this.modeType = modeType;
         this.frequencyType = frequencyType;
         this.eventType = eventType;
-        this.dayOfWeek = dayOfWeek;
-        this.time = time;
     }
 }

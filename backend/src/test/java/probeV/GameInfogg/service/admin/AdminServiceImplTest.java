@@ -5,120 +5,151 @@ import static org.mockito.Mockito.*;
 
 import java.util.Optional;
 import java.util.List;
+import java.util.Arrays;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-
+import org.springframework.transaction.annotation.Transactional;
+import lombok.extern.slf4j.Slf4j;
 import probeV.GameInfogg.domain.task.DefaultTask;
+import probeV.GameInfogg.domain.task.constant.EventType;
+import probeV.GameInfogg.domain.task.constant.FrequencyType;
 import probeV.GameInfogg.domain.user.User;
+import probeV.GameInfogg.domain.user.constant.RoleType;
 import probeV.GameInfogg.repository.task.DefaultTaskRepository;
 import probeV.GameInfogg.repository.user.UserRepository;
-import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskSaveRequestDto;
-import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskUpdateDto;
+import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListSaveRequestDto;
 import probeV.GameInfogg.controller.admin.dto.response.UserListResponseDto;
 import probeV.GameInfogg.exception.task.TaskNotFoundException;
+import probeV.GameInfogg.domain.task.constant.ModeType;
+import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
+import org.springframework.data.domain.PageRequest;
 
+
+@Slf4j
+@SpringBootTest
+@Transactional
 class AdminServiceImplTest {
 
-    @InjectMocks
+    @Autowired
     private AdminServiceImpl adminService;
 
-    @Mock
+    @Autowired
     private DefaultTaskRepository defaultTaskRepository;
 
-    @Mock
+    @Autowired
     private UserRepository userRepository;
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
+
+    @Test
+    public void saveTasks_생성_성공() {
+        // Given
+        DefaultTaskListSaveRequestDto dto1 = new DefaultTaskListSaveRequestDto(null, "Task 1", ModeType.PVP.toString(), FrequencyType.DAILY.toString(), EventType.NORMAL.toString());
+        DefaultTaskListSaveRequestDto dto2 = new DefaultTaskListSaveRequestDto(null, "Task 2", ModeType.PVE.toString(), FrequencyType.DAILY.toString(), EventType.NORMAL.toString());
+        List<DefaultTaskListSaveRequestDto> requestDto = Arrays.asList(dto1, dto2);
+
+        // When
+        adminService.saveTasks(requestDto);
+
+        // Then
+        List<DefaultTask> tasks = defaultTaskRepository.findAll();
+        assertThat(2).isEqualTo(tasks.size());
+        assertThat(tasks.get(0).getName()).isEqualTo("Task 1");
+        assertThat(tasks.get(1).getName()).isEqualTo("Task 2");
     }
 
     @Test
-    void createTask_성공() {
-        // given
-        DefaultTaskSaveRequestDto requestDto = new DefaultTaskSaveRequestDto("테스트 태스크", 1, "12:00");
-        
-        // when
-        adminService.createTask("DAILY", "WEEKLY", "CHAOS_DUNGEON", requestDto);
-        
-        // then
-        verify(defaultTaskRepository, times(1)).save(any(DefaultTask.class));
+    public void saveTasks_수정_성공() {
+        // Given
+        DefaultTask task1 = DefaultTask.builder()
+                .name("Task 0")
+                .modeType(ModeType.PVP)
+                .frequencyType(FrequencyType.DAILY)
+                .eventType(EventType.NORMAL)
+                .build();
+        defaultTaskRepository.save(task1);
+
+        DefaultTaskListSaveRequestDto dto1 = new DefaultTaskListSaveRequestDto(1, "Task 1", ModeType.PVE.toString(), FrequencyType.WEEKLY.toString(), EventType.TIME.toString());
+        DefaultTaskListSaveRequestDto dto2 = new DefaultTaskListSaveRequestDto(null, "Task 2", ModeType.PVE.toString(), FrequencyType.DAILY.toString(), EventType.NORMAL.toString());
+        List<DefaultTaskListSaveRequestDto> requestDto = Arrays.asList(dto1, dto2);
+
+        // When
+        adminService.saveTasks(requestDto);
+
+        // Then
+        List<DefaultTask> tasks = defaultTaskRepository.findAll();
+        assertThat(2).isEqualTo(tasks.size());
+        assertThat(tasks.get(0).getName()).isEqualTo("Task 1");
+        assertThat(tasks.get(1).getName()).isEqualTo("Task 2");
+    }
+    
+    @Test
+    public void saveTasks_존재하지_않는_id_예외() {
+        // Given
+        DefaultTaskListSaveRequestDto dto1 = new DefaultTaskListSaveRequestDto(1, "Task 1", ModeType.PVE.toString(), FrequencyType.WEEKLY.toString(), EventType.TIME.toString());
+        DefaultTaskListSaveRequestDto dto2 = new DefaultTaskListSaveRequestDto(2, "Task 2", ModeType.PVE.toString(), FrequencyType.DAILY.toString(), EventType.NORMAL.toString());
+        List<DefaultTaskListSaveRequestDto> requestDto = Arrays.asList(dto1, dto2);
+
+        // When & Then
+        assertThrows(TaskNotFoundException.class, () -> adminService.saveTasks(requestDto));
     }
 
     @Test
-    void updateTask_성공() {
-        // given
-        Integer taskId = 1;
-        DefaultTask existingTask = new DefaultTask();
-        when(defaultTaskRepository.findById(taskId)).thenReturn(Optional.of(existingTask));
-        
-        DefaultTaskUpdateDto updateDto = new DefaultTaskUpdateDto("수정된 태스크", 2, "13:00");
-        
-        // when
-        adminService.updateTask(taskId, "DAILY", "WEEKLY", "CHAOS_DUNGEON", updateDto);
-        
-        // then
-        verify(defaultTaskRepository, times(1)).findById(taskId);
-        assertEquals("수정된 태스크", existingTask.getName());
+    public void saveTasks_삭제_성공() {
+        // Given
+        DefaultTask task1 = DefaultTask.builder()
+                .name("Task 0")
+                .modeType(ModeType.PVP)
+                .frequencyType(FrequencyType.DAILY)
+                .eventType(EventType.NORMAL)
+                .build();
+        defaultTaskRepository.save(task1);
+
+        List<DefaultTaskListSaveRequestDto> requestDto = Arrays.asList();
+
+        // When
+        adminService.saveTasks(requestDto);
+
+        // Then
+        List<DefaultTask> tasks = defaultTaskRepository.findAll();
+        assertThat(0).isEqualTo(tasks.size());
     }
 
-    @Test
-    void updateTask_태스크없음_예외발생() {
-        // given
-        Integer taskId = 1;
-        when(defaultTaskRepository.findById(taskId)).thenReturn(Optional.empty());
-        
-        DefaultTaskUpdateDto updateDto = new DefaultTaskUpdateDto("수정된 태스크", 2, "13:00");
-        
-        // when & then
-        assertThrows(TaskNotFoundException.class, () -> 
-            adminService.updateTask(taskId, "DAILY", "WEEKLY", "CHAOS_DUNGEON", updateDto));
-    }
-
-    @Test
-    void deleteTask_성공() {
-        // given
-        Integer taskId = 1;
-        DefaultTask existingTask = new DefaultTask();
-        when(defaultTaskRepository.findById(taskId)).thenReturn(Optional.of(existingTask));
-        
-        // when
-        adminService.deleteTask(taskId);
-        
-        // then
-        verify(defaultTaskRepository, times(1)).delete(existingTask);
-    }
-
-    @Test
-    void deleteTask_태스크없음_예외발생() {
-        // given
-        Integer taskId = 1;
-        when(defaultTaskRepository.findById(taskId)).thenReturn(Optional.empty());
-        
-        // when & then
-        assertThrows(TaskNotFoundException.class, () -> adminService.deleteTask(taskId));
-    }
 
     @Test
     void getUserList_성공() {
         // given
-        List<User> users = List.of(new User(), new User());
-        Page<User> userPage = new PageImpl<>(users);
-        Pageable pageable = mock(Pageable.class);
-        when(userRepository.findAll(pageable)).thenReturn(userPage);
-        
+        User user1 = User.builder()
+            .name("test1")
+            .email("test1")
+            .roleType(RoleType.USER)
+            .provider("test1")
+            .attributeCode("test1")
+            .build();
+        User user2 = User.builder()
+            .name("test2")
+            .email("test2")
+            .roleType(RoleType.USER)
+            .provider("test2")
+            .attributeCode("test2")
+            .build();
+        userRepository.save(user1);
+        userRepository.save(user2);
+
+        Pageable pageable = PageRequest.of(0, 10);
+
         // when
         List<UserListResponseDto> result = adminService.getUserList(pageable);
         
         // then
-        assertEquals(2, result.size());
-        verify(userRepository, times(1)).findAll(pageable);
+        assertThat(2).isEqualTo(result.size());
+        assertThat(result.get(0).getName()).isEqualTo("test1");
+        assertThat(result.get(1).getName()).isEqualTo("test2");
     }
 }

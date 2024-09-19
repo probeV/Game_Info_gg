@@ -3,7 +3,7 @@ package probeV.GameInfogg.service.task;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import probeV.GameInfogg.controller.task.dto.response.TaskListResponseDto;
+import probeV.GameInfogg.controller.task.dto.response.DefaultTaskListResponseDto;
 import probeV.GameInfogg.domain.task.constant.EventType;
 import probeV.GameInfogg.domain.task.constant.ModeType;
 import probeV.GameInfogg.repository.task.DefaultTaskRepository;
@@ -20,45 +20,45 @@ public class DefaultTaskServiceImpl implements DefaultTaskService{
 
     // Task 전체 조회
     @Override
-    public List<TaskListResponseDto> getAllTaskList() {
+    public List<DefaultTaskListResponseDto> getAllTaskList() {
         log.debug("getAllTaskLIst");
 
         return defaultTaskRepository.findAll().stream()
-                .map(TaskListResponseDto::new)
+                .map(DefaultTaskListResponseDto::new)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<TaskListResponseDto> getFilteredByModeTaskList(String mode) {
+    public List<DefaultTaskListResponseDto> getFilteredByModeTaskList(String mode) {
         log.debug("getFilteredByModeTaskList");
 
         ModeType modeType = ModeType.valueOf(mode.toUpperCase());
 
         return defaultTaskRepository.findByModeType(modeType).stream()
-                .map(TaskListResponseDto::new)
+                .map(DefaultTaskListResponseDto::new)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<TaskListResponseDto> getFilteredByEventTaskList(String event) {
+    public List<DefaultTaskListResponseDto> getFilteredByEventTaskList(String event) {
         log.debug("getFilteredByEventTaskList");
 
         EventType eventType = EventType.valueOf(event.toUpperCase());
 
         return defaultTaskRepository.findByEventType(eventType).stream()
-                .map(TaskListResponseDto::new)
+                .map(DefaultTaskListResponseDto::new)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<TaskListResponseDto> getFilteredByModeEventTaskList(String mode, String event) {
+    public List<DefaultTaskListResponseDto> getFilteredByModeEventTaskList(String mode, String event) {
         log.debug("getFilteredByModeEventTaskList");
 
         ModeType modeType = ModeType.valueOf(mode.toUpperCase());
         EventType eventType = EventType.valueOf(event.toUpperCase());
 
         return defaultTaskRepository.findByModeTypeAndEventType(modeType, eventType).stream()
-                .map(TaskListResponseDto::new)
+                .map(DefaultTaskListResponseDto::new)
                 .collect(Collectors.toList());
     }
 }

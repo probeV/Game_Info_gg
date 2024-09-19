@@ -11,23 +11,19 @@ import java.time.DayOfWeek;
 
 @Getter
 @NoArgsConstructor
-public class TaskListResponseDto {
+public class DefaultTaskListResponseDto {
 
     private Integer id;
     private String name;
     private ModeType modeType;
     private FrequencyType frequencyType;
     private EventType eventType;
-    private DayOfWeek dayOfWeek;
-    private String time;
 
-    public TaskListResponseDto(DefaultTask task) {
-        this.id = task.getId();
-        this.name = task.getName();
-        this.modeType = task.getModeType();
-        this.frequencyType = task.getFrequencyType();
-        this.eventType = task.getEventType();
-        this.dayOfWeek = task.getDayOfWeek();
-        this.time = task.getTime();
+    public DefaultTaskListResponseDto(DefaultTask defaultTask) {
+        this.id = defaultTask.getId();
+        this.name = defaultTask.getName();
+        this.modeType = defaultTask.getModeType();
+        this.frequencyType = defaultTask.getFrequencyType();
+        this.eventType = defaultTask.getEventType();
     }
 }

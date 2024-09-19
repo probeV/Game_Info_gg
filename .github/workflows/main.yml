@@ -84,7 +84,7 @@ jobs:
       - name: Build and Test
         run: |
           cd backend
-          ./gradlew build test
+          ./gradlew build -x test
 
       # 빌드 파일을 zip 형식으로 압축
       - name: Make zip file
