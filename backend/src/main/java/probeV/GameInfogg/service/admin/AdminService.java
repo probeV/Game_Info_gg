@@ -2,10 +2,10 @@ package probeV.GameInfogg.service.admin;
 
 import java.util.List;
 
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListSaveRequestDto;
-import probeV.GameInfogg.controller.admin.dto.response.UserListResponseDto;
+import probeV.GameInfogg.domain.user.User;
 
 
 @Service
@@ -15,6 +15,6 @@ public interface AdminService {
     public void saveTasks(List<DefaultTaskListSaveRequestDto> requestDto);
 
     // 유저 목록 조회
-    public List<UserListResponseDto> getUserList(Pageable pageable);
+    public Page<User> getUserList(int page);
 
 }

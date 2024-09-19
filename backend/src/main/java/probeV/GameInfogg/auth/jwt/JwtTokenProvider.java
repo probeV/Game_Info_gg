@@ -23,7 +23,9 @@ import java.util.stream.Collectors;
 
 import javax.crypto.SecretKey;
 
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Component
 public class JwtTokenProvider implements InitializingBean {
     // JWT 생성 및 검증을 위한 키
@@ -36,7 +38,7 @@ public class JwtTokenProvider implements InitializingBean {
             @Value("${jwt.secret}") String secret,
             @Value("${jwt.token-validity-in-seconds}") long tokenValidityInSeconds) {
         this.secret = secret;
-        this.accessTokenValidityInMilliseconds = tokenValidityInSeconds * 30; // 60,000ms : 1m(0.001d), 60000 * 30 = 30m
+        this.accessTokenValidityInMilliseconds = tokenValidityInSeconds * 1; // 60,000ms : 1m(0.001d), 60000 * 120 = 2h
         this.refreshTokenValidityInMilliseconds = tokenValidityInSeconds * 60 * 24 * 2; // 60,000ms : 1m(0.001d), 60000 * 60 * 24 * 2 = 2d
     }
 
@@ -126,17 +128,13 @@ public class JwtTokenProvider implements InitializingBean {
                 .parseSignedClaims(token);
             return true;
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
-            e.printStackTrace();
-            System.out.println("잘못된 JWT 서명입니다.");
+            log.info("잘못된 JWT 서명입니다.");
         } catch (ExpiredJwtException e) {
-            e.printStackTrace();
-            System.out.println("만료된 JWT 토큰입니다.");
+            log.info("만료된 JWT 토큰입니다.");
         } catch (UnsupportedJwtException e) {
-            e.printStackTrace();
-            System.out.println("지원되지 않는 JWT 토큰입니다.");
+            log.info("지원되지 않는 JWT 토큰입니다.");
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            System.out.println("JWT 토큰이 잘못되었습니다.");
+            log.info("JWT 토큰이 잘못되었습니다.");
         }
         return false;
     }

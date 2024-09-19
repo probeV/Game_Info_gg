@@ -1,17 +1,13 @@
 package probeV.GameInfogg.service.admin;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
-import java.util.Optional;
 import java.util.List;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.slf4j.Slf4j;
@@ -23,12 +19,12 @@ import probeV.GameInfogg.domain.user.constant.RoleType;
 import probeV.GameInfogg.repository.task.DefaultTaskRepository;
 import probeV.GameInfogg.repository.user.UserRepository;
 import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListSaveRequestDto;
-import probeV.GameInfogg.controller.admin.dto.response.UserListResponseDto;
 import probeV.GameInfogg.exception.task.TaskNotFoundException;
 import probeV.GameInfogg.domain.task.constant.ModeType;
 import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 
@@ -142,14 +138,12 @@ class AdminServiceImplTest {
         userRepository.save(user1);
         userRepository.save(user2);
 
-        Pageable pageable = PageRequest.of(0, 10);
-
         // when
-        List<UserListResponseDto> result = adminService.getUserList(pageable);
+        Page<User> result = adminService.getUserList(0);
         
         // then
-        assertThat(2).isEqualTo(result.size());
-        assertThat(result.get(0).getName()).isEqualTo("test1");
-        assertThat(result.get(1).getName()).isEqualTo("test2");
+        assertThat(result.getTotalElements()).isEqualTo(2);
+        assertThat(result.getContent().get(0).getName()).isEqualTo("test1");
+        assertThat(result.getContent().get(1).getName()).isEqualTo("test2");
     }
 }

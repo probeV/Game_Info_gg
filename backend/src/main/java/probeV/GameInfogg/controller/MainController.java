@@ -25,8 +25,29 @@ public class MainController {
         return "pages/LoginPages/Login";
     }
 
-    @GetMapping("/admin")
+    // 관리자 페이지    
+    @GetMapping("/admin/main")
     public String AdminPage(){
-        return "pages/AdminPages/Admin";
+        return "pages/AdminPages/AdminMain";
+    }
+
+    @GetMapping("/admin/user")
+    public String AdminUserPage(){
+        return "pages/AdminPages/AdminUser";
+    }
+
+    @GetMapping("/admin/task")
+    public String AdminTaskPage(){
+        return "pages/AdminPages/AdminTask";
+    }
+
+    @GetMapping("/admin/taskUsage")
+    public String AdminTaskUsagePage(){
+        return "pages/AdminPages/AdminTaskUsage";
+    }
+
+    @GetMapping("/admin/taskSetting")
+    public String AdminTaskSettingPage(){
+        return "pages/AdminPages/AdminTaskSetting";
     }
 }

@@ -32,7 +32,7 @@ public class DefaultTaskServiceImpl implements DefaultTaskService{
     public List<DefaultTaskListResponseDto> getFilteredByModeTaskList(String mode) {
         log.debug("getFilteredByModeTaskList");
 
-        ModeType modeType = ModeType.valueOf(mode.toUpperCase());
+        ModeType modeType = ModeType.fromString(mode);
 
         return defaultTaskRepository.findByModeType(modeType).stream()
                 .map(DefaultTaskListResponseDto::new)
@@ -43,7 +43,7 @@ public class DefaultTaskServiceImpl implements DefaultTaskService{
     public List<DefaultTaskListResponseDto> getFilteredByEventTaskList(String event) {
         log.debug("getFilteredByEventTaskList");
 
-        EventType eventType = EventType.valueOf(event.toUpperCase());
+        EventType eventType = EventType.fromString(event);
 
         return defaultTaskRepository.findByEventType(eventType).stream()
                 .map(DefaultTaskListResponseDto::new)
@@ -54,8 +54,8 @@ public class DefaultTaskServiceImpl implements DefaultTaskService{
     public List<DefaultTaskListResponseDto> getFilteredByModeEventTaskList(String mode, String event) {
         log.debug("getFilteredByModeEventTaskList");
 
-        ModeType modeType = ModeType.valueOf(mode.toUpperCase());
-        EventType eventType = EventType.valueOf(event.toUpperCase());
+        ModeType modeType = ModeType.fromString(mode);
+        EventType eventType = EventType.fromString(event);
 
         return defaultTaskRepository.findByModeTypeAndEventType(modeType, eventType).stream()
                 .map(DefaultTaskListResponseDto::new)

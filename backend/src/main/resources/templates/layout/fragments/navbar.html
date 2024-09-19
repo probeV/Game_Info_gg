@@ -1,5 +1,5 @@
-<div th:fragment="menu">
-    <nav class="navbar"> 
+<div class="navbar-fragment" th:fragment="navbar">
+    <nav class="navbar-container"> 
         <div class="navbar-content">
             <div class="navbar-content-brand">
                 <div class="logo" onclick="location.href='/'" style="cursor: pointer; width: 200px; height: 50px;"></div> 
@@ -18,10 +18,12 @@
         <div class="sub-navbar-content-list">
             <ul>
                 <li class="sub-navbar-content-item"><a href="/task" class="sub-navbar-content-text">숙제 체크 리스트</a></li>
-                <li class="sub-navbar-content-item"><a href="/personal-task" class="sub-navbar-content-text">개인 숙제 체크 리스트</a></li>
+                <li class="sub-navbar-content-item"><a href="/personalask" class="sub-navbar-content-text">개인 숙제 체크 리스트</a></li>
                 <li class="sub-navbar-content-item"><a href="/group" class="sub-navbar-content-text">숙제 체크 리스트 사용법</a></li>
                 <li class="sub-navbar-content-item"><a href="/setting" class="sub-navbar-content-text">개인 숙제 체크 리스트 설정법</a></li>
             </ul>
         </div>
     </nav>
+
+    <div class="navbar-margin"></div>
 </div>

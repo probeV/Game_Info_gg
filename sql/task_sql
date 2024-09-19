@@ -1,47 +1,47 @@
-INSERT INTO DEFAULTS_TASKS (name, mode_type, frequency_type, event_type, day_of_week, time) VALUES
-('영지 정착', 'PVE', 'WEEKLY', 'NORMAL', NULL, NULL),
-('움직이는 점', 'PVE', 'WEEKLY', 'NORMAL', NULL, NULL),
-('에이전트 원의 시련', 'PVE', 'WEEKLY', 'NORMAL', NULL, NULL),
-('클랜 상점', 'PVE', 'WEEKLY', 'NORMAL', NULL, NULL),
-('의뢰 퀘스트', 'PVE', 'WEEKLY', 'NORMAL', NULL, NULL),
-('주간 상인 물품 판매', 'PVE', 'WEEKLY', 'NORMAL', NULL, NULL),
-('No.37의 불안정 수용 용기', 'PVE', 'WEEKLY', 'SPECIAL', NULL, NULL);
+INSERT INTO DEFAULTS_TASKS (name, mode_type, frequency_type, event_type) VALUES
+('영지 정착', 'PVE', 'WEEKLY', 'NORMAL'),
+('움직이는 점', 'PVE', 'WEEKLY', 'NORMAL'), 
+('에이전트 원의 시련', 'PVE', 'WEEKLY', 'NORMAL'),
+('클랜 상점', 'PVE', 'WEEKLY', 'NORMAL'),
+('의뢰 퀘스트', 'PVE', 'WEEKLY', 'NORMAL'),
+('주간 상인 물품 판매', 'PVE', 'WEEKLY', 'NORMAL'),
+('No.37의 불안정 수용 용기', 'PVE', 'WEEKLY', 'SPECIAL');
 
-INSERT INTO DEFAULTS_TASKS (name, mode_type, frequency_type, event_type, day_of_week, time) VALUES
-('일일 필드 이벤트(3회)', 'PVE', 'DAILY', 'NORMAL', NULL, NULL),
-('필드 단계 이벤트(6회)', 'PVE', 'DAILY', 'NORMAL', NULL, NULL),
-('01:00 파밍', 'PVE', 'DAILY', 'TIME', NULL, '01:00'),
-('05:00 파밍', 'PVE', 'DAILY', 'TIME', NULL, '05:00'),
-('09:00 파밍', 'PVE', 'DAILY', 'TIME', NULL, '09:00'),
-('13:00 파밍', 'PVE', 'DAILY', 'TIME', NULL, '13:00'),
-('17:00 파밍', 'PVE', 'DAILY', 'TIME', NULL, '17:00'),
-('21:00 파밍', 'PVE', 'DAILY', 'TIME', NULL, '21:00'),
-('21:00 고속도로 추격전', 'PVE', 'DAILY', 'TIME', NULL, '21:00'),
-('화물 정렬전', 'PVE', 'DAILY', 'NORMAL', NULL, NULL);
+INSERT INTO DEFAULTS_TASKS (name, mode_type, frequency_type, event_type) VALUES
+('일일 필드 이벤트(3회)', 'PVE', 'DAILY', 'NORMAL'),
+('필드 단계 이벤트(6회)', 'PVE', 'DAILY', 'NORMAL'),
+('01:00 파밍', 'PVE', 'DAILY', 'TIME'),
+('05:00 파밍', 'PVE', 'DAILY', 'TIME'),
+('09:00 파밍', 'PVE', 'DAILY', 'TIME'),
+('13:00 파밍', 'PVE', 'DAILY', 'TIME'),
+('17:00 파밍', 'PVE', 'DAILY', 'TIME'),
+('21:00 파밍', 'PVE', 'DAILY', 'TIME'),
+('21:00 고속도로 추격전', 'PVE', 'DAILY', 'TIME'),
+('화물 정렬전', 'PVE', 'DAILY', 'NORMAL');
 
-INSERT INTO DEFAULTS_TASKS (name, mode_type, frequency_type, event_type, day_of_week, time) VALUES
-('영지 정착', 'PVP', 'WEEKLY', 'NORMAL', NULL, NULL),
-('움직이는 점', 'PVP', 'WEEKLY', 'NORMAL', NULL, NULL),
-('에이전트 원의 시련', 'PVP', 'WEEKLY', 'NORMAL', NULL, NULL),
-('클랜 상점', 'PVP', 'WEEKLY', 'NORMAL', NULL, NULL),
-('의뢰 퀘스트', 'PVP', 'WEEKLY', 'NORMAL', NULL, NULL),
-('주간 상인 물품 판매', 'PVP', 'WEEKLY', 'NORMAL', NULL, NULL),
-('혼돈 에코 4렙', 'PVP', 'WEEKLY', 'NORMAL', NULL, NULL),
-('화요일 16:00 포자쟁탈전', 'PVP', 'WEEKLY', 'TIME', 'TUESDAY', '16:00'),
-('목요일 16:00 포자쟁탈전', 'PVP', 'WEEKLY', 'TIME', 'THURSDAY', '16:00'),
-('토요일 16:00 포자쟁탈전', 'PVP', 'WEEKLY', 'TIME', 'SATURDAY', '16:00'),
-('수요일 20:00 클랜 거점', 'PVP', 'WEEKLY', 'TIME', 'WEDNESDAY', '20:00'),
-('금요일 20:00 클랜 거점', 'PVP', 'WEEKLY', 'TIME', 'FRIDAY', '20:00'),
-('일요일 20:00 클랜 거점', 'PVP', 'WEEKLY', 'TIME', 'SUNDAY', '20:00');
+INSERT INTO DEFAULTS_TASKS (name, mode_type, frequency_type, event_type) VALUES
+('영지 정착', 'PVP', 'WEEKLY', 'NORMAL'),
+('움직이는 점', 'PVP', 'WEEKLY', 'NORMAL'),
+('에이전트 원의 시련', 'PVP', 'WEEKLY', 'NORMAL'),
+('클랜 상점', 'PVP', 'WEEKLY', 'NORMAL'),
+('의뢰 퀘스트', 'PVP', 'WEEKLY', 'NORMAL'),
+('주간 상인 물품 판매', 'PVP', 'WEEKLY', 'NORMAL'),
+('혼돈 에코 4렙', 'PVP', 'WEEKLY', 'NORMAL'),
+('화요일 16:00 포자쟁탈전', 'PVP', 'WEEKLY', 'TIME'),
+('목요일 16:00 포자쟁탈전', 'PVP', 'WEEKLY', 'TIME'),
+('토요일 16:00 포자쟁탈전', 'PVP', 'WEEKLY', 'TIME'),
+('수요일 20:00 클랜 거점', 'PVP', 'WEEKLY', 'TIME'),
+('금요일 20:00 클랜 거점', 'PVP', 'WEEKLY', 'TIME'),
+('일요일 20:00 클랜 거점', 'PVP', 'WEEKLY', 'TIME');
 
-INSERT INTO DEFAULTS_TASKS (name, mode_type, frequency_type, event_type, day_of_week, time) VALUES
-('일일 필드 이벤트(3회)', 'PVP', 'DAILY', 'NORMAL', NULL, NULL),
-('필드 단계 이벤트(6회)', 'PVP', 'DAILY', 'NORMAL', NULL, NULL),
-('01:00 파밍', 'PVP', 'DAILY', 'TIME', NULL, '01:00'),
-('05:00 파밍', 'PVP', 'DAILY', 'TIME', NULL, '05:00'),
-('09:00 파밍', 'PVP', 'DAILY', 'TIME', NULL, '09:00'),
+INSERT INTO DEFAULTS_TASKS (name, mode_type, frequency_type, event_type) VALUES
+('일일 필드 이벤트(3회)', 'PVP', 'DAILY', 'NORMAL'),
+('필드 단계 이벤트(6회)', 'PVP', 'DAILY', 'NORMAL'),
+('01:00 파밍', 'PVP', 'DAILY', 'TIME'),
+('05:00 파밍', 'PVP', 'DAILY', 'TIME'),
+('09:00 파밍', 'PVP', 'DAILY', 'TIME'),
 ('13:00 파밍', 'PVP', 'DAILY', 'TIME', NULL, '13:00'),
 ('17:00 파밍', 'PVP', 'DAILY', 'TIME', NULL, '17:00'),
 ('21:00 파밍', 'PVP', 'DAILY', 'TIME', NULL, '21:00'),
-('21:00 고속도로 추격전', 'PVP', 'DAILY', 'TIME', NULL, '21:00'),
-('화물 정렬전', 'PVP', 'DAILY', 'NORMAL', NULL, NULL);
+('21:00 고속도로 추격전', 'PVP', 'DAILY', 'TIME'),
+('화물 정렬전', 'PVP', 'DAILY', 'NORMAL');

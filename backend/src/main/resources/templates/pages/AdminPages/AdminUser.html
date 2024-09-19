@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="~{layout/fragments/header :: header}"></div>
+    <link rel="stylesheet" href="/css/admin_navbar_styles.css" />
+</head>
+<body>
+    <div class="wrap">
+        <div class="app">
+                <div class="admin-navbar-fragment" th:replace="~{layout/fragments/admin_navbar :: admin-navbar}"></div>
+
+            <div class="user-list-container">
+                <div class="user-list-area" style="margin-left: 290px; margin-right: 40px;">
+                    <div class="user-list pl-5 pt-5 pr-5 pb-5" style="background-color: #ffffffee; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                        <h2>유저 목록</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>이메일</th>
+                                    <th>이름</th>
+                                    <th>역할</th>
+                                    <th>제공자</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="user : ${userList}">
+                                    <td th:text="${user.id}"></td>
+                                    <td th:text="${user.email}"></td>
+                                    <td th:text="${user.name}"></td>
+                                    <td th:text="${user.roleType}"></td>
+                                    <td th:text="${user.provider}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 페이지네이션 추가 -->
+                <div th:if="${userList != null and !userList.isEmpty()}">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item" th:classappend="${!userList.hasPrevious} ? 'disabled'">
+                            <a class="page-link" th:href="@{|?page=${userList.number-1}|}">
+                                <span>이전</span>
+                            </a>
+                        </li>
+                        <li th:each="page: ${#numbers.sequence(0, userList.totalPages-1)}"
+                            th:if="${page >= userList.number - 5 and page <= userList.number + 5}"
+                            th:classappend="${page == userList.number} ? 'active'" 
+                            class="page-item">
+                            <a th:text="${page + 1}" class="page-link" th:href="@{|?page=${page}|}"></a>
+                        </li>
+                        <li class="page-item" th:classappend="${!userList.hasNext} ? 'disabled'">
+                            <a class="page-link" th:href="@{|?page=${userList.number + 1}|}">
+                                <span>다음</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{layout/fragments/footer :: footer}"></div>
+    <script src="/js/AdminPages/Admin.js"></script>
+</body>
+</html>

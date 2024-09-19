@@ -1,8 +1,11 @@
 body {
     padding-top: 40px;
     font-family: 'NanumSquareNeo', Arial, sans-serif;
-    background-color: #f8f9fa; /* 연한 회색 배경색 */
-    color: #343a40;
+    background-color: #eeeeee;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .logo {

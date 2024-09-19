@@ -39,9 +39,9 @@ public class DefaultTaskListSaveRequestDto {
     public DefaultTask toEntity() {
         return DefaultTask.builder()
             .name(name)
-            .modeType(ModeType.valueOf(mode.toUpperCase()))
-            .frequencyType(FrequencyType.valueOf(frequency.toUpperCase()))
-            .eventType(EventType.valueOf(event.toUpperCase()))
+            .modeType(ModeType.fromString(mode))
+            .frequencyType(FrequencyType.fromString(frequency))
+            .eventType(EventType.fromString(event))
             .build();
     }
 }

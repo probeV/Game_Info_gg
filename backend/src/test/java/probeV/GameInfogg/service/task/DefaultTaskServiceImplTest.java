@@ -15,7 +15,6 @@ import probeV.GameInfogg.domain.task.constant.ModeType;
 import probeV.GameInfogg.domain.task.constant.EventType;
 import probeV.GameInfogg.repository.task.DefaultTaskRepository;
 
-import java.time.DayOfWeek;
 import java.util.List;
 
 @Slf4j

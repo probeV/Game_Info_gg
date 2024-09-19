@@ -1,8 +1,8 @@
 /* NAVBAR  */
-.navbar {
+
+.navbar-container {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 적용 */
-    flex-wrap: nowrap;
-    background-color: #f8f9fa;
+    background-color: #ffffff99;
 
     position: fixed;
     top: 0;
@@ -10,6 +10,10 @@
     left: 0;
     z-index: 1000;
     height: 65px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .navbar-content {
@@ -60,7 +64,7 @@
     top: 65px;
     right: 0;
     left: 0;
-    background-color: #e3cfec;
+    background-color: #f5e6fb; /* 좀 더 연한 색상으로 변경 */
     z-index: 900;
     height: 55px; 
     
@@ -107,6 +111,7 @@
     font-weight: bold; /* 현재 페이지 텍스트 굵게 */
 }
 
+# Start of Selection
 /* 반응형 디자인을 위한 미디어 쿼리 */
 @media screen and (max-width: 1200px) {
     .navbar-content {
@@ -115,9 +120,13 @@
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
     .navbar-content {
         width: 100%; /* 모바일 화면에서는 전체 너비 사용 */
         margin: 0 20px; /* 좌우 여백 최소화 */
     }
+}
+
+.navbar-margin {
+    height: 135px;
 }

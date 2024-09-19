@@ -9,7 +9,7 @@ import probeV.GameInfogg.domain.task.constant.FrequencyType;
 import probeV.GameInfogg.domain.task.constant.ModeType;
 import probeV.GameInfogg.domain.task.constant.EventType;
 
-import java.time.DayOfWeek;
+
 
 @Getter @Setter
 @NoArgsConstructor

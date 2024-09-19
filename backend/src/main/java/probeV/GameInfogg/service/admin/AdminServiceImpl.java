@@ -15,9 +15,11 @@ import probeV.GameInfogg.domain.task.constant.ModeType;
 import probeV.GameInfogg.exception.task.TaskNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.method.P;
+
 import probeV.GameInfogg.domain.user.User;
-import probeV.GameInfogg.controller.admin.dto.response.UserListResponseDto;
 import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListSaveRequestDto;
 import java.util.Set;
 import java.util.Map;
@@ -59,7 +61,7 @@ public class AdminServiceImpl implements AdminService {
                 log.info("saveTasks 수정 로직 호출" + dto.getId());
 
                 DefaultTask task = taskMap.get(dto.getId());
-                task.update(dto.getName(), ModeType.valueOf(dto.getMode().toUpperCase()), FrequencyType.valueOf(dto.getFrequency().toUpperCase()), EventType.valueOf(dto.getEvent().toUpperCase()));
+                task.update(dto.getName(), ModeType.fromString(dto.getMode()), FrequencyType.fromString(dto.getFrequency()), EventType.fromString(dto.getEvent()));
                 // existingTaskIds에서 제거
                 existingTaskIds.remove(dto.getId());
             } 
@@ -90,9 +92,10 @@ public class AdminServiceImpl implements AdminService {
 
     // 유저 목록 조회
     @Override
-    public List<UserListResponseDto> getUserList(Pageable pageable) {
+    public Page<User> getUserList(int page) {
+        Pageable pageable = PageRequest.of(page, 10);
         Page<User> entities = userRepository.findAll(pageable);
-
-        return entities.stream().map(UserListResponseDto::new).toList();
+        
+        return entities;
     }
 }
