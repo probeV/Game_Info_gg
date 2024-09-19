@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import probeV.GameInfogg.controller.task.dto.response.TaskListResponseDto;
 import probeV.GameInfogg.domain.task.constant.EventType;
 import probeV.GameInfogg.domain.task.constant.ModeType;
-import probeV.GameInfogg.repository.task.TaskRepository;
+import probeV.GameInfogg.repository.task.DefaultTaskRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,16 +14,16 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class TaskServiceImpl implements TaskService{
+public class DefaultTaskServiceImpl implements DefaultTaskService{
 
-    private final TaskRepository taskRepository;
+    private final DefaultTaskRepository defaultTaskRepository;
 
     // Task 전체 조회
     @Override
     public List<TaskListResponseDto> getAllTaskList() {
         log.debug("getAllTaskLIst");
 
-        return taskRepository.findAll().stream()
+        return defaultTaskRepository.findAll().stream()
                 .map(TaskListResponseDto::new)
                 .collect(Collectors.toList());
     }
@@ -34,7 +34,7 @@ public class TaskServiceImpl implements TaskService{
 
         ModeType modeType = ModeType.valueOf(mode.toUpperCase());
 
-        return taskRepository.findByModeType(modeType).stream()
+        return defaultTaskRepository.findByModeType(modeType).stream()
                 .map(TaskListResponseDto::new)
                 .collect(Collectors.toList());
     }
@@ -45,7 +45,7 @@ public class TaskServiceImpl implements TaskService{
 
         EventType eventType = EventType.valueOf(event.toUpperCase());
 
-        return taskRepository.findByEventType(eventType).stream()
+        return defaultTaskRepository.findByEventType(eventType).stream()
                 .map(TaskListResponseDto::new)
                 .collect(Collectors.toList());
     }
@@ -57,7 +57,7 @@ public class TaskServiceImpl implements TaskService{
         ModeType modeType = ModeType.valueOf(mode.toUpperCase());
         EventType eventType = EventType.valueOf(event.toUpperCase());
 
-        return taskRepository.findByModeTypeAndEventType(modeType, eventType).stream()
+        return defaultTaskRepository.findByModeTypeAndEventType(modeType, eventType).stream()
                 .map(TaskListResponseDto::new)
                 .collect(Collectors.toList());
     }

@@ -47,7 +47,7 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
         response.addCookie(accessTokenCookie);
 
         // redirect.html로 리다이렉트
-        response.sendRedirect("/api/v1/auths/redirect");
+        response.sendRedirect("/api/v1/auth/redirect");
     }
     
 }

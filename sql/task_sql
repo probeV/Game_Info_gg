@@ -1,4 +1,4 @@
-INSERT INTO TASKS (name, mode_type, frequency_type, event_type, day_of_week, time) VALUES
+INSERT INTO DEFAULTS_TASKS (name, mode_type, frequency_type, event_type, day_of_week, time) VALUES
 ('영지 정착', 'PVE', 'WEEKLY', 'NORMAL', NULL, NULL),
 ('움직이는 점', 'PVE', 'WEEKLY', 'NORMAL', NULL, NULL),
 ('에이전트 원의 시련', 'PVE', 'WEEKLY', 'NORMAL', NULL, NULL),
@@ -7,7 +7,7 @@ INSERT INTO TASKS (name, mode_type, frequency_type, event_type, day_of_week, tim
 ('주간 상인 물품 판매', 'PVE', 'WEEKLY', 'NORMAL', NULL, NULL),
 ('No.37의 불안정 수용 용기', 'PVE', 'WEEKLY', 'SPECIAL', NULL, NULL);
 
-INSERT INTO TASKS (name, mode_type, frequency_type, event_type, day_of_week, time) VALUES
+INSERT INTO DEFAULTS_TASKS (name, mode_type, frequency_type, event_type, day_of_week, time) VALUES
 ('일일 필드 이벤트(3회)', 'PVE', 'DAILY', 'NORMAL', NULL, NULL),
 ('필드 단계 이벤트(6회)', 'PVE', 'DAILY', 'NORMAL', NULL, NULL),
 ('01:00 파밍', 'PVE', 'DAILY', 'TIME', NULL, '01:00'),
@@ -19,7 +19,7 @@ INSERT INTO TASKS (name, mode_type, frequency_type, event_type, day_of_week, tim
 ('21:00 고속도로 추격전', 'PVE', 'DAILY', 'TIME', NULL, '21:00'),
 ('화물 정렬전', 'PVE', 'DAILY', 'NORMAL', NULL, NULL);
 
-INSERT INTO TASKS (name, mode_type, frequency_type, event_type, day_of_week, time) VALUES
+INSERT INTO DEFAULTS_TASKS (name, mode_type, frequency_type, event_type, day_of_week, time) VALUES
 ('영지 정착', 'PVP', 'WEEKLY', 'NORMAL', NULL, NULL),
 ('움직이는 점', 'PVP', 'WEEKLY', 'NORMAL', NULL, NULL),
 ('에이전트 원의 시련', 'PVP', 'WEEKLY', 'NORMAL', NULL, NULL),
@@ -34,7 +34,7 @@ INSERT INTO TASKS (name, mode_type, frequency_type, event_type, day_of_week, tim
 ('금요일 20:00 클랜 거점', 'PVP', 'WEEKLY', 'TIME', 'FRIDAY', '20:00'),
 ('일요일 20:00 클랜 거점', 'PVP', 'WEEKLY', 'TIME', 'SUNDAY', '20:00');
 
-INSERT INTO TASKS (name, mode_type, frequency_type, event_type, day_of_week, time) VALUES
+INSERT INTO DEFAULTS_TASKS (name, mode_type, frequency_type, event_type, day_of_week, time) VALUES
 ('일일 필드 이벤트(3회)', 'PVP', 'DAILY', 'NORMAL', NULL, NULL),
 ('필드 단계 이벤트(6회)', 'PVP', 'DAILY', 'NORMAL', NULL, NULL),
 ('01:00 파밍', 'PVP', 'DAILY', 'TIME', NULL, '01:00'),

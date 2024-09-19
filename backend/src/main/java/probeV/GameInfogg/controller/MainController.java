@@ -11,18 +11,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
 
     @GetMapping("/")
-    public String redirectToTasks() {
-        return "redirect:/tasks";
+    public String redirectToTaskListPage() {
+        return "redirect:/task";
     }
 
-    @GetMapping("/tasks")
-    public String taskList() {
+    @GetMapping("/task")
+    public String TaskListPage() {
         return "pages/TaskListPages/DefaultTaskList";
     }
 
-    @GetMapping("/logins")
-    public String ToLoginPage(){
+    @GetMapping("/login")
+    public String LoginPage(){
         return "pages/LoginPages/Login";
     }
 
+    @GetMapping("/admin")
+    public String AdminPage(){
+        return "pages/AdminPages/Admin";
+    }
 }

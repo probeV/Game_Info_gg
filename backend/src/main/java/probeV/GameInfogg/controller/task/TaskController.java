@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import probeV.GameInfogg.controller.task.dto.response.TaskListResponseDto;
-import probeV.GameInfogg.service.task.TaskService;
+import probeV.GameInfogg.service.task.DefaultTaskService;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("api/v1")
 public class TaskController {
 
-    private final TaskService taskService;
+    private final DefaultTaskService taskService;
 
     // AJAX 요청을 처리하는 컨트롤러
     @GetMapping("/tasks/filter")

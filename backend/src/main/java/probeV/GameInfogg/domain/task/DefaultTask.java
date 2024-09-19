@@ -13,9 +13,9 @@ import java.time.DayOfWeek;
 
 @Getter @Setter
 @NoArgsConstructor
-@Table(name = "TASKS")
+@Table(name = "DEFAULTS_TASKS")
 @Entity
-public class Task {
+public class DefaultTask {
     /* PK */
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -45,7 +45,16 @@ public class Task {
     private String time;
 
     @Builder
-    public Task(String name, ModeType modeType, FrequencyType frequencyType, EventType eventType, DayOfWeek dayOfWeek, String time) {
+    public DefaultTask(String name, ModeType modeType, FrequencyType frequencyType, EventType eventType, DayOfWeek dayOfWeek, String time) {
+        this.name = name;
+        this.modeType = modeType;
+        this.frequencyType = frequencyType;
+        this.eventType = eventType;
+        this.dayOfWeek = dayOfWeek;
+        this.time = time;
+    }
+
+    public void update(String name, ModeType modeType, FrequencyType frequencyType, EventType eventType, DayOfWeek dayOfWeek, String time) {
         this.name = name;
         this.modeType = modeType;
         this.frequencyType = frequencyType;

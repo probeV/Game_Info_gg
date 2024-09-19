@@ -2,7 +2,7 @@ package probeV.GameInfogg.controller.task.dto.response;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import probeV.GameInfogg.domain.task.Task;
+import probeV.GameInfogg.domain.task.DefaultTask;
 import probeV.GameInfogg.domain.task.constant.FrequencyType;
 import probeV.GameInfogg.domain.task.constant.ModeType;
 import probeV.GameInfogg.domain.task.constant.EventType;
@@ -21,7 +21,7 @@ public class TaskListResponseDto {
     private DayOfWeek dayOfWeek;
     private String time;
 
-    public TaskListResponseDto(Task task) {
+    public TaskListResponseDto(DefaultTask task) {
         this.id = task.getId();
         this.name = task.getName();
         this.modeType = task.getModeType();

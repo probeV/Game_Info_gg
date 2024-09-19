@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/api/v1")
 public class AuthController {
 
-    @GetMapping("/auths/redirect")
+    @GetMapping("/auth/redirect")
     public String redirectToTasks() {
         return "pages/LoginPages/redirect";
     }

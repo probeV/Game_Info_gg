@@ -4,7 +4,7 @@ import probeV.GameInfogg.controller.task.dto.response.TaskListResponseDto;
 
 import java.util.List;
 
-public interface TaskService {
+public interface DefaultTaskService {
 
     // TaskList Filter 조회
     List<TaskListResponseDto> getAllTaskList();
