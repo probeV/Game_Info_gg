@@ -45,4 +45,4 @@ application-real-db.properties
 
 ### js ###
 # Start of Selection
-/js/auth.js
+backend/src/main/resources/static/js/auth.js
