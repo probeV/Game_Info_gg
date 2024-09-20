@@ -13,7 +13,7 @@ public class AdminIndexController {
     // 관리자 페이지 메인 페이지
     @GetMapping("/admin")
     public String AdminPage(){
-        return "redirect:/admin/main";
+        return "redirect:/admin/task";
     }
 
     // 관리자 페이지 메인 페이지

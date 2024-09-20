@@ -14,7 +14,7 @@ $(document).ready(function() {
 // 작업 목록을 서버로부터 가져오는 함수
 function updateTasks() {
     // 서버에 필터에 맞는 작업 목록을 GET 요청으로 가져오기
-    $.get(`/api/v1/tasks/filter?mode=ALL&event=ALL`, function(tasks) {
+    $.get(`/api/v1/tasks/filters?mode=ALL&event=ALL`, function(tasks) {
         const tasksContainer = $('.tasks-area');
         tasksContainer.empty(); // 이전 내용 제거
 
@@ -71,7 +71,7 @@ function saveTasks() {
     if (tasksToSave.length > 0) {
         // 서버에 저장 요청
         $.ajax({
-            url: '/api/v1/admins/task',
+            url: '/api/v1/admins/tasks',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(tasksToSave),
@@ -88,7 +88,7 @@ function saveTasks() {
     if(tasksToDelete.length != length) {
         // 서버에 삭제 요청
         $.ajax({
-            url: '/api/v1/admins/task',
+            url: '/api/v1/admins/tasks',
             type: 'DELETE',
             contentType: 'application/json',
             data: JSON.stringify(tasksToDelete),

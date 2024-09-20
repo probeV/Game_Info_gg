@@ -64,7 +64,7 @@
         let debounceTimer;
 
         function loadUserList(page) {
-            $.get(`/api/v1/admins/user?page=${page}`, function(userPage) {
+            $.get(`/api/v1/admins/users?page=${page}`, function(userPage) {
                 const tbody = $('tbody');
                 tbody.empty(); // 기존 내용 삭제
 

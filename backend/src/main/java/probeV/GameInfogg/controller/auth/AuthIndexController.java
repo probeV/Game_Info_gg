@@ -1,4 +1,4 @@
-package probeV.GameInfogg.controller;
+package probeV.GameInfogg.controller.auth;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,14 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-public class MainController {
+public class AuthIndexController {
 
-    @GetMapping("/")
-    public String redirectToTaskListPage() {
-        return "redirect:/task";
+    @GetMapping("/login")
+    public String LoginPage(){
+        return "pages/LoginPages/Login";
     }
-
-
-
-
 }

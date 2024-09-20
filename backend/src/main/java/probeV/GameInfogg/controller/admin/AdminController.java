@@ -32,7 +32,7 @@ public class AdminController {
     private final AdminService adminService;
 
     // 기본 숙제 체크 리스트 항목 설정 (생성, 수정)
-    @PostMapping("/admins/task")
+    @PostMapping("/admins/tasks")
     @ResponseBody
     public void saveOrUpdateTasks(
         @Valid @RequestBody List<DefaultTaskListSaveorUpdateRequestDto> requestDto
@@ -43,7 +43,7 @@ public class AdminController {
     }
 
     // 기본 숙제 체크 리스트 항목 삭제
-    @DeleteMapping("/admins/task")
+    @DeleteMapping("/admins/tasks")
     @ResponseBody
     public void deleteTasks(
         @Valid @RequestBody List<DefaultTaskListDeleteDto> requestDto
@@ -56,7 +56,7 @@ public class AdminController {
 
 
     // 유저 목록 조회
-    @GetMapping("/admins/user")
+    @GetMapping("/admins/users")
     @ResponseBody
     public UserPageResponseDto getUserList(@RequestParam(value="page", defaultValue="0") int page) {
         UserPageResponseDto userPage = adminService.getUserList(page);

@@ -74,6 +74,28 @@ jobs:
           name: application-real-db.properties
           path: ./backend/src/main/resources/application-real-db.properties
 
+      # application-real-oauth.properties 만들기
+      - name: application-oauth.properties 만들기
+        run: |
+          touch ./backend/src/main/resources/application-oauth.properties
+          echo "${{secrets.APPLICATION_OAUTH}}" > ./backend/src/main/resources/application-oauth.properties
+      - name: Upload application-oauth.properties
+        uses: actions/upload-artifact@v3
+        with:
+          name: application-oauth.properties
+          path: ./backend/src/main/resources/application-oauth.properties
+
+      # auth-api.js 만들기
+      - name: auth-api.js 만들기
+        run: |
+          touch ./backend/src/main/resources/static/js/auth-api.js
+          echo "${{secrets.AUTH_API_ENDPOINT}}" > ./backend/src/main/resources/static/js/auth-api.js
+      - name: Upload auth-api.js
+        uses: actions/upload-artifact@v3
+        with:
+          name: auth-api.js
+          path: ./backend/src/main/resources/static/js/auth-api.js    
+
       # 권한 부여
       - name: Grant execute permission for gradlew
         run: |

@@ -4,6 +4,7 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,13 +15,15 @@ import org.springframework.stereotype.Component;
 
 import probeV.GameInfogg.auth.dto.response.AccessTokenResponseDto;
 import probeV.GameInfogg.auth.dto.response.RefreshTokenResponseDto;
+import probeV.GameInfogg.repository.user.UserRepository;
+
 import org.springframework.security.core.Authentication;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
-
+import java.util.List;
 import javax.crypto.SecretKey;
 
 import lombok.extern.slf4j.Slf4j;
@@ -33,12 +36,13 @@ public class JwtTokenProvider implements InitializingBean {
     private final long accessTokenValidityInMilliseconds;
     private final long refreshTokenValidityInMilliseconds;
     private final String secret;
-
+    
     public JwtTokenProvider(
             @Value("${jwt.secret}") String secret,
-            @Value("${jwt.token-validity-in-seconds}") long tokenValidityInSeconds) {
+            @Value("${jwt.token-validity-in-seconds}") long tokenValidityInSeconds
+            ) {
         this.secret = secret;
-        this.accessTokenValidityInMilliseconds = tokenValidityInSeconds * 1; // 60,000ms : 1m(0.001d), 60000 * 120 = 2h
+        this.accessTokenValidityInMilliseconds = tokenValidityInSeconds * 60 * 2; // 60,000ms : 1m(0.001d), 60000 * 120 = 2h
         this.refreshTokenValidityInMilliseconds = tokenValidityInSeconds * 60 * 24 * 2; // 60,000ms : 1m(0.001d), 60000 * 60 * 24 * 2 = 2d
     }
 
@@ -52,6 +56,8 @@ public class JwtTokenProvider implements InitializingBean {
         String authorities = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
+
+        log.info("authorities : {}", authorities);
 
         // 토큰의 expire 시간을 설정
         long now = (new Date()).getTime();

@@ -1,4 +1,4 @@
-package probeV.GameInfogg.controller;
+package probeV.GameInfogg.controller.task;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,14 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-public class MainController {
+public class TaskIndexController {
 
-    @GetMapping("/")
-    public String redirectToTaskListPage() {
-        return "redirect:/task";
+    @GetMapping("/task")
+    public String TaskListPage() {
+        return "pages/TaskListPages/DefaultTaskList";
     }
-
-
-
 
 }
