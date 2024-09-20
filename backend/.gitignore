@@ -42,3 +42,7 @@ application-dev.properties
 application-dev-db.properties
 application-real.properties
 application-real-db.properties
+
+### js ###
+# Start of Selection
+/js/auth.js
