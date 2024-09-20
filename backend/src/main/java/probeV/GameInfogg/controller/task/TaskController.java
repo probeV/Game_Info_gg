@@ -15,8 +15,8 @@ import java.util.List;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("api/v1")
-public class DefaultTaskController {
+@RequestMapping("/api/v1")
+public class TaskController {
 
     private final DefaultTaskService defaultTaskService;
 

@@ -23,12 +23,12 @@ public class AdminIndexController {
 
     @GetMapping("/admin/user")
     public String AdminUserPage(){
-        return "pages/AdminPages/AdminUser";
+        return "pages/AdminPages/AdminUserList";
     }
 
     @GetMapping("/admin/task")
     public String AdminTaskPage(){
-        return "pages/AdminPages/AdminTask";
+        return "pages/AdminPages/AdminDefaultTaskListSetting";
     }
 
     @GetMapping("/admin/taskUsage")
@@ -36,8 +36,4 @@ public class AdminIndexController {
         return "pages/AdminPages/AdminTaskUsage";
     }
 
-    @GetMapping("/admin/taskSetting")
-    public String AdminTaskSettingPage(){
-        return "pages/AdminPages/AdminTaskSetting";
-    }
 }

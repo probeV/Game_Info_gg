@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="~{layout/fragments/header :: header}"></div>
+    <link rel="stylesheet" href="/css/taskList_styles.css" />
+</head>
+<body>
+    <div class="wrap">
+        <div class="app">
+            <div class="navbar-container" th:replace="~{layout/fragments/navbar :: navbar}"/>
+
+            <div class="tasks-container">
+                <div class="tasks-area">
+                    <!-- 필터링된 작업 목록이 여기에 표시됩니다 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div th:replace="~{layout/fragments/footer :: footer}"></div>
+
+</body>
+</html>
