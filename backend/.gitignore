@@ -44,5 +44,4 @@ application-real.properties
 application-real-db.properties
 
 ### js ###
-# Start of Selection
-backend/src/main/resources/static/js/auth-properties.js
+**/src/main/resources/static/js/TaskListPages/taskListSetting.js
