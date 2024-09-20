@@ -3,6 +3,19 @@
 <head>
     <div th:replace="~{layout/fragments/header :: header}"></div>
     <link rel="stylesheet" href="/css/admin_navbar_styles.css" />
+    <style>
+        table {
+            width: 100%;
+            table-layout: fixed; /* 고정된 테이블 레이아웃 */
+        }
+        th, td {
+            text-align: center;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
     <div class="wrap">
@@ -10,59 +23,128 @@
                 <div class="admin-navbar-fragment" th:replace="~{layout/fragments/admin_navbar :: admin-navbar}"></div>
 
             <div class="user-list-container">
-                <div class="user-list-area" style="margin-left: 290px; margin-right: 40px;">
-                    <div class="user-list pl-5 pt-5 pr-5 pb-5" style="background-color: #ffffffee; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-                        <h2>유저 목록</h2>
-                        <table>
+                <div class="user-list-area" style="margin-left: 290px; margin-right: 40px; background-color: #ffffffee; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                    <div class="user-list-head pt-4 pl-5">
+                        <h2>사용자 목록</h2>
+                    </div>
+                    <hr>
+                    <div class="user-list pl-5 pr-5 pb-5">
+                        <table style="width: 100%; table-layout: fixed; padding: 0; display: table;">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>이메일</th>
-                                    <th>이름</th>
-                                    <th>역할</th>
-                                    <th>제공자</th>
+                                    <th style="width: 10%;">ID</th>
+                                    <th style="width: 30%;">이메일</th>
+                                    <th style="width: 10%;">이름</th>
+                                    <th style="width: 10%;">역할</th>
+                                    <th style="width: 10%;">제공자</th>
+                                    <th style="width: 30%;">가입일</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="user : ${userList}">
-                                    <td th:text="${user.id}"></td>
-                                    <td th:text="${user.email}"></td>
-                                    <td th:text="${user.name}"></td>
-                                    <td th:text="${user.roleType}"></td>
-                                    <td th:text="${user.provider}"></td>
-                                </tr>
+                                <!-- 유저 목록 표시 -->
+                                
                             </tbody>
                         </table>
+
+                        <!-- 페이지네이션 -->
+                        <div class="pagination-area d-flex justify-content-center">
+                            <ul class="pagination">
+                                <!-- 페이지네이션 업데이트 -->
+                            </ul>
+                        </div>
                     </div>
-                </div>
-
-                <!-- 페이지네이션 추가 -->
-                <div th:if="${userList != null and !userList.isEmpty()}">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item" th:classappend="${!userList.hasPrevious} ? 'disabled'">
-                            <a class="page-link" th:href="@{|?page=${userList.number-1}|}">
-                                <span>이전</span>
-                            </a>
-                        </li>
-                        <li th:each="page: ${#numbers.sequence(0, userList.totalPages-1)}"
-                            th:if="${page >= userList.number - 5 and page <= userList.number + 5}"
-                            th:classappend="${page == userList.number} ? 'active'" 
-                            class="page-item">
-                            <a th:text="${page + 1}" class="page-link" th:href="@{|?page=${page}|}"></a>
-                        </li>
-                        <li class="page-item" th:classappend="${!userList.hasNext} ? 'disabled'">
-                            <a class="page-link" th:href="@{|?page=${userList.number + 1}|}">
-                                <span>다음</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
+                </div>  
             </div>
         </div>
     </div>
 
     <div th:replace="~{layout/fragments/footer :: footer}"></div>
-    <script src="/js/AdminPages/Admin.js"></script>
+<script>
+    $(document).ready(function() {
+        let debounceTimer;
+
+        function loadUserList(page) {
+            $.get(`/api/v1/admins/user?page=${page}`, function(userPage) {
+                const tbody = $('tbody');
+                tbody.empty(); // 기존 내용 삭제
+
+                if (userPage.userList.length > 0) {
+                    userPage.userList.forEach(function(user) {
+                        tbody.append(`
+                            <tr>
+                                <td style="width: 10%;">${user.id}</td>
+                                <td style="width: 30%;">${user.email}</td>
+                                <td style="width: 10%;">${user.name}</td>
+                                <td style="width: 10%;">${user.roleType}</td>
+                                <td style="width: 10%;">${user.provider}</td>
+                                <td style="width: 30%;">${user.createdDate}</td>
+                            </tr>
+                        `);
+                    });
+                } else {
+                    tbody.append(`
+                        <tr>
+                            <td colspan="6" style="text-align: center;">유저가 없습니다.</td>
+                        </tr>
+                    `);
+                }
+
+                // 페이지네이션 업데이트
+                const pagination = $('.pagination');
+                pagination.empty();
+
+                const totalPages = userPage.totalPages;
+                const currentPage = userPage.number;
+
+                // 처음으로 가는 버튼
+                pagination.append(`
+                    <li class="page-item ${currentPage === 0 ? 'disabled' : ''}">
+                        <a class="page-link" href="#" data-page="0"><<</a>
+                    </li>
+                `);
+
+                // 페이지네이션 범위 계산
+                let startPage = Math.max(0, currentPage - 2);
+                let endPage = Math.min(totalPages - 1, currentPage + 2);
+
+                // Adjust startPage and endPage if they are out of bounds
+                if (currentPage <= 2) {
+                    endPage = Math.min(4, totalPages - 1);
+                } else if (currentPage >= totalPages - 3) {
+                    startPage = Math.max(totalPages - 5, 0);
+                }
+
+                for (let i = startPage; i <= endPage; i++) {
+                    pagination.append(`
+                        <li class="page-item ${i === currentPage ? 'active' : ''}">
+                            <a class="page-link" href="#" data-page="${i}">${i + 1}</a>
+                        </li>
+                    `);
+                }
+
+                // 마지막으로 가는 버튼
+                pagination.append(`
+                    <li class="page-item ${currentPage === totalPages - 1 ? 'disabled' : ''}">
+                        <a class="page-link" href="#" data-page="${totalPages - 1}">>></a>
+                    </li>
+                `);
+            });
+        }
+
+        // 초기 로드
+        loadUserList(0);
+
+        // 페이지네이션 클릭 이벤트
+        $(document).on('click', '.page-link', function(e) {
+            e.preventDefault();
+            const page = $(this).data('page');
+
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(function() {
+                loadUserList(page);
+            }, 300); // 300ms 디바운스 타임
+        });
+    });
+</script>
 </body>
 </html>

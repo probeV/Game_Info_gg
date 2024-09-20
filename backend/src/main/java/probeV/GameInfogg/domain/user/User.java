@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import probeV.GameInfogg.domain.BaseTimeEntity;
 import probeV.GameInfogg.domain.user.constant.RoleType;
 
 
@@ -12,7 +13,7 @@ import probeV.GameInfogg.domain.user.constant.RoleType;
 @NoArgsConstructor
 @Table(name = "USERS")
 @Entity
-public class User {
+public class User extends BaseTimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

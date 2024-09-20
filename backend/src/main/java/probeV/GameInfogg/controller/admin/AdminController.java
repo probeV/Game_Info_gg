@@ -17,6 +17,8 @@ import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListSaveRequest
 import probeV.GameInfogg.service.admin.AdminService;
 import probeV.GameInfogg.domain.user.User;
 import org.springframework.data.domain.Page;
+import probeV.GameInfogg.controller.admin.dto.response.UserListResponseDto;
+import probeV.GameInfogg.controller.admin.dto.response.UserPageResponseDto;
 
 import java.util.List;
 
@@ -41,11 +43,13 @@ public class AdminController {
 
     // 유저 목록 조회
     @GetMapping("/admins/user")
-    public String getUserList(@RequestParam(value="page", defaultValue="0") int page, Model model) {
-        Page<User> userList = adminService.getUserList(page);
-        model.addAttribute("userList", userList);
-        
-        return "pages/AdminPages/AdminUser"; // 반환할 템플릿 이름
+    @ResponseBody
+    public UserPageResponseDto getUserList(@RequestParam(value="page", defaultValue="0") int page) {
+        UserPageResponseDto userPage = adminService.getUserList(page);
+
+        log.info("userList : " + userPage.getUserList().size());
+
+        return userPage;
     }
 
 

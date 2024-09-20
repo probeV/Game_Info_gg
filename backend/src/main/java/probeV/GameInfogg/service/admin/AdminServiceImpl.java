@@ -21,6 +21,9 @@ import org.springframework.security.access.method.P;
 
 import probeV.GameInfogg.domain.user.User;
 import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListSaveRequestDto;
+import probeV.GameInfogg.controller.admin.dto.response.UserListResponseDto;
+import probeV.GameInfogg.controller.admin.dto.response.UserPageResponseDto;
+
 import java.util.Set;
 import java.util.Map;
 import java.util.function.Function;
@@ -39,7 +42,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     @Transactional
     public void saveTasks(List<DefaultTaskListSaveRequestDto> requestDto) {
-        log.info("saveTasks 호출");
+        log.info("AdminService : saveTasks");
 
         // DB에서 현재 존재하는 Task ID 목록 가져오기
         List<DefaultTask> existingTasks = defaultTaskRepository.findAll();
@@ -92,10 +95,12 @@ public class AdminServiceImpl implements AdminService {
 
     // 유저 목록 조회
     @Override
-    public Page<User> getUserList(int page) {
+    public UserPageResponseDto getUserList(int page) {
+        log.info("AdminService : getUserList");
+
         Pageable pageable = PageRequest.of(page, 10);
         Page<User> entities = userRepository.findAll(pageable);
-        
-        return entities;
+
+        return new UserPageResponseDto(entities);
     }
 }

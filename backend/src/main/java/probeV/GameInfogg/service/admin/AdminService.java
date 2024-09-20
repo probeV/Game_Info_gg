@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListSaveRequestDto;
+import probeV.GameInfogg.controller.admin.dto.response.UserListResponseDto;
+import probeV.GameInfogg.controller.admin.dto.response.UserPageResponseDto;
 import probeV.GameInfogg.domain.user.User;
 
 
@@ -15,6 +17,6 @@ public interface AdminService {
     public void saveTasks(List<DefaultTaskListSaveRequestDto> requestDto);
 
     // 유저 목록 조회
-    public Page<User> getUserList(int page);
+    public UserPageResponseDto getUserList(int page);
 
 }

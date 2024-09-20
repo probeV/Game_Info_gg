@@ -21,7 +21,7 @@ public class DefaultTaskServiceImpl implements DefaultTaskService{
     // Task 전체 조회
     @Override
     public List<DefaultTaskListResponseDto> getAllTaskList() {
-        log.debug("getAllTaskLIst");
+        log.info("DefaultTaskService : getAllTaskList");
 
         return defaultTaskRepository.findAll().stream()
                 .map(DefaultTaskListResponseDto::new)
@@ -30,7 +30,7 @@ public class DefaultTaskServiceImpl implements DefaultTaskService{
 
     @Override
     public List<DefaultTaskListResponseDto> getFilteredByModeTaskList(String mode) {
-        log.debug("getFilteredByModeTaskList");
+        log.info("DefaultTaskService : getFilteredByModeTaskList");
 
         ModeType modeType = ModeType.fromString(mode);
 
@@ -41,7 +41,7 @@ public class DefaultTaskServiceImpl implements DefaultTaskService{
 
     @Override
     public List<DefaultTaskListResponseDto> getFilteredByEventTaskList(String event) {
-        log.debug("getFilteredByEventTaskList");
+        log.info("DefaultTaskService : getFilteredByEventTaskList");
 
         EventType eventType = EventType.fromString(event);
 
@@ -52,7 +52,7 @@ public class DefaultTaskServiceImpl implements DefaultTaskService{
 
     @Override
     public List<DefaultTaskListResponseDto> getFilteredByModeEventTaskList(String mode, String event) {
-        log.debug("getFilteredByModeEventTaskList");
+        log.info("DefaultTaskService : getFilteredByModeEventTaskList");
 
         ModeType modeType = ModeType.fromString(mode);
         EventType eventType = EventType.fromString(event);

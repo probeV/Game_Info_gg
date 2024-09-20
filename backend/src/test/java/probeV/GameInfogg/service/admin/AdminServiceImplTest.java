@@ -19,6 +19,7 @@ import probeV.GameInfogg.domain.user.constant.RoleType;
 import probeV.GameInfogg.repository.task.DefaultTaskRepository;
 import probeV.GameInfogg.repository.user.UserRepository;
 import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListSaveRequestDto;
+import probeV.GameInfogg.controller.admin.dto.response.UserPageResponseDto;
 import probeV.GameInfogg.exception.task.TaskNotFoundException;
 import probeV.GameInfogg.domain.task.constant.ModeType;
 import static org.assertj.core.api.Assertions.*;
@@ -139,11 +140,11 @@ class AdminServiceImplTest {
         userRepository.save(user2);
 
         // when
-        Page<User> result = adminService.getUserList(0);
+        UserPageResponseDto result = adminService.getUserList(0);
         
         // then
-        assertThat(result.getTotalElements()).isEqualTo(2);
-        assertThat(result.getContent().get(0).getName()).isEqualTo("test1");
-        assertThat(result.getContent().get(1).getName()).isEqualTo("test2");
+        assertThat(result.getUserList()).hasSize(2);
+        assertThat(result.getUserList().get(0).getName()).isEqualTo("test1");
+        assertThat(result.getUserList().get(1).getName()).isEqualTo("test2");
     }
 }
