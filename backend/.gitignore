@@ -42,6 +42,4 @@ application-dev.properties
 application-dev-db.properties
 application-real.properties
 application-real-db.properties
-
-### js ###
 **/src/main/resources/static/js/TaskListPages/taskListSetting.js
