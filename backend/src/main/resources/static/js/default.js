@@ -1,4 +1,4 @@
-import { protectedApiEndpoints } from './auth'; // 파일 이름 변경
+import { protectedApiEndpoints } from './auth-properties'; // 파일 이름 변경
 
 $(document).ajaxSend(function(event, xhr, settings) {
     // 권한이 필요한 API 요청인지 확인

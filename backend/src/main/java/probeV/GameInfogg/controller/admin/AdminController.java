@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import jakarta.validation.Valid;
 import org.springframework.ui.Model; // 추가
-
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListSaveRequestDto;
+
+import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListDeleteDto;
+import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListSaveorUpdateRequestDto;
 import probeV.GameInfogg.service.admin.AdminService;
-import probeV.GameInfogg.domain.user.User;
-import org.springframework.data.domain.Page;
-import probeV.GameInfogg.controller.admin.dto.response.UserListResponseDto;
 import probeV.GameInfogg.controller.admin.dto.response.UserPageResponseDto;
 
 import java.util.List;
@@ -32,13 +31,28 @@ import java.util.List;
 public class AdminController {
     private final AdminService adminService;
 
-    // 기본 숙제 체크 리스트 항목 설정 (생성, 수정, 삭제)
+    // 기본 숙제 체크 리스트 항목 설정 (생성, 수정)
     @PostMapping("/admins/task")
-    public void saveTasks(
-        @Valid @RequestBody List<DefaultTaskListSaveRequestDto> requestDto
+    @ResponseBody
+    public void saveOrUpdateTasks(
+        @Valid @RequestBody List<DefaultTaskListSaveorUpdateRequestDto> requestDto
     ){
         adminService.saveTasks(requestDto);
+
+        return;
     }
+
+    // 기본 숙제 체크 리스트 항목 삭제
+    @DeleteMapping("/admins/task")
+    @ResponseBody
+    public void deleteTasks(
+        @Valid @RequestBody List<DefaultTaskListDeleteDto> requestDto
+    ){
+        adminService.deleteTasks(requestDto);
+
+        return;
+    }
+
 
 
     // 유저 목록 조회

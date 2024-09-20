@@ -12,7 +12,7 @@ import probeV.GameInfogg.domain.task.constant.FrequencyType;
 
 @Getter
 @NoArgsConstructor
-public class DefaultTaskListSaveRequestDto {
+public class DefaultTaskListSaveorUpdateRequestDto {
     private Integer id;
 
     @NotBlank(message = "이름은 필수 입력 항목입니다.")
@@ -28,7 +28,7 @@ public class DefaultTaskListSaveRequestDto {
     private String event;
     
     @Builder
-    public DefaultTaskListSaveRequestDto(Integer id, String name, String mode, String frequency, String event) {
+    public DefaultTaskListSaveorUpdateRequestDto(Integer id, String name, String mode, String frequency, String event) {
         this.id = id;
         this.name = name;
         this.mode = mode;

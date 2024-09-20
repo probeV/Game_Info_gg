@@ -18,7 +18,7 @@ import probeV.GameInfogg.domain.user.User;
 import probeV.GameInfogg.domain.user.constant.RoleType;
 import probeV.GameInfogg.repository.task.DefaultTaskRepository;
 import probeV.GameInfogg.repository.user.UserRepository;
-import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListSaveRequestDto;
+import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListSaveorUpdateRequestDto;
 import probeV.GameInfogg.controller.admin.dto.response.UserPageResponseDto;
 import probeV.GameInfogg.exception.task.TaskNotFoundException;
 import probeV.GameInfogg.domain.task.constant.ModeType;
@@ -47,9 +47,9 @@ class AdminServiceImplTest {
     @Test
     public void saveTasks_생성_성공() {
         // Given
-        DefaultTaskListSaveRequestDto dto1 = new DefaultTaskListSaveRequestDto(null, "Task 1", ModeType.PVP.toString(), FrequencyType.DAILY.toString(), EventType.NORMAL.toString());
-        DefaultTaskListSaveRequestDto dto2 = new DefaultTaskListSaveRequestDto(null, "Task 2", ModeType.PVE.toString(), FrequencyType.DAILY.toString(), EventType.NORMAL.toString());
-        List<DefaultTaskListSaveRequestDto> requestDto = Arrays.asList(dto1, dto2);
+        DefaultTaskListSaveorUpdateRequestDto dto1 = new DefaultTaskListSaveorUpdateRequestDto(null, "Task 1", ModeType.PVP.toString(), FrequencyType.DAILY.toString(), EventType.NORMAL.toString());
+        DefaultTaskListSaveorUpdateRequestDto dto2 = new DefaultTaskListSaveorUpdateRequestDto(null, "Task 2", ModeType.PVE.toString(), FrequencyType.DAILY.toString(), EventType.NORMAL.toString());
+        List<DefaultTaskListSaveorUpdateRequestDto> requestDto = Arrays.asList(dto1, dto2);
 
         // When
         adminService.saveTasks(requestDto);
@@ -72,9 +72,9 @@ class AdminServiceImplTest {
                 .build();
         defaultTaskRepository.save(task1);
 
-        DefaultTaskListSaveRequestDto dto1 = new DefaultTaskListSaveRequestDto(1, "Task 1", ModeType.PVE.toString(), FrequencyType.WEEKLY.toString(), EventType.TIME.toString());
-        DefaultTaskListSaveRequestDto dto2 = new DefaultTaskListSaveRequestDto(null, "Task 2", ModeType.PVE.toString(), FrequencyType.DAILY.toString(), EventType.NORMAL.toString());
-        List<DefaultTaskListSaveRequestDto> requestDto = Arrays.asList(dto1, dto2);
+        DefaultTaskListSaveorUpdateRequestDto dto1 = new DefaultTaskListSaveorUpdateRequestDto(1, "Task 1", ModeType.PVE.toString(), FrequencyType.WEEKLY.toString(), EventType.TIME.toString());
+        DefaultTaskListSaveorUpdateRequestDto dto2 = new DefaultTaskListSaveorUpdateRequestDto(null, "Task 2", ModeType.PVE.toString(), FrequencyType.DAILY.toString(), EventType.NORMAL.toString());
+        List<DefaultTaskListSaveorUpdateRequestDto> requestDto = Arrays.asList(dto1, dto2);
 
         // When
         adminService.saveTasks(requestDto);
@@ -89,9 +89,9 @@ class AdminServiceImplTest {
     @Test
     public void saveTasks_존재하지_않는_id_예외() {
         // Given
-        DefaultTaskListSaveRequestDto dto1 = new DefaultTaskListSaveRequestDto(1, "Task 1", ModeType.PVE.toString(), FrequencyType.WEEKLY.toString(), EventType.TIME.toString());
-        DefaultTaskListSaveRequestDto dto2 = new DefaultTaskListSaveRequestDto(2, "Task 2", ModeType.PVE.toString(), FrequencyType.DAILY.toString(), EventType.NORMAL.toString());
-        List<DefaultTaskListSaveRequestDto> requestDto = Arrays.asList(dto1, dto2);
+        DefaultTaskListSaveorUpdateRequestDto dto1 = new DefaultTaskListSaveorUpdateRequestDto(1, "Task 1", ModeType.PVE.toString(), FrequencyType.WEEKLY.toString(), EventType.TIME.toString());
+        DefaultTaskListSaveorUpdateRequestDto dto2 = new DefaultTaskListSaveorUpdateRequestDto(2, "Task 2", ModeType.PVE.toString(), FrequencyType.DAILY.toString(), EventType.NORMAL.toString());
+        List<DefaultTaskListSaveorUpdateRequestDto> requestDto = Arrays.asList(dto1, dto2);
 
         // When & Then
         assertThrows(TaskNotFoundException.class, () -> adminService.saveTasks(requestDto));
@@ -108,7 +108,7 @@ class AdminServiceImplTest {
                 .build();
         defaultTaskRepository.save(task1);
 
-        List<DefaultTaskListSaveRequestDto> requestDto = Arrays.asList();
+        List<DefaultTaskListSaveorUpdateRequestDto> requestDto = Arrays.asList();
 
         // When
         adminService.saveTasks(requestDto);

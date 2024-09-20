@@ -8,9 +8,9 @@ export function renderTasks(modeType, tasks, container) {
 
     const taskList = $('<div>', { class: 'task-list' });
     // 주간 컨테이너 생성
-    const weeklyContainer = $('<div>', {class: 'task-list-weekly'}).html(`<h3>주간(WEEKLY)</h3>`);
+    const weeklyContainer = $('<div>', {class: 'task-list-weekly', 'data-frequency-type': 'WEEKLY', 'data-mode-type': modeType}).html(`<h3>주간(WEEKLY)</h3>`);
     // 일일 컨테이너 생성
-    const dailyContainer = $('<div>', {class: 'task-list-daily'}).html(`<h3>일간(DAILY)</h3>`);
+    const dailyContainer = $('<div>', {class: 'task-list-daily', 'data-frequency-type': 'DAILY', 'data-mode-type': modeType}).html(`<h3>일간(DAILY)</h3>`);
 
     if (weeklyTasks.length > 0 || dailyTasks.length > 0) {
 

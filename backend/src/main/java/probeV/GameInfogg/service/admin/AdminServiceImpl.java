@@ -20,7 +20,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.method.P;
 
 import probeV.GameInfogg.domain.user.User;
-import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListSaveRequestDto;
+import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListDeleteDto;
+import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListSaveorUpdateRequestDto;
 import probeV.GameInfogg.controller.admin.dto.response.UserListResponseDto;
 import probeV.GameInfogg.controller.admin.dto.response.UserPageResponseDto;
 
@@ -41,10 +42,53 @@ public class AdminServiceImpl implements AdminService {
     // 기본 숙제 체크 리스트 항목 생성
     @Override
     @Transactional
-    public void saveTasks(List<DefaultTaskListSaveRequestDto> requestDto) {
+    public void saveTasks(List<DefaultTaskListSaveorUpdateRequestDto> requestDto) {
         log.info("AdminService : saveTasks");
 
         // DB에서 현재 존재하는 Task ID 목록 가져오기
+        List<DefaultTask> existingTasks = defaultTaskRepository.findAll();
+
+        // 존재하는 Task ID를 Key로, Task를 Value로 하는 Map 생성
+        Map<Integer, DefaultTask> taskMap = existingTasks.stream()
+            .collect(Collectors.toMap(DefaultTask::getId, Function.identity()));
+
+        // 수정 및 생성 처리
+        for (DefaultTaskListSaveorUpdateRequestDto dto : requestDto) {
+            Integer id = dto.getId();
+
+            //log.info(dto.getId(), dto.getName(), dto.getMode(), dto.getFrequency(), dto.getEvent());
+
+            // 이미 존재하는 경우
+            if (id != null && taskMap.containsKey(id)) {
+                // 수정 로직 호출
+                log.info("saveTasks 수정 로직 호출" + id);
+
+                DefaultTask task = taskMap.get(id);
+                task.update(dto.getName(), ModeType.fromString(dto.getMode()), FrequencyType.fromString(dto.getFrequency()), EventType.fromString(dto.getEvent()));
+            } 
+
+            // 존재하지 않는 경우
+            else if (id == null) {
+                // 생성 로직
+                log.info("saveTasks 생성 로직 호출" + id);
+
+                defaultTaskRepository.save(dto.toEntity());
+            }
+            else {
+                log.error("saveTasks 오류 발생" + id);
+
+                throw new TaskNotFoundException("Task not found");
+            }
+        }
+    }
+
+    // 기본 숙제 체크 리스트 항목 삭제 
+    // requestDto는 현재 존재하는 모든 Task의 ID를 가지고 있음, 따라서 db에는 있고, requestDto에는 없는 경우 삭제    
+    @Override
+    @Transactional
+    public void deleteTasks(List<DefaultTaskListDeleteDto> requestDto) {
+        log.info("AdminService : deleteTasks");
+
         List<DefaultTask> existingTasks = defaultTaskRepository.findAll();
 
         // 존재하는 Task ID 목록 가져오기
@@ -56,42 +100,19 @@ public class AdminServiceImpl implements AdminService {
         Map<Integer, DefaultTask> taskMap = existingTasks.stream()
             .collect(Collectors.toMap(DefaultTask::getId, Function.identity()));
 
-        // 수정 및 생성 처리
-        for (DefaultTaskListSaveRequestDto dto : requestDto) {
-            // 이미 존재하는 경우
-            if (dto.getId() != null && taskMap.containsKey(dto.getId())) {
-                // 수정 로직 호출
-                log.info("saveTasks 수정 로직 호출" + dto.getId());
-
-                DefaultTask task = taskMap.get(dto.getId());
-                task.update(dto.getName(), ModeType.fromString(dto.getMode()), FrequencyType.fromString(dto.getFrequency()), EventType.fromString(dto.getEvent()));
-                // existingTaskIds에서 제거
+        for (DefaultTaskListDeleteDto dto : requestDto) {
+            if(taskMap.get(dto.getId()) != null) {
                 existingTaskIds.remove(dto.getId());
-            } 
-            // 존재하지 않는 경우
-            else if (dto.getId() == null) {
-                // 생성 로직
-                log.info("saveTasks 생성 로직 호출" + dto.getId());
-
-                defaultTaskRepository.save(dto.toEntity());
-            }
-            else {
-                log.error("saveTasks 오류 발생" + dto.getId());
-
-                throw new TaskNotFoundException("Task not found");
             }
         }
 
-        // 삭제 처리
-        for (Integer id : existingTaskIds) {
-            // 삭제 로직 호출
-            log.info("saveTasks 삭제 로직 호출" + id);
-
-            defaultTaskRepository.deleteById(id);
+        for(Integer taskId : existingTaskIds) {
+            log.info("deleteTasks 삭제 로직 호출");
+            if(taskMap.get(taskId) != null) {
+                defaultTaskRepository.deleteById(taskId);
+            }
         }
-
     }
-
 
     // 유저 목록 조회
     @Override
