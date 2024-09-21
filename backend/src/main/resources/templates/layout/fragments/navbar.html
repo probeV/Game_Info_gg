@@ -1,8 +1,43 @@
-<div th:fragment="menu">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top"> <!-- 상단 고정 메뉴바 추가 -->
-        <a class="navbar-brand" href="#" onclick="location.href='/'">원스휴먼 도우미</a> <!-- 클릭 시 리로드 -->
-        <div class="ml-auto">
-            <a class="btn btn-info" href="/api/v1/login">로그인</a>
+<div class="navbar-fragment" th:fragment="navbar">
+    <nav class="navbar-container"> 
+        <div class="navbar-content">
+            <div class="navbar-content-brand">
+                <div class="logo" onclick="location.href='/'" style="cursor: pointer; width: 200px; height: 50px;"></div> 
+            </div>
+
+            <div class="navbar-content-list">
+                <ul>
+                    <li class="navbar-content-item"><a href="/help" class="navbar-content-text">문의</a></li>
+                    <li class="navbar-content-item" id="login-item" style="display: none;"><a href="/login" class="navbar-content-text">로그인</a></li>
+                    <li class="navbar-content-item" id="logout-item" style="display: none;"><a href="/logout" class="navbar-content-text" onclick="localStorage.removeItem('accessToken');">로그아웃</a></li>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            const accessToken = localStorage.getItem('accessToken');
+                            if (accessToken) {
+                                document.getElementById('login-item').style.display = 'none';
+                                document.getElementById('logout-item').style.display = 'block';
+                            } else {
+                                document.getElementById('login-item').style.display = 'block';
+                                document.getElementById('logout-item').style.display = 'none';
+                            }
+                        });
+
+                    </script>
+                </ul>
+            </div>
         </div>
     </nav>
+
+    <nav class="sub-navbar">
+        <div class="sub-navbar-content-list">
+            <ul>
+                <li class="sub-navbar-content-item"><a href="/task" class="sub-navbar-content-text">체크 리스트</a></li>
+                <li class="sub-navbar-content-item"><a href="/user/task" class="sub-navbar-content-text">나의 체크 리스트</a></li>
+                <!-- <li class="sub-navbar-content-item"><a href="/group" class="sub-navbar-content-text">체크 리스트 사용법</a></li>
+                <li class="sub-navbar-content-item"><a href="/setting" class="sub-navbar-content-text">나의 체크 리스트 설정법</a></li> -->
+            </ul>
+        </div>
+    </nav>
+    <div style="margin-bottom: 145px;"></div>
+
 </div>

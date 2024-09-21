@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="~{layout/fragments/header :: header}"></div>
+    <link rel="stylesheet" href="/css/admin_navbar_styles.css" />
+    <link rel="stylesheet" href="/css/taskListSetting_styles.css" />
+</head>
+<body>
+    <div class="wrap">
+        <div class="app">
+                <div class="admin-navbar-fragment" th:replace="~{layout/fragments/admin_navbar :: admin-navbar}"></div>
+
+            <div class="task-list-container">
+                <div class="task-list-area" style="margin-left: 290px; margin-right: 40px; background-color: #ffffffee; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                    <div class="task-list-head pt-4 pl-5 pr-5 d-flex justify-content-between">
+                        <h2>체크 리스트 설정</h2>
+                        <button class="btn" style="background-color: #ff9999; border: none;">저장</button>
+                    </div>
+                    <hr>
+                    <div class="tasks-container pl-5 pr-5 pb-5">
+                        <div class="tasks-area">
+                            <!-- 태스크 리스트 컨텐츠 -->
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{layout/fragments/footer :: footer}"></div>
+    <script type="module" src="/js/TaskListPages/taskListSetting.js"></script>
+</body>
+</html>

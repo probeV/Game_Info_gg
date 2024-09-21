@@ -14,16 +14,20 @@ import org.springframework.stereotype.Component;
 
 import probeV.GameInfogg.auth.dto.response.AccessTokenResponseDto;
 import probeV.GameInfogg.auth.dto.response.RefreshTokenResponseDto;
+
 import org.springframework.security.core.Authentication;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
+import java.util.Map;
 
 import javax.crypto.SecretKey;
 
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Component
 public class JwtTokenProvider implements InitializingBean {
     // JWT 생성 및 검증을 위한 키
@@ -31,20 +35,24 @@ public class JwtTokenProvider implements InitializingBean {
     private final long accessTokenValidityInMilliseconds;
     private final long refreshTokenValidityInMilliseconds;
     private final String secret;
-
+    
     public JwtTokenProvider(
             @Value("${jwt.secret}") String secret,
-            @Value("${jwt.token-validity-in-seconds}") long tokenValidityInSeconds) {
+            @Value("${jwt.token-validity-in-seconds}") long tokenValidityInSeconds
+            ) {
         this.secret = secret;
-        this.accessTokenValidityInMilliseconds = tokenValidityInSeconds * 30; // 60,000ms : 1m(0.001d), 60000 * 30 = 30m
+        this.accessTokenValidityInMilliseconds = tokenValidityInSeconds * 60 * 2; // 60,000ms : 1m(0.001d), 60000 * 120 = 2h
         this.refreshTokenValidityInMilliseconds = tokenValidityInSeconds * 60 * 24 * 2; // 60,000ms : 1m(0.001d), 60000 * 60 * 24 * 2 = 2d
     }
+
 
     private SecretKey getSigningKey() {
         byte[] keyBytes = Decoders.BASE64.decode(this.secret);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
+    // 액세스 토큰 생성
+    @SuppressWarnings("unchecked")
     public AccessTokenResponseDto generateAccessToken(Authentication authentication) {
         // 권한들 가져오기
         String authorities = authentication.getAuthorities().stream()
@@ -55,21 +63,26 @@ public class JwtTokenProvider implements InitializingBean {
         long now = (new Date()).getTime();
         Date accessExprTime = new Date(now + this.accessTokenValidityInMilliseconds);
 
+        log.info("authentication.getPrincipal() : {}", authentication.getPrincipal());
+
         DefaultOAuth2User defaultOAuth2User = (DefaultOAuth2User) authentication.getPrincipal();
-        Object id = defaultOAuth2User.getAttributes().get("id");
-        String nameAttributeKey = defaultOAuth2User.getName();
-        String provider;
-        if(nameAttributeKey.equals("respoonse")){
-            provider="kakao";
+        // 소셜 플렛폼에서의 id 값이 포함된 attribvtes (DefaultOAuth2User 가 usernameAttributeName으로 알아서 가져옴)
+        //defaultOAuth2User.getName();
+        // 소셜 플렛폼에서의 고유한 id
+        Object id=defaultOAuth2User.getAttribute("id");
+
+        //kakao 전용 식별자 체크
+        if(id!=null){
+            id=defaultOAuth2User.getAttributes().get("id");
         }
+        //naver 전용 식별자 체크 
         else{
-            provider="naver";
+            id=((Map<String, Object>)defaultOAuth2User.getAttributes().get("response")).get("id");
         }
 
         String accessToken = Jwts.builder()
-                .subject(String.valueOf(id))
+                .subject(id.toString())
                 .claim(AUTHORITIES_KEY, authorities)
-                .claim("provider", provider)
                 .signWith(this.getSigningKey())
                 .expiration(accessExprTime)
                 .compact();
@@ -79,6 +92,38 @@ public class JwtTokenProvider implements InitializingBean {
                 .accessTokenExpiresDate(accessExprTime)
                 .build();
     }
+
+    // 액세스 토큰 재발급
+    public AccessTokenResponseDto reGenerateAccessToken(Authentication authentication) {
+        // 권한들 가져오기
+        String authorities = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(","));
+
+        log.info("authentication.getPrincipal() : {}", authentication.getPrincipal());
+
+        // 토큰의 expire 시간을 설정
+        long now = (new Date()).getTime();
+        Date accessExprTime = new Date(now + this.accessTokenValidityInMilliseconds);
+
+        User user = (User) authentication.getPrincipal();
+        String subject = user.getUsername();
+
+        String accessToken = Jwts.builder()
+                .subject(subject)
+                .claim(AUTHORITIES_KEY, authorities)
+                .signWith(this.getSigningKey())
+                .expiration(accessExprTime)
+                .compact();
+
+        return AccessTokenResponseDto.builder()
+                .accessToken(accessToken)
+                .accessTokenExpiresDate(accessExprTime)
+                .build();
+    }
+
+
+    // 리프레시 토큰 생성
 
     public RefreshTokenResponseDto generateRefreshToken() {
         // 토큰의 expire 시간을 설정
@@ -98,21 +143,35 @@ public class JwtTokenProvider implements InitializingBean {
 
     // 토큰에서 인증정보를 꺼내옴   
     public Authentication getAuthentication(String token) {
-        Claims claims = Jwts.parser()
-                .verifyWith(this.getSigningKey())
-                .build()
-                .parseSignedClaims(token)
-                .getPayload();
+        try {
+            Claims claims = Jwts.parser()
+                    .verifyWith(this.getSigningKey())
+                    .build()
+                    .parseSignedClaims(token)
+                    .getPayload();
 
-        Collection<? extends GrantedAuthority> authorities =
-                Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
-                        .map(SimpleGrantedAuthority::new)
-                        .collect(Collectors.toList());
+            Collection<? extends GrantedAuthority> authorities =
+                    Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
+                            .map(SimpleGrantedAuthority::new)
+                            .collect(Collectors.toList());
 
-        User principal = new User(claims.getSubject(), "", authorities);
+            User principal = new User(claims.getSubject(), "", authorities);
 
-        return new UsernamePasswordAuthenticationToken(principal, token, authorities);
+            return new UsernamePasswordAuthenticationToken(principal, token, authorities);
+        } catch (ExpiredJwtException e) {
+            Claims claims = e.getClaims();
+
+            Collection<? extends GrantedAuthority> authorities =
+                    Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
+                            .map(SimpleGrantedAuthority::new)
+                            .collect(Collectors.toList());
+
+            User principal = new User(claims.getSubject(), "", authorities);
+
+            return new UsernamePasswordAuthenticationToken(principal, token, authorities);
+        } 
     }
+
 
     // 토큰의 유효성 검증을 수행
     public boolean validateToken(String token) {
@@ -124,17 +183,13 @@ public class JwtTokenProvider implements InitializingBean {
                 .parseSignedClaims(token);
             return true;
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
-            e.printStackTrace();
-            System.out.println("잘못된 JWT 서명입니다.");
+            log.info("잘못된 JWT 서명입니다.");
         } catch (ExpiredJwtException e) {
-            e.printStackTrace();
-            System.out.println("만료된 JWT 토큰입니다.");
+            log.info("만료된 JWT 토큰입니다.");
         } catch (UnsupportedJwtException e) {
-            e.printStackTrace();
-            System.out.println("지원되지 않는 JWT 토큰입니다.");
+            log.info("지원되지 않는 JWT 토큰입니다.");
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            System.out.println("JWT 토큰이 잘못되었습니다.");
+            log.info("JWT 토큰이 잘못되었습니다.");
         }
         return false;
     }

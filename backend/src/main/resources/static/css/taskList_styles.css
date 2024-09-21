@@ -1,7 +1,9 @@
-body {
-    font-family: 'NanumSquareNeo', Arial, sans-serif;
-    background-color: #f8f9fa; /* 연한 회색 배경색 */
-    color: #343a40;
+.filter-area {
+    margin: 0 20%;
+}
+
+.tasks-area {
+    margin: 0 20%;
 }
 
 .mode-filter, .event-filter {
@@ -19,10 +21,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.tasks-container {
-    width: 100%; /* 가로 크기 늘림 */
 }
 
 .task-category {

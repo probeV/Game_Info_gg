@@ -3,7 +3,6 @@ package probeV.GameInfogg.auth.handler;
 import jakarta.servlet.http.Cookie;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,7 +23,7 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
 
-        DefaultOAuth2User defaultOAuth2User = (DefaultOAuth2User) authentication.getPrincipal();
+        //DefaultOAuth2User defaultOAuth2User = (DefaultOAuth2User) authentication.getPrincipal();
 
         log.info("onAuthenticationSuccess token 생성 시작");
 
@@ -38,10 +37,16 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
         refreshTokenCookie.setPath("/");
         response.addCookie(refreshTokenCookie);
 
-        // "/"로 리다이렉트
-        // AccessToken을 HTTP Header에 담아 전송
-        response.setHeader("Authorization", "Bearer " + accessTokenResponseDto.getAccessToken());
+        // AccessToken을 쿠키에 저장
+        Cookie accessTokenCookie = new Cookie("AccessToken", accessTokenResponseDto.getAccessToken());
+        accessTokenCookie.setHttpOnly(false); // 클라이언트에서 접근 가능하도록 설정
+        //accessTokenCookie.setSecure(true); // HTTPS에서만 전송
+        accessTokenCookie.setPath("/");
+        accessTokenCookie.setMaxAge(30); // 1분 동안 유효
+        response.addCookie(accessTokenCookie);
 
+        // redirect.html로 리다이렉트
+        response.sendRedirect("/api/v1/auths/redirects");
     }
     
 }

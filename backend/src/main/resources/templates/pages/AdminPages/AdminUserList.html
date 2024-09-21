@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="~{layout/fragments/header :: header}"></div>
+    <link rel="stylesheet" href="/css/admin_navbar_styles.css" />
+    <style>
+        table {
+            width: 100%;
+            table-layout: fixed; /* 고정된 테이블 레이아웃 */
+        }
+        th, td {
+            text-align: center;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="app">
+                <div class="admin-navbar-fragment" th:replace="~{layout/fragments/admin_navbar :: admin-navbar}"></div>
+
+            <div class="user-list-container">
+                <div class="user-list-area" style="margin-left: 290px; margin-right: 40px; background-color: #ffffffee; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                    <div class="user-list-head pt-4 pl-5 pr-5">
+                        <h2>사용자 목록</h2>
+                    </div>
+                    <hr>
+                    <div class="user-list pl-5 pr-5 pb-5">
+                        <table style="width: 100%; table-layout: fixed; padding: 0; display: table;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 10%;">ID</th>
+                                    <th style="width: 30%;">이메일</th>
+                                    <th style="width: 10%;">이름</th>
+                                    <th style="width: 10%;">역할</th>
+                                    <th style="width: 10%;">제공자</th>
+                                    <th style="width: 30%;">가입일</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- 유저 목록 표시 -->
+                                
+                            </tbody>
+                        </table>
+
+                        <!-- 페이지네이션 -->
+                        <div class="pagination-area d-flex justify-content-center">
+                            <ul class="pagination">
+                                <!-- 페이지네이션 업데이트 -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{layout/fragments/footer :: footer}"></div>
+    <script src="/js/AdminPages/userlist.js"></script>
+</body>
+</html>

@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
 
     @GetMapping("/")
-    public String redirectToTasks() {
-        return "redirect:/api/v1/tasks";
+    public String redirectToTaskListPage() {
+        return "redirect:/task";
     }
+
+
+
 
 }
