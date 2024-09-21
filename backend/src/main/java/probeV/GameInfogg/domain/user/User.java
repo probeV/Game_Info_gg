@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import probeV.GameInfogg.domain.BaseTimeEntity;
 import probeV.GameInfogg.domain.user.constant.RoleType;
 
 
@@ -12,13 +13,16 @@ import probeV.GameInfogg.domain.user.constant.RoleType;
 @NoArgsConstructor
 @Table(name = "USERS")
 @Entity
-public class User {
+public class User extends BaseTimeEntity {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "email", nullable = false)
     private String email;
 
     @Enumerated(EnumType.STRING)

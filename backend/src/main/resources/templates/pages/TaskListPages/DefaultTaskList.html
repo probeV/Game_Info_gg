@@ -4,43 +4,51 @@
     <div th:replace="~{layout/fragments/header :: header}"></div>
     <link rel="stylesheet" href="/css/taskList_styles.css" />
 </head>
-<body class="container mt-5">
-    <div th:replace="~{layout/fragments/navbar :: menu}"/>
+<body>
+    <div class="wrap">
+        <div class="app">
+            <div class="navbar-container" th:replace="~{layout/fragments/navbar :: navbar}"/>
 
-    <div class="mt-5 pt-5"> <!-- 메뉴바 아래 여백 추가 -->
-        <h1 class="text-center mb-4">원스휴먼 숙제 체크 리스트</h1>
-        <div class="mode-filter btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-info active"> <!-- 색상 변경: btn-primary에서 btn-info로 -->
-                <input type="radio" name="mode" value="ALL" checked> 모두 보기
-            </label>
-            <label class="btn btn-info"> <!-- 색상 변경: btn-primary에서 btn-info로 -->
-                <input type="radio" name="mode" value="PVE"> PVE
-            </label>
-            <label class="btn btn-info"> <!-- 색상 변경: btn-primary에서 btn-info로 -->
-                <input type="radio" name="mode" value="PVP"> PVP
-            </label>
-        </div>
-        <div class="event-filter btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-info active"> <!-- 색상 변경: btn-primary에서 btn-info로 -->
-                <input type="radio" name="event" value="ALL" checked> 모두 보기
-            </label>
-            <label class="btn btn-info"> <!-- 색상 변경: btn-primary에서 btn-info로 -->
-                <input type="radio" name="event" value="NORMAL"> 일반 이벤트
-            </label>
-            <label class="btn btn-info"> <!-- 색상 변경: btn-primary에서 btn-info로 -->
-                <input type="radio" name="event" value="TIME"> 시간 이벤트
-            </label>
-            <label class="btn btn-info"> <!-- 색상 변경: btn-primary에서 btn-info로 -->
-                <input type="radio" name="event" value="SPECIAL"> 특별 이벤트
-            </label>
+            <div class="filter-container">
+                <div class="filter-area"> <!-- 좌우 여백을 5로 조정 -->
+                    <h1 class="text-center mb-4">체크 리스트</h1>
+                    <div class="mode-filter btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-info active"> <!-- 색상 변경: btn-primary에서 btn-info로 -->
+                            <input type="radio" name="mode" value="ALL" checked> 모두 보기
+                        </label>
+                        <label class="btn btn-info"> <!-- 색상 변경: btn-primary에서 btn-info로 -->
+                            <input type="radio" name="mode" value="PVE"> PVE
+                        </label>
+                        <label class="btn btn-info"> <!-- 색상 변경: btn-primary에서 btn-info로 -->
+                            <input type="radio" name="mode" value="PVP"> PVP
+                        </label>
+                    </div>
+                    <div class="event-filter btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-info active"> <!-- 색상 변경: btn-primary에서 btn-info로 -->
+                            <input type="radio" name="event" value="ALL" checked> 모두 보기
+                        </label>
+                        <label class="btn btn-info"> <!-- 색상 변경: btn-primary에서 btn-info로 -->
+                            <input type="radio" name="event" value="NORMAL"> 일반 이벤트
+                        </label>
+                        <label class="btn btn-info"> <!-- 색상 변경: btn-primary에서 btn-info로 -->
+                            <input type="radio" name="event" value="TIME"> 시간 이벤트
+                        </label>
+                        <label class="btn btn-info"> <!-- 색상 변경: btn-primary에서 btn-info로 -->
+                            <input type="radio" name="event" value="SPECIAL"> 특별 이벤트
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tasks-container">
+                <div class="tasks-area">
+                    <!-- 필터링된 작업 목록이 여기에 표시됩니다 -->
+                </div>
+            </div>
         </div>
     </div>
-    <div class="tasks mt-4">
-        <div class="tasks-container">
-            <!-- 필터링된 작업 목록이 여기에 표시됩니다 -->
-        </div>
-    </div>
+    
     <div th:replace="~{layout/fragments/footer :: footer}"></div>
-    <script src="/js/TaskListPages/DefaultTaskList.js"></script>
+    <script type="module" src="/js/TaskListPages/defaultTaskList.js"></script>
 </body>
 </html>

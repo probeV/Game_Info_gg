@@ -15,6 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import probeV.GameInfogg.auth.CustomOAuth2UserService;
+import probeV.GameInfogg.auth.filter.JwtFilter;
 import probeV.GameInfogg.auth.handler.JwtAccessDeniedHandler;
 import probeV.GameInfogg.auth.handler.JwtAuthenticationEntryPoint;
 import probeV.GameInfogg.auth.handler.MyAuthenticationSuccessHandler;
@@ -59,12 +60,7 @@ public class SecurityConfig {
                         c.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 세션 사용하지 않음
                 
                 // request 인증, 인가 설정
-                .authorizeHttpRequests(request ->
-                        request.requestMatchers(
-                                        new AntPathRequestMatcher("/api/vi/admin")
-                                ).authenticated()
-                                .anyRequest().permitAll()
-                )
+                .authorizeHttpRequests(request -> request.anyRequest().permitAll())
 
                 // 인증 예외 핸들링
                 .exceptionHandling((exceptions) -> exceptions

@@ -42,3 +42,4 @@ application-dev.properties
 application-dev-db.properties
 application-real.properties
 application-real-db.properties
+**/src/main/resources/static/js/auth-api.js

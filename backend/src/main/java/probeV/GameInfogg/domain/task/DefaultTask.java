@@ -9,13 +9,13 @@ import probeV.GameInfogg.domain.task.constant.FrequencyType;
 import probeV.GameInfogg.domain.task.constant.ModeType;
 import probeV.GameInfogg.domain.task.constant.EventType;
 
-import java.time.DayOfWeek;
+
 
 @Getter @Setter
 @NoArgsConstructor
-@Table(name = "TASKS")
+@Table(name = "DEFAULTS_TASKS")
 @Entity
-public class Task {
+public class DefaultTask {
     /* PK */
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -37,20 +37,18 @@ public class Task {
     @Enumerated(EnumType.STRING)
     private EventType eventType;
 
-    @Column(name = "day_of_week", nullable = true)
-    @Enumerated(EnumType.STRING)
-    private DayOfWeek dayOfWeek;
-
-    @Column(name = "time", nullable = true)
-    private String time;
-
     @Builder
-    public Task(String name, ModeType modeType, FrequencyType frequencyType, EventType eventType, DayOfWeek dayOfWeek, String time) {
+    public DefaultTask(String name, ModeType modeType, FrequencyType frequencyType, EventType eventType) {
         this.name = name;
         this.modeType = modeType;
         this.frequencyType = frequencyType;
         this.eventType = eventType;
-        this.dayOfWeek = dayOfWeek;
-        this.time = time;
+    }
+
+    public void update(String name, ModeType modeType, FrequencyType frequencyType, EventType eventType) {
+        this.name = name;
+        this.modeType = modeType;
+        this.frequencyType = frequencyType;
+        this.eventType = eventType;
     }
 }

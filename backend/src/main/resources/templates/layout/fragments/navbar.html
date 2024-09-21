@@ -1,5 +1,5 @@
-<div th:fragment="menu">
-    <nav class="navbar"> 
+<div class="navbar-fragment" th:fragment="navbar">
+    <nav class="navbar-container"> 
         <div class="navbar-content">
             <div class="navbar-content-brand">
                 <div class="logo" onclick="location.href='/'" style="cursor: pointer; width: 200px; height: 50px;"></div> 
@@ -7,8 +7,8 @@
 
             <div class="navbar-content-list">
                 <ul>
-                    <li class="navbar-content-item"><a href="/helps" class="navbar-content-text">문의</a></li>
-                    <li class="navbar-content-item"><a href="/logins" class="navbar-content-text">로그인</a></li>
+                    <li class="navbar-content-item"><a href="/help" class="navbar-content-text">문의</a></li>
+                    <li class="navbar-content-item"><a href="/login" class="navbar-content-text">로그인</a></li>
                 </ul>
             </div>
         </div>
@@ -17,11 +17,13 @@
     <nav class="sub-navbar">
         <div class="sub-navbar-content-list">
             <ul>
-                <li class="sub-navbar-content-item"><a href="/tasks" class="sub-navbar-content-text">숙제 체크 리스트</a></li>
-                <li class="sub-navbar-content-item"><a href="/personal-tasks" class="sub-navbar-content-text">개인 숙제 체크 리스트</a></li>
-                <li class="sub-navbar-content-item"><a href="/groups" class="sub-navbar-content-text">숙제 체크 리스트 사용법</a></li>
-                <li class="sub-navbar-content-item"><a href="/settings" class="sub-navbar-content-text">개인 숙제 체크 리스트 설정법</a></li>
+                <li class="sub-navbar-content-item"><a href="/task" class="sub-navbar-content-text">체크 리스트</a></li>
+                <li class="sub-navbar-content-item"><a href="/user/task" class="sub-navbar-content-text">나의 체크 리스트</a></li>
+                <li class="sub-navbar-content-item"><a href="/group" class="sub-navbar-content-text">체크 리스트 사용법</a></li>
+                <li class="sub-navbar-content-item"><a href="/setting" class="sub-navbar-content-text">나의 체크 리스트 설정법</a></li>
             </ul>
         </div>
     </nav>
+
+    <div style="margin-bottom: 145px;"></div>
 </div>
