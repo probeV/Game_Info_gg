@@ -1,6 +1,6 @@
 $(document).ready(function() {
     let adminPages = ["/admin/*"];
-    let userPages = ["/users/*"];
+    let userPages = ["/user/*"];
     let activeTokenAPI = ["/api/v1/users/*", "/api/v1/admins/*"];
 
     let authorities;

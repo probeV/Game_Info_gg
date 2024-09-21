@@ -10,20 +10,15 @@ import probeV.GameInfogg.domain.task.DefaultTask;
 import probeV.GameInfogg.repository.task.DefaultTaskRepository;
 import probeV.GameInfogg.repository.user.UserRepository;
 import probeV.GameInfogg.domain.task.constant.EventType;
-import probeV.GameInfogg.domain.task.constant.FrequencyType;
-import probeV.GameInfogg.domain.task.constant.ModeType;
 import probeV.GameInfogg.exception.task.TaskNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.access.method.P;
 
 import probeV.GameInfogg.domain.user.User;
-import probeV.GameInfogg.auth.SecurityUtil;
 import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListDeleteDto;
 import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListSaveorUpdateRequestDto;
-import probeV.GameInfogg.controller.admin.dto.response.UserListResponseDto;
 import probeV.GameInfogg.controller.admin.dto.response.UserPageResponseDto;
 
 import java.util.Set;

@@ -1,12 +1,12 @@
 package probeV.GameInfogg.controller.user;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -60,7 +60,7 @@ public class UserController {
 
     // 나의 숙제 체크 리스트 항목 설정 (생성, 수정)
     @PostMapping("/users/tasks")
-    public ResponseEntity<Void> createUserTask(@RequestBody List<UserTaskListSaveorUpdateRequestDto> requestDto){
+    public ResponseEntity<Void> createUserTask(@Valid @RequestBody List<UserTaskListSaveorUpdateRequestDto> requestDto){
         userTaskService.saveTasks(requestDto);
         return ResponseEntity.ok().build();
     }

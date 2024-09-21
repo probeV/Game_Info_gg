@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import probeV.GameInfogg.domain.task.UserTask;
 import probeV.GameInfogg.domain.task.constant.EventType;
 import probeV.GameInfogg.domain.task.constant.ModeType;
-import org.springframework.data.jpa.repository.Query;
 
 @Repository
 public interface UserTaskRepository extends JpaRepository<UserTask, Long> {

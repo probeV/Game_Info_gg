@@ -2,12 +2,9 @@ package probeV.GameInfogg.controller.task;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import probeV.GameInfogg.controller.task.dto.response.DefaultTaskListResponseDto;
-import probeV.GameInfogg.controller.user.dto.response.UserTaskListResponseDto;
 import probeV.GameInfogg.service.task.DefaultTaskService;
-import probeV.GameInfogg.service.task.UserTaskService;
 
 import java.util.List;
 

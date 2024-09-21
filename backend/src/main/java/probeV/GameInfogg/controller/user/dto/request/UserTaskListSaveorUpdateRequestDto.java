@@ -4,14 +4,12 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import probeV.GameInfogg.domain.task.DefaultTask;
 import probeV.GameInfogg.domain.task.constant.EventType;
 import probeV.GameInfogg.domain.task.constant.FrequencyType;
 import probeV.GameInfogg.domain.task.constant.ModeType;
 import probeV.GameInfogg.domain.task.UserTask;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
-import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor

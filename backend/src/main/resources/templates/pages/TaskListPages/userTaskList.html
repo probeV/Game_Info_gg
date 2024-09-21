@@ -10,8 +10,12 @@
             <div class="navbar-container" th:replace="~{layout/fragments/navbar :: navbar}"/>
 
             <div class="filter-container">
-                <div class="filter-area"> <!-- 좌우 여백을 5로 조정 -->
-                    <h1 class="text-center mb-4">체크 리스트</h1>
+                <div class="filter-area"> 
+                    <div class="filter-header d-flex justify-content-center align-items-center mb-4" style="padding-left: 50px;">
+                        <h1 class="text-center">나의 체크 리스트</h1>
+                        <a href="/user/task/setting" class="btn btn-primary btn-sm ml-2" style="position: relative; top: -10px;">설정</a>
+                    </div>
+
                     <div class="mode-filter btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-info active"> <!-- 색상 변경: btn-primary에서 btn-info로 -->
                             <input type="radio" name="mode" value="ALL" checked> 모두 보기
@@ -49,6 +53,6 @@
     </div>
     
     <div th:replace="~{layout/fragments/footer :: footer}"></div>
-    
+    <script type="module" src="/js/TaskListPages/userTaskList.js"></script>
 </body>
 </html>

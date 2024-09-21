@@ -2,10 +2,8 @@ package probeV.GameInfogg.controller.user;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 
 @Slf4j
@@ -17,6 +15,12 @@ public class UserIndexController {
     public String getUserTask(){
         return "pages/TaskListPages/userTaskList";
     }
+
+    @GetMapping("/user/task/setting")
+    public String getUserTaskSetting(){
+        return "pages/TaskListPages/userTaskListSetting";
+    }
 }
+
 
 

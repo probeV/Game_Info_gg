@@ -74,9 +74,13 @@ public class UserTask{
         this.sortPriority = sortPriority;
     }
 
-    public void setUser(User user){
-        this.user = user;
-        user.getUserTasks().add(this);
+    public void setUser(User user) {
+        if (user.getUserTasks().size() < 60) {
+            this.user = user;
+            user.getUserTasks().add(this);
+        } else {
+            throw new IllegalStateException("사용자 작업 수는 60개 이하만 허용됩니다.");
+        }
     }
 }
 

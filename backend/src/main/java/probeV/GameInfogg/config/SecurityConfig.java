@@ -12,10 +12,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import probeV.GameInfogg.auth.CustomOAuth2UserService;
-import probeV.GameInfogg.auth.filter.JwtFilter;
 import probeV.GameInfogg.auth.handler.JwtAccessDeniedHandler;
 import probeV.GameInfogg.auth.handler.JwtAuthenticationEntryPoint;
 import probeV.GameInfogg.auth.handler.MyAuthenticationSuccessHandler;

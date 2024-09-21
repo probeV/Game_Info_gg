@@ -2,14 +2,11 @@ package probeV.GameInfogg.service.admin;
 
 import java.util.List;
 
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListDeleteDto;
 import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListSaveorUpdateRequestDto;
-import probeV.GameInfogg.controller.admin.dto.response.UserListResponseDto;
 import probeV.GameInfogg.controller.admin.dto.response.UserPageResponseDto;
-import probeV.GameInfogg.domain.user.User;
 
 
 @Service

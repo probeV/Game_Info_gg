@@ -2,19 +2,13 @@ package probeV.GameInfogg.service.user;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +21,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
-import probeV.GameInfogg.auth.SecurityUtil;
 import probeV.GameInfogg.controller.user.dto.request.UserTaskListDeleteRequestDto;
 import probeV.GameInfogg.controller.user.dto.request.UserTaskListSaveorUpdateRequestDto;
 import probeV.GameInfogg.controller.user.dto.response.UserTaskListResponseDto;

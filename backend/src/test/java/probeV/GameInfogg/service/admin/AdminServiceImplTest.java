@@ -9,7 +9,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import probeV.GameInfogg.domain.task.DefaultTask;
@@ -27,8 +26,7 @@ import probeV.GameInfogg.domain.task.constant.ModeType;
 import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+
 
 
 @Slf4j
