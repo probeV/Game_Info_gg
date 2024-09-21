@@ -9,9 +9,9 @@ import probeV.GameInfogg.domain.task.constant.EventType;
 import probeV.GameInfogg.domain.task.constant.FrequencyType;
 import probeV.GameInfogg.domain.task.constant.ModeType;
 import probeV.GameInfogg.domain.task.UserTask;
-import probeV.GameInfogg.domain.task.TaskCategory;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
@@ -40,12 +40,12 @@ public class UserTaskListSaveorUpdateRequestDto {
     public UserTaskListSaveorUpdateRequestDto(Long id, String name, String mode, String frequency, String event, String resetDayOfWeek, String resetTime, Integer sortPriority) {
         this.id = id;
         this.name = name;
-        this.resetDayOfWeek = resetDayOfWeek;
-        this.resetTime = resetTime;
-        this.sortPriority = sortPriority;
         this.mode = mode;
         this.frequency = frequency;
         this.event = event;
+        this.resetDayOfWeek = resetDayOfWeek;
+        this.resetTime = resetTime;
+        this.sortPriority = sortPriority;
     }
 
     public UserTask toEntity() {
@@ -54,13 +54,12 @@ public class UserTaskListSaveorUpdateRequestDto {
             .resetDayOfWeek(resetDayOfWeek != null ? DayOfWeek.valueOf(resetDayOfWeek) : null)
             .resetTime(resetTime != null ? LocalTime.parse(resetTime) : null)
             .sortPriority(sortPriority)
-            .taskCategory(TaskCategory.builder()
-                .modeType(ModeType.fromString(mode))
-                .frequencyType(FrequencyType.fromString(frequency))
-                .eventType(EventType.fromString(event))
-                .build())
+            .modeType(ModeType.fromString(mode))
+            .frequencyType(FrequencyType.fromString(frequency))
+            .eventType(EventType.fromString(event))
             .build();
     }
+
 
 
 }

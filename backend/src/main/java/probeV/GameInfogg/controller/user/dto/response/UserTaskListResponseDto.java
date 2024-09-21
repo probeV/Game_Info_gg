@@ -20,14 +20,14 @@ public class UserTaskListResponseDto {
     private EventType eventType;
     private DayOfWeek resetDayOfWeek;
     private LocalTime resetTime;
-    private int sortPriority;
+    private Integer sortPriority;
 
     public UserTaskListResponseDto(UserTask userTask){
         this.id = userTask.getId();
         this.name = userTask.getName();
-        this.modeType = userTask.getTaskCategory().getModeType();
-        this.frequencyType = userTask.getTaskCategory().getFrequencyType();
-        this.eventType = userTask.getTaskCategory().getEventType();
+        this.modeType = userTask.getModeType();
+        this.frequencyType = userTask.getFrequencyType();
+        this.eventType = userTask.getEventType();
         this.resetDayOfWeek = userTask.getResetDayOfWeek();
         this.resetTime = userTask.getResetTime();
         this.sortPriority = userTask.getSortPriority();

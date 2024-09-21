@@ -27,11 +27,6 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 
 
-
-
-
-
-
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -68,9 +63,10 @@ public class UserTaskServiceImpl implements UserTaskService {
             .orElseThrow(() -> new IllegalArgumentException("User not found"));
         Long userId = user.getId();
 
-        return userTaskRepository.findByUserIdWithModeType(userId, ModeType.fromString(mode)).stream()
+        return userTaskRepository.findByUserIdAndModeType(userId, ModeType.fromString(mode)).stream()
                 .map(UserTaskListResponseDto::new)
                 .collect(Collectors.toList());
+
     }
 
 
@@ -85,9 +81,10 @@ public class UserTaskServiceImpl implements UserTaskService {
             .orElseThrow(() -> new IllegalArgumentException("User not found"));
         Long userId = user.getId();
 
-        return userTaskRepository.findByUserIdWithEventType(userId, EventType.fromString(event)).stream()
+        return userTaskRepository.findByUserIdAndEventType(userId, EventType.fromString(event)).stream()
                 .map(UserTaskListResponseDto::new)
                 .collect(Collectors.toList());
+
     }
 
 
@@ -102,9 +99,10 @@ public class UserTaskServiceImpl implements UserTaskService {
             .orElseThrow(() -> new IllegalArgumentException("User not found"));
         Long userId = user.getId();
 
-        return userTaskRepository.findByUserIdWithModeTypeAndEventType(userId, ModeType.fromString(mode), EventType.fromString(event)).stream()
+        return userTaskRepository.findByUserIdAndModeTypeAndEventType(userId, ModeType.fromString(mode), EventType.fromString(event)).stream()
                 .map(UserTaskListResponseDto::new)
                 .collect(Collectors.toList());
+
     }
 
 
@@ -137,25 +135,29 @@ public class UserTaskServiceImpl implements UserTaskService {
                 log.info("saveTasks 수정 로직 호출" + id);
 
                 UserTask userTask = userTaskMap.get(id);
-                userTask.update(dto.getName(), DayOfWeek.valueOf(dto.getResetDayOfWeek()), LocalTime.parse(dto.getResetTime()), dto.getSortPriority());
-                userTask.getTaskCategory().update(EventType.fromString(dto.getEvent()));
+                userTask.update(dto.getName(), 
+                        dto.getResetDayOfWeek() != null ? DayOfWeek.valueOf(dto.getResetDayOfWeek()) : null, 
+                        dto.getResetTime() != null ? LocalTime.parse(dto.getResetTime()) : null, 
+                        dto.getSortPriority(), 
+                        EventType.fromString(dto.getEvent()));
             } 
             // 존재하지 않는 경우
             else if (id == null) {
                 // 생성 로직
                 log.info("saveTasks 생성 로직 호출" + id);
 
-                userTaskRepository.save(dto.toEntity());
+                UserTask userTask = dto.toEntity();
+                userTask.setUser(user);
+                userTaskRepository.save(userTask);
             }
             else {
                 log.error("saveTasks 오류 발생" + id);
 
-                throw new TaskNotFoundException("Task not found");
+                throw new TaskNotFoundException("Task not found" + id);
             }
         }
+
     }
-
-
     
 
     @Override
@@ -175,12 +177,10 @@ public class UserTaskServiceImpl implements UserTaskService {
 
         // 존재하는 UserTask ID 목록 가져오기
         Set<Long> existingUserTaskIds = existingUserTasks.stream()
-
             .map(UserTask::getId)
             .collect(Collectors.toSet());
 
         // 존재하는 UserTask ID를 Key로, UserTask를 Value로 하는 Map 생성
-
         Map<Long, UserTask> userTaskMap = existingUserTasks.stream()
             .collect(Collectors.toMap(UserTask::getId, Function.identity()));
 

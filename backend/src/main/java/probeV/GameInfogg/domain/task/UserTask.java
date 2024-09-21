@@ -8,8 +8,9 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 import lombok.Setter;
 import probeV.GameInfogg.domain.user.User;
-import probeV.GameInfogg.domain.task.TaskCategory;
-
+import probeV.GameInfogg.domain.task.constant.EventType;
+import probeV.GameInfogg.domain.task.constant.FrequencyType;
+import probeV.GameInfogg.domain.task.constant.ModeType;
 
 
 
@@ -17,7 +18,7 @@ import probeV.GameInfogg.domain.task.TaskCategory;
 @NoArgsConstructor
 @Table(name = "USERS_TASKS")
 @Entity
-public class UserTask {
+public class UserTask{
     /* PK */
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -28,15 +29,24 @@ public class UserTask {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "task_category_id", nullable = false)
-    private TaskCategory taskCategory;
-
     /* Attribute */
     @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "mode_type", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ModeType modeType;
+
+    @Column(name = "frequency_type", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private FrequencyType frequencyType;
+
+    @Column(name = "event_type", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private EventType eventType;
     
     @Column(name = "reset_dayofweek", nullable = true)
+    @Enumerated(EnumType.STRING)
     private DayOfWeek resetDayOfWeek;
 
     @Column(name = "reset_time", nullable = true)
@@ -45,25 +55,31 @@ public class UserTask {
     @Column(name = "sort_priority", nullable = true)
     private Integer sortPriority;
     
-
-
     @Builder
-    public UserTask(String name, DayOfWeek resetDayOfWeek, LocalTime resetTime, Integer sortPriority, TaskCategory taskCategory){
+    public UserTask(String name, ModeType modeType, FrequencyType frequencyType, EventType eventType, DayOfWeek resetDayOfWeek, LocalTime resetTime, Integer sortPriority){
         this.name = name;
-        this.resetDayOfWeek = resetDayOfWeek;
-        this.taskCategory = taskCategory;
-        this.resetTime = resetTime;
-        this.sortPriority = sortPriority;
-    }
-
-    public void update(String name, DayOfWeek resetDayOfWeek, LocalTime resetTime, Integer sortPriority){
-        this.name = name;
+        this.modeType = modeType;
+        this.frequencyType = frequencyType;
+        this.eventType = eventType;
         this.resetDayOfWeek = resetDayOfWeek;
         this.resetTime = resetTime;
         this.sortPriority = sortPriority;
     }
 
+    public void update(String name, DayOfWeek resetDayOfWeek, LocalTime resetTime, Integer sortPriority, EventType eventType){
+        this.name = name;
+        this.eventType = eventType;
+        this.resetDayOfWeek = resetDayOfWeek;
+        this.resetTime = resetTime;
+        this.sortPriority = sortPriority;
+    }
 
-
+    public void setUser(User user){
+        this.user = user;
+        user.getUserTasks().add(this);
+    }
 }
+
+
+
 

@@ -30,9 +30,7 @@ public class User extends BaseTimeEntity {
     private List<UserTask> userTasks = new ArrayList<>();
 
     /* Attribute */
-
     @Column(name = "name", nullable = false)
-
     private String name;
 
 

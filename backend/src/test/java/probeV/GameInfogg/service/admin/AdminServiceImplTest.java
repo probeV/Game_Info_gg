@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 import java.util.Arrays;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,6 +19,7 @@ import probeV.GameInfogg.domain.user.User;
 import probeV.GameInfogg.domain.user.constant.RoleType;
 import probeV.GameInfogg.repository.task.DefaultTaskRepository;
 import probeV.GameInfogg.repository.user.UserRepository;
+import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListDeleteDto;
 import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListSaveorUpdateRequestDto;
 import probeV.GameInfogg.controller.admin.dto.response.UserPageResponseDto;
 import probeV.GameInfogg.exception.task.TaskNotFoundException;
@@ -43,8 +45,14 @@ class AdminServiceImplTest {
     @Autowired
     private UserRepository userRepository;
 
+    @AfterEach
+    public void tearDown() {
+        defaultTaskRepository.deleteAll();
+        userRepository.deleteAll();
+    }
 
     @Test
+    @Transactional
     public void saveTasks_생성_성공() {
         // Given
         DefaultTaskListSaveorUpdateRequestDto dto1 = new DefaultTaskListSaveorUpdateRequestDto(null, "Task 1", ModeType.PVP.toString(), FrequencyType.DAILY.toString(), EventType.NORMAL.toString());
@@ -62,6 +70,7 @@ class AdminServiceImplTest {
     }
 
     @Test
+    @Transactional
     public void saveTasks_수정_성공() {
         // Given
         DefaultTask task1 = DefaultTask.builder()
@@ -87,6 +96,7 @@ class AdminServiceImplTest {
     }
     
     @Test
+    @Transactional
     public void saveTasks_존재하지_않는_id_예외() {
         // Given
         DefaultTaskListSaveorUpdateRequestDto dto1 = new DefaultTaskListSaveorUpdateRequestDto(1, "Task 1", ModeType.PVE.toString(), FrequencyType.WEEKLY.toString(), EventType.TIME.toString());
@@ -98,7 +108,8 @@ class AdminServiceImplTest {
     }
 
     @Test
-    public void saveTasks_삭제_성공() {
+    @Transactional
+    public void deleteTasks_삭제_성공() {
         // Given
         DefaultTask task1 = DefaultTask.builder()
                 .name("Task 0")
@@ -108,20 +119,23 @@ class AdminServiceImplTest {
                 .build();
         defaultTaskRepository.save(task1);
 
-        List<DefaultTaskListSaveorUpdateRequestDto> requestDto = Arrays.asList();
+        List<DefaultTaskListDeleteDto> requestDto = Arrays.asList();
 
         // When
-        adminService.saveTasks(requestDto);
+        adminService.deleteTasks(requestDto);
 
         // Then
+
         List<DefaultTask> tasks = defaultTaskRepository.findAll();
         assertThat(0).isEqualTo(tasks.size());
     }
 
 
     @Test
+    @Transactional
     void getUserList_성공() {
         // given
+
         User user1 = User.builder()
             .name("test1")
             .email("test1")
