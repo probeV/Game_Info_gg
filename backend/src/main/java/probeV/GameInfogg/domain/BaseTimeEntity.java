@@ -1,5 +1,6 @@
 package probeV.GameInfogg.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
@@ -13,9 +14,11 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class BaseTimeEntity {
+    @Column(name = "created_date")
     @CreatedDate
     private LocalDateTime createdDate;
 
+    @Column(name = "modified_date")
     @LastModifiedDate
     private LocalDateTime modifiedDate;
 }
