@@ -2,7 +2,7 @@ import { renderTasks } from './taskListRender.js';
 import { getEventMessage } from './eventUtils.js';
 
 $(document).ready(function() {
-    updateTasks(); // 페이지 로드 시 기본 필터링 적용
+    updateTasks(); // 페이지 로드 시 
 
     // 초기화 버튼 클릭 이벤트 핸들러 (이벤트 위임 사용)
     $('body').on('click', '.reset-button', function(event) {

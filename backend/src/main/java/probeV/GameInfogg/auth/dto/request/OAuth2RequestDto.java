@@ -15,15 +15,13 @@ public class OAuth2RequestDto {
     private String name;
     private String email;
     private String provider;
-    private String nameAttributeKey;
     private String attributeCode;
 
     @Builder
-    public OAuth2RequestDto(String name, String email, String provider, String nameAttributeKey, String attributeCode) {
+    public OAuth2RequestDto(String name, String email, String provider, String attributeCode) {
         this.name = name;
         this.email = email;
         this.provider = provider;
-        this.nameAttributeKey = nameAttributeKey;
         this.attributeCode = attributeCode;
     }
 
@@ -42,9 +40,9 @@ public class OAuth2RequestDto {
                 .provider("naver")
                 .name((String) response.get("name"))
                 .email((String) response.get("email"))
-                .nameAttributeKey(userNameAttributeName)
                 .attributeCode((String) response.get("id"))
                 .build();
+
     }
 
     private static OAuth2RequestDto ofKakao(String userNameAttributeName, Map<String, Object> attributes){
@@ -55,9 +53,9 @@ public class OAuth2RequestDto {
                 .provider("kakao")
                 .name(kakaoProfile.get("nickname").toString())
                 .email(kakaoAccount.get("email").toString())
-                .nameAttributeKey(userNameAttributeName)
                 .attributeCode(attributes.get("id").toString())
                 .build();
+
     }
 
     public User toEntity() {

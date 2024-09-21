@@ -10,6 +10,8 @@ import java.util.List;
 
 @Repository
 public interface DefaultTaskRepository extends JpaRepository<DefaultTask, Integer> {
+
+    // Default Task 필터링
     List<DefaultTask> findByModeType(ModeType modeType);
     List<DefaultTask> findByEventType(EventType eventType);
     List<DefaultTask> findByModeTypeAndEventType(ModeType modeType, EventType eventType);

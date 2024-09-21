@@ -64,7 +64,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         // 토큰이 필요없는 경우, 권한이 필요없는 요청 
         if(!isUserActive && !isAdminActive){
-            log.info("권한이 필요없는 요청입니다.");
+            log.info("권한이 필요없는 요청 or 페이지 로딩");
             filterChain.doFilter(request, response);
             return;
         }
@@ -87,12 +87,19 @@ public class JwtFilter extends OncePerRequestFilter {
                 response.sendError(HttpServletResponse.SC_FORBIDDEN, "권한이 없습니다.");
                 return;
             }
+            else if(isUserActive && !isUserAuthenticated(authentication)){
+                log.info("사용자 권한이 없습니다.");
+                response.sendError(HttpServletResponse.SC_FORBIDDEN, "권한이 없습니다.");
+                return;
+            }
 
             // 꺼내온 인증정보를 SecurityContext에 저장
             SecurityContextHolder.getContext().setAuthentication(authentication);
             filterChain.doFilter(request, response);
+            return;
         } 
         else if(accessToken != null){
+
             log.info("AccessToken이 있지만 유효하지 않습니다.");
             // 유효하지 않다면 RefreshToken을 확인
             Cookie[] cookies = request.getCookies();
@@ -108,14 +115,10 @@ public class JwtFilter extends OncePerRequestFilter {
 
                             // 새로운 AccessToken 생성, 사용자 정보는 기존 accessToken에서 가져옴
                             Authentication authentication = jwtTokenProvider.getAuthentication(accessToken);
-                            String newAccessToken = jwtTokenProvider.generateAccessToken(authentication).getAccessToken();
+                            String newAccessToken = jwtTokenProvider.reGenerateAccessToken(authentication).getAccessToken();
                             
-                            // 관리자 요청이지만 권한이 없을 경우, 에러 반환
-                            if (isAdminActive && !isAdminAuthenticated(authentication)) {
-                                log.info("관리자 권한이 없습니다.");
-                                response.sendError(HttpServletResponse.SC_FORBIDDEN, "권한이 없습니다.");
-                                return;
-                            }   
+                            // 권한 확인 함수 호출
+                            //checkAuthorization(isAdminActive, isUserActive, authentication, response);
 
                             // AccessToken을 쿠키에 저장
                             Cookie accessTokenCookie = new Cookie("AccessToken", newAccessToken);
@@ -125,8 +128,10 @@ public class JwtFilter extends OncePerRequestFilter {
                             accessTokenCookie.setMaxAge(30); // 1분 동안 유효
                             response.addCookie(accessTokenCookie);
 
-                            // redirect.html로 리다이렉트
-                            response.sendRedirect("/api/v1/auths/redirects");  
+                            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                            response.getWriter().write("Token expired, reissue required");
+                            response.getWriter().flush();
+                            response.getWriter().close();
 
                             SecurityContextHolder.getContext().setAuthentication(null);
                             return;
@@ -137,30 +142,31 @@ public class JwtFilter extends OncePerRequestFilter {
                             log.info("재로그인 필요");
                             SecurityContextHolder.getContext().setAuthentication(null);
 
-                            // 로그아웃 후 로그인 페이지로 리다이렉트
-                            response.sendRedirect("/login");
+                            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "재로그인 필요");
                             return;
                         }
                     }
                 }
             }
-            log.info("AccessToken, RefreshToken이 없습니다.");
-            log.info("로그인 페이지로 리다이렉트");
-            SecurityContextHolder.getContext().setAuthentication(null);
-            response.sendRedirect("/login");
-            return;
+            
         }
-        else{
-            log.info("로그인 오류");
-            log.info("로그인 페이지로 리다이렉트");
-            SecurityContextHolder.getContext().setAuthentication(null);
-            response.sendRedirect("/login");
-            return;
-        }
+
+        log.info("AccessToken 없음 및 로그인 오류");
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "AccessToken 없음 및 로그인 오류");
+        SecurityContextHolder.getContext().setAuthentication(null);
+        return;
     }
 
     private boolean isAdminAuthenticated(Authentication authentication) {
         return authentication.getAuthorities().stream()
                 .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ADMIN"));
     }
+
+    private boolean isUserAuthenticated(Authentication authentication) {
+        return authentication.getAuthorities().stream()
+                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("USER") || grantedAuthority.getAuthority().equals("ADMIN"));
+    }
+
+
 }
+

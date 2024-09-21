@@ -20,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.method.P;
 
 import probeV.GameInfogg.domain.user.User;
+import probeV.GameInfogg.auth.SecurityUtil;
 import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListDeleteDto;
 import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListSaveorUpdateRequestDto;
 import probeV.GameInfogg.controller.admin.dto.response.UserListResponseDto;
@@ -64,7 +65,7 @@ public class AdminServiceImpl implements AdminService {
                 log.info("saveTasks 수정 로직 호출" + id);
 
                 DefaultTask task = taskMap.get(id);
-                task.update(dto.getName(), ModeType.fromString(dto.getMode()), FrequencyType.fromString(dto.getFrequency()), EventType.fromString(dto.getEvent()));
+                task.update(dto.getName(), EventType.fromString(dto.getEvent()));
             } 
 
             // 존재하지 않는 경우
@@ -120,6 +121,7 @@ public class AdminServiceImpl implements AdminService {
         log.info("AdminService : getUserList");
 
         Pageable pageable = PageRequest.of(page, 10);
+
         Page<User> entities = userRepository.findAll(pageable);
 
         return new UserPageResponseDto(entities);

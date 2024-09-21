@@ -1,30 +1,32 @@
 package probeV.GameInfogg.domain.task;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.util.ArrayList;
+import java.util.List;
 import probeV.GameInfogg.domain.task.constant.FrequencyType;
 import probeV.GameInfogg.domain.task.constant.ModeType;
 import probeV.GameInfogg.domain.task.constant.EventType;
-
-
+import lombok.Builder;
 
 @Getter @Setter
 @NoArgsConstructor
-@Table(name = "DEFAULTS_TASKS")
+@Table(name = "TASKS_CATEGORIES")
 @Entity
-public class DefaultTask {
+public class TaskCategory {
     /* PK */
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
-    /* Attribute */
-    @Column(name = "name", nullable = false)
-    private String name;
+    /* Relation */
+    @Column(name = "user_id", nullable = false)
+    @OneToMany(mappedBy = "taskCategory")
+    private List<UserTask> userTasks = new ArrayList<>();
 
+    /* Attribute */
     @Column(name = "mode_type", nullable = false)
     @Enumerated(EnumType.STRING)
     private ModeType modeType;
@@ -38,15 +40,16 @@ public class DefaultTask {
     private EventType eventType;
 
     @Builder
-    public DefaultTask(String name, ModeType modeType, FrequencyType frequencyType, EventType eventType) {
-        this.name = name;
+    public TaskCategory(ModeType modeType, FrequencyType frequencyType, EventType eventType){
         this.modeType = modeType;
         this.frequencyType = frequencyType;
         this.eventType = eventType;
     }
 
-    public void update(String name, EventType eventType) {
-        this.name = name;
+    public void update(EventType eventType){
         this.eventType = eventType;
     }
 }
+
+
+
