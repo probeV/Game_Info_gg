@@ -45,10 +45,8 @@ public class DefaultTask {
         this.eventType = eventType;
     }
 
-    public void update(String name, ModeType modeType, FrequencyType frequencyType, EventType eventType) {
+    public void update(String name, EventType eventType) {
         this.name = name;
-        this.modeType = modeType;
-        this.frequencyType = frequencyType;
         this.eventType = eventType;
     }
 }

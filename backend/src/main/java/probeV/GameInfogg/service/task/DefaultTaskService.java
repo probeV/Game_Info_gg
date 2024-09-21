@@ -10,7 +10,6 @@ public interface DefaultTaskService {
     List<DefaultTaskListResponseDto> getAllTaskList();
     List<DefaultTaskListResponseDto> getFilteredByModeTaskList(String mode);
     List<DefaultTaskListResponseDto> getFilteredByEventTaskList(String event);
-
     List<DefaultTaskListResponseDto> getFilteredByModeEventTaskList(String mode, String event);
 
 }

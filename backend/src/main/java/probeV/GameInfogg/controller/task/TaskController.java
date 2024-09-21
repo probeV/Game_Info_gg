@@ -2,12 +2,12 @@ package probeV.GameInfogg.controller.task;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import probeV.GameInfogg.controller.task.dto.response.DefaultTaskListResponseDto;
 import probeV.GameInfogg.service.task.DefaultTaskService;
 
 import java.util.List;
+
 
 @Slf4j
 @RestController
@@ -43,13 +43,5 @@ public class TaskController {
             return null; // 에러 발생 시 null 반환
         }
     }
-
-    // User Task Filter 조회
-//    @GetMapping("/users/tasks/filters/{id}")
-//    public List<UserTaskListResponseDto> filterUserTasks(
-//            @RequestParam("mode") String mode,
-//            @RequestParam("event") String event){
-//
-//    )
 
 }

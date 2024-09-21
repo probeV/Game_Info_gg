@@ -40,8 +40,11 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails()
                 .getUserInfoEndpoint().getUserNameAttributeName(); // 해당 소셜 서비스에서 유니크한 id값을 전달
 
+        log.info("userNameAttributeName : {}", userNameAttributeName);
+
         // OAuth2RequestDto 생성
         OAuth2RequestDto oAuth2RequestDto = OAuth2RequestDto.of(originAttributes, userNameAttributeName, registrationId);
+
         
         // 서버로 부터 가져온 속성값들을 기반으로 Save or Update
         User user = saveOrUpdate(oAuth2RequestDto);
@@ -49,9 +52,9 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         return new DefaultOAuth2User(
                 Collections.singleton(
                         new SimpleGrantedAuthority(user.getRoleType().toString())),
-                originAttributes,
-                userNameAttributeName
-        );
+                        originAttributes,
+                        userNameAttributeName
+        );      
     }
 
 

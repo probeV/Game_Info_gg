@@ -1,3 +1,7 @@
+update USERS
+set ROLE_TYPE = 'ADMIN'
+where ID=1;
+
 INSERT INTO DEFAULTS_TASKS (name, mode_type, frequency_type, event_type) VALUES
 ('영지 정착', 'PVE', 'WEEKLY', 'NORMAL'),
 ('움직이는 점', 'PVE', 'WEEKLY', 'NORMAL'), 

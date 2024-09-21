@@ -54,7 +54,7 @@ function updateTasks() {
     localStorage.setItem('pvpDailyTasks', JSON.stringify([]));
 
     // 서버에 필터에 맞는 작업 목록을 GET 요청으로 가져오기
-    $.get(`/api/v1/tasks/filters?mode=${mode}&event=${event}`, function(tasks) {
+    $.get(`/api/v1/users/tasks/filters?mode=${mode}&event=${event}`, function(tasks) {
         const tasksContainer = $('.tasks-area');
         tasksContainer.empty(); // 이전 내용 제거
 

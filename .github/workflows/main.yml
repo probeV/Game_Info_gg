@@ -85,17 +85,6 @@ jobs:
           name: application-oauth.properties
           path: ./backend/src/main/resources/application-oauth.properties
 
-      # auth-api.js 만들기
-      - name: auth-api.js 만들기
-        run: |
-          touch ./backend/src/main/resources/static/js/auth-api.js
-          echo "${{secrets.AUTH_API_ENDPOINT}}" > ./backend/src/main/resources/static/js/auth-api.js
-      - name: Upload auth-api.js
-        uses: actions/upload-artifact@v3
-        with:
-          name: auth-api.js
-          path: ./backend/src/main/resources/static/js/auth-api.js    
-
       # 권한 부여
       - name: Grant execute permission for gradlew
         run: |

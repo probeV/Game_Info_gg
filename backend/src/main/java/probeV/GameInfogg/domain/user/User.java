@@ -7,6 +7,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import probeV.GameInfogg.domain.BaseTimeEntity;
 import probeV.GameInfogg.domain.user.constant.RoleType;
+import probeV.GameInfogg.domain.task.UserTask;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
 
 
 @Getter @Setter
@@ -14,13 +20,19 @@ import probeV.GameInfogg.domain.user.constant.RoleType;
 @Table(name = "USERS")
 @Entity
 public class User extends BaseTimeEntity {
-
+    /* PK */
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
+    /* Relation */
+    @OneToMany(mappedBy = "user")
+    private List<UserTask> userTasks = new ArrayList<>();
+
+    /* Attribute */
     @Column(name = "name", nullable = false)
     private String name;
+
 
     @Column(name = "email", nullable = false)
     private String email;
