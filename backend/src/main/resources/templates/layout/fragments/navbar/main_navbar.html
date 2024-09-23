@@ -1,0 +1,35 @@
+<div class="main_navbar_fragment" th:fragment="main_navbar">
+    <link rel="stylesheet" href="/css/main_navbar_styles.css">
+
+    <nav class="main_navbar_container"> 
+        <div class="main_navbar_area">
+            <div class="main_navbar">
+                <div class="main_navbar_brand">
+                    <div class="logo" onclick="location.href='/'" style="cursor: pointer; width: 200px; height: 50px;"></div> 
+                </div>
+
+                <div>
+                    <ul class="main_navbar_list">
+                        <li><a href="/help" class="main_navbar_text">문의</a></li>
+                        <li id="login-item" style="display: block;"><a href="/login"> 로그인</a></li>
+                        <li id="logout-item" style="display: none;"><a href="/logout" onclick="localStorage.removeItem('accessToken');">로그아웃</a></li>
+                    </ul>
+                    <script> <!-- 로그인 상태에 따라 로그인 버튼 표시 여부 결정 -->
+                        document.addEventListener("DOMContentLoaded", function() {
+                            const accessToken = localStorage.getItem('accessToken');
+                            if (accessToken) {
+                                document.getElementById('login-item').style.display = 'none';
+                                document.getElementById('logout-item').style.display = 'block';
+                            } else {
+                                document.getElementById('login-item').style.display = 'block';
+                                document.getElementById('logout-item').style.display = 'none';
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div style="margin-bottom: 100px;"></div>
+</div>
+

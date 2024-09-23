@@ -1,0 +1,42 @@
+<div class="admin_navbar_fragment" th:fragment="admin_navbar">
+    <link rel="stylesheet" href="/css/admin/admin_navbar_styles.css">
+
+    <div class="admin_sidebar_container">
+        <div class="admin_sidebar_area">
+            <div class="admin_sidebar">
+                <h2 style="color: var(--white-color); cursor: pointer; margin-bottom: 10px;" onclick="location.href='/admin/main'">관리자 페이지</h2>
+
+                <div>
+                    <h4 class="admin_sidebar_title">사용자</h4>
+                    <hr style="color: var(--white-color)">
+                </div>
+                <ul class="admin_sidebar_list">
+                    <li><a href="/admin/user">사용자 관리</a></li>
+                </ul>
+
+                <div>
+                    <h4 class="admin_sidebar_title">체크 리스트</h4>
+                    <hr style="color: var(--white-color);">
+                </div>
+                <ul class="admin_sidebar_list">
+                    <li><a href="/admin/main">대시보드</a></li>
+                    <li><a href="/admin/task">기본 체크 리스트 관리</a></li>
+                    <li><a href="/admin/taskUsage">체크 리스트 사용법 관리</a></li>
+                    <li><a href="/admin/taskSetting">체크 리스트 설정법 관리</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="admin_headbar_container">
+        <div class="admin_headbar_area">
+            <div class="admin_headbar">
+                <div class="logo" onclick="location.href='/'" style="cursor: pointer; width: 200px; height: 50px;"></div> 
+                <button class="btn btn-secondary" style="color: var(--white-color);" onclick="location.href='/'">나가기</button>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 120px;"></div>
+</div>

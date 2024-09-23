@@ -19,25 +19,25 @@ public class AdminIndexController {
     // 관리자 페이지 메인 페이지
     @GetMapping("/admin/main")
     public String AdminMainPage(){
-        return "pages/AdminPages/AdminMain";
+        return "pages/admin/main";
     }
 
     // 관리자 페이지 유저 목록 페이지
     @GetMapping("/admin/user")
     public String AdminUserPage(){
-        return "pages/AdminPages/AdminUserList";
+        return "pages/admin/userlist";
     }
 
     // 관리자 페이지 기본 숙제 체크 리스트 설정 페이지
     @GetMapping("/admin/task")
     public String AdminTaskPage(){
-        return "pages/AdminPages/AdminDefaultTaskListSetting";
+        return "pages/admin/default_tasklist_setting";
     }
 
     // 관리자 페이지 숙제 체크 리스트 사용법 페이지
     @GetMapping("/admin/taskUsage")
     public String AdminTaskUsagePage(){
-        return "pages/AdminPages/AdminTaskUsage";
+        return "pages/admin/task_usage";
     }
 
 }

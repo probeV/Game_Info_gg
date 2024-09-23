@@ -2,12 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <div th:replace="~{layout/fragments/header :: header}"></div>
-    <link rel="stylesheet" href="/css/TaskListPages/userTaskListSetting_styles.css" />
+    <link rel="stylesheet" href="/css/tasklist/user_tasklist_setting_styles.css" />
 </head>
 <body>
     <div class="wrap">
         <div class="app">
-            <div class="navbar-container" th:replace="~{layout/fragments/navbar :: navbar}"/>
+            <div class="main-navbar-container" th:replace="~{layout/fragments/navbar/main_navbar :: main_navbar}"/>
+            <div class="inner-navbar-container" th:replace="~{layout/fragments/navbar/inner_navbar :: inner_navbar}"/>  
 
             <div class="task-list-container">
                 <div class="task-list-area" style="background-color: #ffffffee; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
@@ -26,7 +27,7 @@
         </div>
     </div>
     <div th:replace="~{layout/fragments/footer :: footer}"></div>
-    <script type="module" src="/js/TaskListPages/userTaskListSetting.js"></script>
+    <script type="module" src="/js/tasklist/userTaskListSetting.js"></script>
 
 </body>
 </html>

@@ -13,7 +13,7 @@ public class HelpIndexController {
 
     @GetMapping("/help")
     public String help() {
-        return "pages/HelpPages/help";
+        return "pages/help/help";
     }
 }
 
