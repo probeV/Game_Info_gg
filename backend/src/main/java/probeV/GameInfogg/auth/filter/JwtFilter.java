@@ -116,7 +116,7 @@ public class JwtFilter extends OncePerRequestFilter {
                             // 새로운 AccessToken 생성, 사용자 정보는 기존 accessToken에서 가져옴
                             Authentication authentication = jwtTokenProvider.getAuthentication(accessToken);
                             String newAccessToken = jwtTokenProvider.reGenerateAccessToken(authentication).getAccessToken();
-                            
+
                             // 권한 확인 함수 호출
                             //checkAuthorization(isAdminActive, isUserActive, authentication, response);
 
@@ -148,7 +148,6 @@ public class JwtFilter extends OncePerRequestFilter {
                     }
                 }
             }
-            
         }
 
         log.info("AccessToken 없음 및 로그인 오류");

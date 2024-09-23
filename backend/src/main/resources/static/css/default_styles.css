@@ -1,11 +1,28 @@
+:root {
+    --white-color: #fdfdfd;
+    --gray-1-color: #f3f3f3;
+    --gray-2-color: #d9d9d9;
+    --gray-3-color: #a9a9a9;
+    --border-color: #cccccc;
+    --main-color: #8540ef;
+    --main-light-color: #c39ff6;
+
+}
+
 body {
-    padding-top: 40px;
     font-family: 'NanumSquareNeo', Arial, sans-serif;
-    background-color: #eeeeee;
+    background-color: var(--gray-1-color);
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
+}
+
+.title-head {
+    font-size: 60px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 .logo {
@@ -15,3 +32,4 @@ body {
     background-position: center; /* 이미지 중앙 배치 */
     /* width, height, cursor 는 사용할 때 마다 상황에 맞춰 조정 */
 }
+

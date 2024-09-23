@@ -13,12 +13,12 @@ public class UserIndexController {
 
     @GetMapping("/user/task")
     public String getUserTask(){
-        return "pages/TaskListPages/userTaskList";
+        return "pages/tasklist/user_tasklist";
     }
 
     @GetMapping("/user/task/setting")
     public String getUserTaskSetting(){
-        return "pages/TaskListPages/userTaskListSetting";
+        return "pages/tasklist/user_tasklist_setting";
     }
 }
 

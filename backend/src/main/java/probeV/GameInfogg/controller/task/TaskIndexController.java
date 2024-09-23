@@ -12,7 +12,7 @@ public class TaskIndexController {
 
     @GetMapping("/task")
     public String TaskListPage() {
-        return "pages/TaskListPages/defaultTaskList";
+        return "pages/tasklist/default_tasklist";
     }
 
 }

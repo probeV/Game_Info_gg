@@ -1,0 +1,70 @@
+<div class="inner_navbar_fragment" th:fragment="inner_navbar">
+    <link rel="stylesheet" href="/css/inner_navbar_styles.css">
+
+    <nav class="inner_navbar_container">
+        <div class="inner_navbar_area">
+            <div class="inner_navbar">  
+                <div>
+                    <ul class="inner_navbar_list">
+
+                        <li class="inner_navbar_item">
+                            <span class="inner_navbar_item_icon">
+                                <i class="fa-solid fa-list-check fa-2xl" style="color: #8540ef;"></i>
+                            </span>
+                            <span class="inner_navbar_item_text">숙제</span>
+                            <div class="inner_navbar_item_submenu">
+                                <ul class="inner_navbar_item_submenu_list">
+                                    <li><a href="/task">기본 체크리스트</a></li>
+                                    <li><a href="/user/task">나의 체크리스트</a></li>
+<!--                                    <li><a href="/task/usage">사용법</a></li>-->
+<!--                                    <li><a href="/task/setting">설정법</a></li>-->
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="inner_navbar_item">
+                            <span class="inner_navbar_item_icon">
+                                <i class="fa-solid fa-suitcase fa-2xl" style="color: #8540ef;"></i>
+                            </span>
+                            <span class="inner_navbar_item_text">아이템</span>
+                            <div class="inner_navbar_item_submenu">
+                                <ul class="inner_navbar_item_submenu_list">
+<!--                                    <li><a href="/item">기간제 아이템 관리</a></li>-->
+                                </ul>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <script> <!-- 서브메뉴 표시 스크립트 -->
+        const inner_navbar_items = document.querySelectorAll('.inner_navbar_item');
+
+        inner_navbar_items.forEach(item => {
+            const submenu = item.querySelector('.inner_navbar_item_submenu');
+
+            item.addEventListener('mouseenter', () => {
+                submenu.style.display = 'block';
+            });
+
+            item.addEventListener('mouseleave', () => {
+                submenu.style.display = 'none';
+            });
+        });
+    </script>
+    <script> <!-- 현재 페이지에 따라 서브메뉴 아이템 색상 변경 -->
+        document.addEventListener("DOMContentLoaded", function() {
+            const currentPath = window.location.pathname; // 현재 URI 경로 가져오기
+            const links = document.querySelectorAll('.inner_navbar_item_submenu_list li a');
+    
+            links.forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active'); // 현재 URI와 동일하면 'active' 클래스 추가
+                }
+            });
+        });
+    </script>
+</div>
