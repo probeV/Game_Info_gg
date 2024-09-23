@@ -5,9 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 import probeV.GameInfogg.domain.user.User;
 import probeV.GameInfogg.domain.user.constant.RoleType;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
 
+@Slf4j
 @Builder
 @Getter @Setter
 @SuppressWarnings("unchecked")
@@ -25,14 +27,33 @@ public class OAuth2RequestDto {
         this.attributeCode = attributeCode;
     }
 
-    // 카카오, 네이버 로그인 처리
+    // 네이버, 카카오, 구글 로그인 처리
     public static OAuth2RequestDto of(Map<String, Object> attributes, String userNameAttributeName, String registrationId) {
         if ("naver".equals(registrationId)) {
             return ofNaver("response", attributes);
         }
-        return ofKakao("id", attributes);
+        else if ("kakao".equals(registrationId)) {
+            return ofKakao("id", attributes);
+        }
+        else if ("google".equals(registrationId)) {
+            return ofGoogle("sub", attributes);
+        }
+        return null;
     }
 
+    // 구글 로그인 처리
+    private static OAuth2RequestDto ofGoogle(String userNameAttributeName, Map<String, Object> attributes){
+        log.info("attributes : {}", attributes);
+
+        return OAuth2RequestDto.builder()
+                .provider("google")
+                .name((String) attributes.get("name"))
+                .email((String) attributes.get("email"))
+                .attributeCode((String) attributes.get("sub"))
+                .build();
+    }
+
+    // 네이버 로그인 처리
     private static OAuth2RequestDto ofNaver(String userNameAttributeName, Map<String, Object> attributes){
         Map<String, Object> response = (Map<String, Object>) attributes.get("response");
 
@@ -45,6 +66,7 @@ public class OAuth2RequestDto {
 
     }
 
+    // 카카오 로그인 처리
     private static OAuth2RequestDto ofKakao(String userNameAttributeName, Map<String, Object> attributes){
         Map<String, Object> kakaoAccount = (Map<String, Object>) attributes.get("kakao_account");
         Map<String, Object> kakaoProfile = (Map<String, Object>) kakaoAccount.get("profile");

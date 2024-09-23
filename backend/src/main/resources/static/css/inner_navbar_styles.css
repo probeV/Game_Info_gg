@@ -11,10 +11,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
+    border-radius: 10px;
+    padding: 10px;
+
 }
 
 .inner_navbar_list {
     list-style-type: none; 
+
 
     display: flex;
     flex-direction: row;

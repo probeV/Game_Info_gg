@@ -16,7 +16,7 @@ public class AuthController {
 
     @GetMapping("/auths/redirects")
     public String redirectToTasks() {
-        return "pages/LoginPages/redirect";
+        return "pages/login/redirect";
     }
 
 

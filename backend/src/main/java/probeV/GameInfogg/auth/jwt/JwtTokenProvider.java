@@ -69,15 +69,11 @@ public class JwtTokenProvider implements InitializingBean {
         // 소셜 플렛폼에서의 id 값이 포함된 attribvtes (DefaultOAuth2User 가 usernameAttributeName으로 알아서 가져옴)
         //defaultOAuth2User.getName();
         // 소셜 플렛폼에서의 고유한 id
-        Object id=defaultOAuth2User.getAttribute("id");
+        Object id=defaultOAuth2User.getName();
 
-        //kakao 전용 식별자 체크
-        if(id!=null){
-            id=defaultOAuth2User.getAttributes().get("id");
-        }
-        //naver 전용 식별자 체크 
-        else{
-            id=((Map<String, Object>)defaultOAuth2User.getAttributes().get("response")).get("id");
+        // naver 전용 식별자 체크
+        if( id instanceof Map ){
+            id=((Map<String, Object>)id).get("id");
         }
 
         String accessToken = Jwts.builder()

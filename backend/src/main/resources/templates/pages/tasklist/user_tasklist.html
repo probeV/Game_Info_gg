@@ -7,13 +7,14 @@
 <body>
     <div class="wrap">
         <div class="app">
-            <div class="navbar-container" th:replace="~{layout/fragments/navbar :: navbar}"/>
+            <div class="main-navbar-container" th:replace="~{layout/fragments/navbar/main_navbar :: main_navbar}"/>
+            <h1 class="title-head">나의 체크 리스트</h1>
+            <div class="inner-navbar-container" th:replace="~{layout/fragments/navbar/inner_navbar :: inner_navbar}"/>  
 
             <div class="filter-container">
                 <div class="filter-area"> 
-                    <div class="filter-header d-flex justify-content-center align-items-center mb-4" style="padding-left: 50px;">
-                        <h1 class="text-center">나의 체크 리스트</h1>
-                        <a href="/user/task/setting" class="btn btn-primary btn-sm ml-2" style="position: relative; top: -10px;">설정</a>
+                    <div class="filter-header mb-1" style="text-align: right;">
+                        <a href="/user/task/setting" class="btn btn-primary btn-sm ml-2">설정</a>
                     </div>
 
                     <div class="mode-filter btn-group btn-group-toggle" data-toggle="buttons">
