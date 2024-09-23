@@ -1,13 +1,13 @@
 /* NAVBAR  */
 .main_navbar_container {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 적용 */
-    background-color: #ffffffee; /* 불투명한 흰색으로 변경 */
+    background-color: var(--white-color); /* 불투명한 흰색으로 변경 */
     position: fixed;
     top: 0;
     right: 0;
     left: 0;
     z-index: 1000;
-    height: 65px;
+    height: 80px;
     display: flex;
     align-items: center;
 }

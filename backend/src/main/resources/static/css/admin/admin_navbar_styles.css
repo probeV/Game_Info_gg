@@ -56,5 +56,6 @@
 
 .admin_sidebar_title {
     color: var(--white-color);
+    margin-top: 20px;
     margin-bottom: 2px;
 }

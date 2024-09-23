@@ -11,10 +11,11 @@
             <div class="inner-navbar-container" th:replace="~{layout/fragments/navbar/inner_navbar :: inner_navbar}"/>  
 
             <div class="task-list-container">
-                <div class="task-list-area" style="background-color: #ffffffee; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                <div class="task-list-area">
                     <div class="task-list-head pt-4 pl-5 pr-5 d-flex justify-content-between">
                         <h2>체크 리스트 설정</h2>
-                        <button class="btn" style="background-color: #ff9999; border: none;">저장</button>
+                        <button class="btn" style="background-color: var(--main-light-color); border: none;">저장</button>
+                        <button class="btn" style="background-color: none; border: var(--border-color);">나가기</button>
                     </div>
                     <hr>
                     <div class="tasks-container pl-5 pr-5 pb-5">

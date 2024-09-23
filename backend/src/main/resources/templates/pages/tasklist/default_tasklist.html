@@ -8,11 +8,14 @@
     <div class="wrap">
         <div class="app">
             <div class="main-navbar-container" th:replace="~{layout/fragments/navbar/main_navbar :: main_navbar}"/>
+            <h1 class="title-head">체크 리스트</h1>
             <div class="inner-navbar-container" th:replace="~{layout/fragments/navbar/inner_navbar :: inner_navbar}"/>
-
+            
+            <div style="margin-top: 24px;"></div>
+            
             <div class="filter-container">
                 <div class="filter-area"> <!-- 좌우 여백을 5로 조정 -->
-                    <h1 class="text-center mb-4">체크 리스트</h1>
+                    
                     <div class="mode-filter btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-info active"> <!-- 색상 변경: btn-primary에서 btn-info로 -->
                             <input type="radio" name="mode" value="ALL" checked> 모두 보기
