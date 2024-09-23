@@ -15,7 +15,7 @@ public class AuthIndexController {
 
     @GetMapping("/login")
     public String LoginPage(){
-        return "pages/LoginPages/Login";
+        return "pages/login/login";
     }
 
     @GetMapping("/logout")

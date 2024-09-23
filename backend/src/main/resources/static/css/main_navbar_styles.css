@@ -1,0 +1,68 @@
+/* NAVBAR  */
+.main_navbar_container {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 적용 */
+    background-color: #ffffffee; /* 불투명한 흰색으로 변경 */
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+    height: 65px;
+    display: flex;
+    align-items: center;
+}
+
+.main_navbar_area {
+    width: calc(100% - 250px); /* 기본 너비 설정 */
+    margin: 0 250px; /* 기본 좌우 여백 */
+    align-items: center;
+}
+
+.main_navbar {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.main_navbar_brand {
+    display: flex;
+}
+
+.main_navbar_list {
+    list-style-type: none; 
+    display: flex;
+    flex-direction: row;
+
+    gap: 43px;
+
+    padding: 0;
+    margin: 0; /* 여백 제거 */
+}
+
+.main_navbar_list li a {
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.main_navbar_list li a:hover {
+    text-decoration: none;
+}
+
+/* 반응형 디자인을 위한 미디어 쿼리 */
+@media screen and (max-width: 1200px) {
+    .main_navbar_area {
+        width: calc(100% - 100px); /* 화면이 작아지면 너비 조정 */
+        margin: 0 50px; /* 좌우 여백 조정 */
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .main_navbar_area {
+        width: 100%; /* 모바일 화면에서는 전체 너비 사용 */
+        margin: 0 20px; /* 좌우 여백 최소화 */
+    }
+}
+

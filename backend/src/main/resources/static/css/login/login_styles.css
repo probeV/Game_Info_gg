@@ -21,3 +21,7 @@
     background-image: url('/images/assets/kakao_login_button.png');
 }
 
+.login-button.google{
+    background-image: url('/images/assets/google_login_button.png');
+}
+

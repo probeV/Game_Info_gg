@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <div th:replace="~{layout/fragments/header :: header}"></div>
-    <link rel="stylesheet" href="/css/admin_navbar_styles.css" />
+    <link rel="stylesheet" href="/css/admin/admin_navbar_styles.css" />
     <style>
         table {
             width: 100%;
@@ -20,7 +20,7 @@
 <body>
     <div class="wrap">
         <div class="app">
-                <div class="admin-navbar-fragment" th:replace="~{layout/fragments/admin_navbar :: admin-navbar}"></div>
+                <div class="admin-navbar-fragment" th:replace="~{layout/fragments/navbar/admin_navbar :: admin-navbar}"></div>
 
             <div class="user-list-container">
                 <div class="user-list-area" style="margin-left: 290px; margin-right: 40px; background-color: #ffffffee; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
@@ -59,6 +59,6 @@
     </div>
 
     <div th:replace="~{layout/fragments/footer :: footer}"></div>
-    <script src="/js/AdminPages/userlist.js"></script>
+    <script src="/js/admin/userlist.js"></script>
 </body>
 </html>
