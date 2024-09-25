@@ -1,5 +1,9 @@
 package probeV.GameInfogg.controller.item.dto.response;
 
+import probeV.GameInfogg.domain.item.Item;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 @Getter
 @NoArgsConstructor
 public class ItemListResponseDto {
