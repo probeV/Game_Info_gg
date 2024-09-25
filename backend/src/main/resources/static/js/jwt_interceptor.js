@@ -86,34 +86,32 @@ $(document).ready(function() {
 
     // ajax 요청 오류 처리
     $(document).ajaxError(function(event, xhr, settings, error) {
-        if(xhr.status === 401){
-            const responseText = xhr.responseText;
-            if (responseText === "Token expired, reissue required") {
-                console.log("401 오류 : 토큰 재발급 필요");
-                alert("권한이 만료되었습니다. 권한을 다시 받아옵니다.");
-                // 쿠키에서 AccessToken을 읽어 로컬 스토리지에 저장하고 쿠키를 삭제
-                function getCookie(name) {
-                    let value = "; " + document.cookie;
-                    let parts = value.split("; " + name + "=");
+        if(xhr.status === 400){
+            console.log("400 오류 : 토큰 재발급 필요");
+            alert("권한이 만료되었습니다. 권한을 다시 받아옵니다.");
 
-                    if (parts.length === 2) return parts.pop().split(";").shift();
-                }
+            // 쿠키에서 AccessToken을 읽어 로컬 스토리지에 저장하고 쿠키를 삭제
+            function getCookie(name) {
+                let value = "; " + document.cookie;
+                let parts = value.split("; " + name + "=");
 
-                const accessToken = getCookie('AccessToken');
-
-                console.log("accessToken : " + accessToken);
-                if (accessToken) {
-                    localStorage.setItem('accessToken', accessToken);
-                    // 쿠키 삭제
-                    document.cookie = "AccessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-                } else {
-                    //console.error('AccessToken이 없습니다.');
-                }
-                location.reload();
-                return;
+                if (parts.length === 2) return parts.pop().split(";").shift();
             }
 
+            const accessToken = getCookie('AccessToken');
 
+            console.log("accessToken : " + accessToken);
+            if (accessToken) {
+                localStorage.setItem('accessToken', accessToken);
+                // 쿠키 삭제
+                document.cookie = "AccessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            } else {
+                //console.error('AccessToken이 없습니다.');
+            }
+            location.reload();
+            return;
+        }
+        if(xhr.status === 401){
             console.log("401 오류 : 재로그인 필요");
             alert("권한 오류, 로그인 해주세요.");
             window.location.href = "/login";

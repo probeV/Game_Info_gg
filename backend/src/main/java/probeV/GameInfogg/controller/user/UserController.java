@@ -12,11 +12,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.http.ResponseEntity;
 
+import probeV.GameInfogg.controller.user.dto.response.UserItemListResponseDto;
 import probeV.GameInfogg.controller.user.dto.response.UserTaskListResponseDto;
 import probeV.GameInfogg.controller.user.dto.request.UserTaskListSaveorUpdateRequestDto;
 import probeV.GameInfogg.controller.user.dto.request.UserTaskListDeleteRequestDto;
-import probeV.GameInfogg.service.task.UserTaskService;
-
+import probeV.GameInfogg.service.user.UserTaskService;
+import probeV.GameInfogg.service.user.UserItemService;
+import probeV.GameInfogg.controller.item.dto.response.ItemListResponseDto;
+import probeV.GameInfogg.controller.user.dto.request.UserItemListSaveorUpdateRequestDto;
+import probeV.GameInfogg.controller.user.dto.request.UserItemListDeleteRequestDto;
 
 import java.util.List;
 
@@ -28,7 +32,7 @@ import java.util.List;
 public class UserController {
     
     private final UserTaskService userTaskService;
-
+    private final UserItemService userItemService;
     // User Task Filter 조회
     @GetMapping("/users/tasks/filters")
     public List<UserTaskListResponseDto> filterUserTasks(
@@ -69,6 +73,26 @@ public class UserController {
     @DeleteMapping("/users/tasks")
     public ResponseEntity<Void> deleteUserTask(@RequestBody List<UserTaskListDeleteRequestDto> requestDto){
         userTaskService.deleteTasks(requestDto);
+        return ResponseEntity.ok().build();
+    }
+
+    // 내 아이템 조회
+    @GetMapping("/users/items")
+    public List<UserItemListResponseDto> getUserItems(){
+        return userItemService.getUserItems();
+    }
+
+    // 내 아이템 항목 설정
+    @PostMapping("/users/items")
+    public ResponseEntity<Void> createUserItem(@Valid @RequestBody List<UserItemListSaveorUpdateRequestDto> requestDto){
+        userItemService.saveItems(requestDto);
+        return ResponseEntity.ok().build();
+    }
+
+    // 내 아이템 항목 삭제
+    @DeleteMapping("/users/items")
+    public ResponseEntity<Void> deleteUserItem(@RequestBody List<UserItemListDeleteRequestDto> requestDto){
+        userItemService.deleteItems(requestDto);
         return ResponseEntity.ok().build();
     }
 }

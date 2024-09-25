@@ -7,11 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import probeV.GameInfogg.domain.BaseTimeEntity;
 import probeV.GameInfogg.domain.user.constant.RoleType;
-import probeV.GameInfogg.domain.task.UserTask;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 
 
@@ -28,6 +26,9 @@ public class User extends BaseTimeEntity {
     /* Relation */
     @OneToMany(mappedBy = "user")
     private List<UserTask> userTasks = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<UserItem> userItems = new ArrayList<>();
 
     /* Attribute */
     @Column(name = "name", nullable = false)

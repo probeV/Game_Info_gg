@@ -18,10 +18,10 @@ public class DefaultTaskServiceImpl implements DefaultTaskService{
 
     private final DefaultTaskRepository defaultTaskRepository;
 
-    // Task 전체 조회
     @Override
     public List<DefaultTaskListResponseDto> getAllTaskList() {
-        log.info("DefaultTaskService : getAllTaskList");
+        // 기본 체크리스트를 조회하는 로직을 구현합니다.
+        log.info("getAllTaskList 기본 체크리스트 조회");
 
         return defaultTaskRepository.findAll().stream()
                 .map(DefaultTaskListResponseDto::new)
@@ -30,7 +30,8 @@ public class DefaultTaskServiceImpl implements DefaultTaskService{
 
     @Override
     public List<DefaultTaskListResponseDto> getFilteredByModeTaskList(String mode) {
-        log.info("DefaultTaskService : getFilteredByModeTaskList");
+        // 모드에 따라 기본 체크리스트를 조회하는 로직을 구현합니다.
+        log.info("getFilteredByModeTaskList 모드에 따라 기본 체크리스트 조회");
 
         ModeType modeType = ModeType.fromString(mode);
 
@@ -41,7 +42,8 @@ public class DefaultTaskServiceImpl implements DefaultTaskService{
 
     @Override
     public List<DefaultTaskListResponseDto> getFilteredByEventTaskList(String event) {
-        log.info("DefaultTaskService : getFilteredByEventTaskList");
+        // 이벤트에 따라 기본 체크리스트를 조회하는 로직을 구현합니다.
+        log.info("getFilteredByEventTaskList 이벤트에 따라 기본 체크리스트 조회");
 
         EventType eventType = EventType.fromString(event);
 
@@ -52,7 +54,8 @@ public class DefaultTaskServiceImpl implements DefaultTaskService{
 
     @Override
     public List<DefaultTaskListResponseDto> getFilteredByModeEventTaskList(String mode, String event) {
-        log.info("DefaultTaskService : getFilteredByModeEventTaskList");
+        // 모드와 이벤트에 따라 기본 체크리스트를 조회하는 로직을 구현합니다.
+        log.info("getFilteredByModeEventTaskList 모드와 이벤트에 따라 기본 체크리스트 조회");
 
         ModeType modeType = ModeType.fromString(mode);
         EventType eventType = EventType.fromString(event);

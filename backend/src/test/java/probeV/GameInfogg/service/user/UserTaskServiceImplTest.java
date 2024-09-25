@@ -24,14 +24,13 @@ import lombok.extern.slf4j.Slf4j;
 import probeV.GameInfogg.controller.user.dto.request.UserTaskListDeleteRequestDto;
 import probeV.GameInfogg.controller.user.dto.request.UserTaskListSaveorUpdateRequestDto;
 import probeV.GameInfogg.controller.user.dto.response.UserTaskListResponseDto;
-import probeV.GameInfogg.domain.task.UserTask;
+import probeV.GameInfogg.domain.user.UserTask;
 import probeV.GameInfogg.domain.task.constant.EventType;
 import probeV.GameInfogg.domain.task.constant.FrequencyType;
 import probeV.GameInfogg.domain.task.constant.ModeType;
 import probeV.GameInfogg.exception.task.TaskNotFoundException;
-import probeV.GameInfogg.repository.task.UserTaskRepository;
+import probeV.GameInfogg.repository.user.UserTaskRepository;
 import probeV.GameInfogg.repository.user.UserRepository;
-import probeV.GameInfogg.service.task.UserTaskService;
 import probeV.GameInfogg.domain.user.constant.RoleType;
 import java.util.Arrays;
 

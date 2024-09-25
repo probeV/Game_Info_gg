@@ -128,10 +128,7 @@ public class JwtFilter extends OncePerRequestFilter {
                             accessTokenCookie.setMaxAge(30); // 1분 동안 유효
                             response.addCookie(accessTokenCookie);
 
-                            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                            response.getWriter().write("Token expired, reissue required");
-                            response.getWriter().flush();
-                            response.getWriter().close();
+                            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 
                             SecurityContextHolder.getContext().setAuthentication(null);
                             return;

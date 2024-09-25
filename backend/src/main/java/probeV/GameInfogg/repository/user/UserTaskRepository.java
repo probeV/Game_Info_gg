@@ -1,11 +1,11 @@
-package probeV.GameInfogg.repository.task;
+package probeV.GameInfogg.repository.user;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import probeV.GameInfogg.domain.task.UserTask;
+import probeV.GameInfogg.domain.user.UserTask;
 import probeV.GameInfogg.domain.task.constant.EventType;
 import probeV.GameInfogg.domain.task.constant.ModeType;
 

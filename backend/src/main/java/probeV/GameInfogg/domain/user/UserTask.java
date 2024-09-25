@@ -1,4 +1,4 @@
-package probeV.GameInfogg.domain.task;
+package probeV.GameInfogg.domain.user;
 
 import jakarta.persistence.*;
 import lombok.Builder;
