@@ -34,6 +34,7 @@ public class ItemController {
     public List<ItemListResponseDto> searchItems(
         @RequestParam(value = "keyword") 
         @Size(max = 255, message = "키워드는 255자 이하여야 합니다.") String keyword) {
+
         return itemService.getSearchItemList(keyword);
     }
 

@@ -1,0 +1,113 @@
+.search_container{
+}
+
+.search_area{
+    margin: 0 35%;
+    margin-bottom: 24px;
+}
+
+.search{
+    width: 100%;
+    height: 40px;
+    background-color: var(--white-color);
+    border: 2px solid var(--main-light-color);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.search_input{
+    width: 95%;
+    height: 100%;
+    background-color: var(--white-color);
+    border: none;
+}
+
+.search i{
+    padding-right: 5px;
+    cursor: pointer;
+}
+
+/* 아이템 관련 */
+.items_container{
+
+}
+
+.items_area{
+    margin: 0 20%;
+    display: flex;
+    flex-direction: column;
+}
+
+.item{
+    width: 100%;
+    height: 100%;
+    background-color: var(--white-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.item_head_area{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0 0 10px;
+
+}
+
+.item_head_image{
+    width: 112px;
+    height: 112px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.item_head_info{
+    width: 100%;
+}
+
+.item_head_name_area{
+    height: 40px;
+    background-color: var(--main-more-light-color);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.item_head_name{
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 10px;
+    margin: 0;
+}
+
+
+.item_head_effect{
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 14px;
+    margin: 0;
+}
+
+
+.item hr{
+    color: var(--border-color);
+    margin: 5px;
+}
+
+.item_body_area{
+    margin-top: 10px;
+
+}
+
+.item_body_info{
+    margin-left: 10px;
+}
+
+.item_body_info_description{
+    font-size: 13px;
+}
+
+

@@ -1,38 +1,37 @@
 package probeV.GameInfogg.service.user;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
-
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
-
-import lombok.extern.slf4j.Slf4j;
 import probeV.GameInfogg.controller.user.dto.request.UserItemListDeleteRequestDto;
 import probeV.GameInfogg.controller.user.dto.request.UserItemListSaveRequestDto;
 import probeV.GameInfogg.controller.user.dto.request.UserItemListUpdateRequestDto;
 import probeV.GameInfogg.controller.user.dto.response.UserItemListResponseDto;
+import probeV.GameInfogg.domain.item.Item;
 import probeV.GameInfogg.domain.user.User;
 import probeV.GameInfogg.domain.user.UserItem;
-import probeV.GameInfogg.exception.item.ItemNotFoundException;
-import probeV.GameInfogg.repository.user.UserItemRepository;
-import probeV.GameInfogg.domain.item.Item;
-import probeV.GameInfogg.repository.item.ItemRepository;
-import probeV.GameInfogg.repository.user.UserRepository;
 import probeV.GameInfogg.domain.user.constant.RoleType;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
+import probeV.GameInfogg.exception.item.ItemNotFoundException;
+import probeV.GameInfogg.repository.item.ItemRepository;
+import probeV.GameInfogg.repository.user.UserItemRepository;
+import probeV.GameInfogg.repository.user.UserRepository;
+
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.when;
 
 
 
@@ -58,8 +57,6 @@ public class UserItemServiceImplTest {
 
     @Mock
     private Authentication authentication;
-
-    private User user;
 
     @BeforeEach
     public void setUp() {

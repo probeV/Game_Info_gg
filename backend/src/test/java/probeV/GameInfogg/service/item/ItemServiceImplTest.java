@@ -1,29 +1,20 @@
 package probeV.GameInfogg.service.item;
 
-import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
 import probeV.GameInfogg.controller.item.dto.response.ItemListResponseDto;
 import probeV.GameInfogg.domain.item.Item;
 import probeV.GameInfogg.repository.item.ItemRepository;
-import probeV.GameInfogg.service.item.ItemService;
-import probeV.GameInfogg.service.item.ItemServiceImpl;
+
 
 @Slf4j
 @SpringBootTest

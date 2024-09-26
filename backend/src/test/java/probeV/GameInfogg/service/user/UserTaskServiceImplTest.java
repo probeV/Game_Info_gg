@@ -24,7 +24,6 @@ import lombok.extern.slf4j.Slf4j;
 import probeV.GameInfogg.controller.user.dto.request.UserTaskListDeleteRequestDto;
 import probeV.GameInfogg.controller.user.dto.request.UserTaskListSaveorUpdateRequestDto;
 import probeV.GameInfogg.controller.user.dto.response.UserTaskListResponseDto;
-import probeV.GameInfogg.domain.user.UserItem;
 import probeV.GameInfogg.domain.user.UserTask;
 import probeV.GameInfogg.domain.task.constant.EventType;
 import probeV.GameInfogg.domain.task.constant.FrequencyType;

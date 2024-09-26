@@ -7,18 +7,26 @@
 <body>
     <div class="wrap">
         <div class="app">
-            <div class="main-navbar-container" th:replace="~{layout/fragments/navbar/main_navbar :: main_navbar}"/>
+            <div class="main_navbar_container" th:replace="~{layout/fragments/navbar/main_navbar :: main_navbar}"/>
             <h1 class="title-head">메메틱 마스터리 아이템 도감</h1>
-            <div class="inner-navbar-container" th:replace="~{layout/fragments/navbar/inner_navbar :: inner_navbar}"/>
+            <div class="inner_navbar_container" th:replace="~{layout/fragments/navbar/inner_navbar :: inner_navbar}"/>
             <div style="margin-top: 24px;"></div>
 
-            <div class="item-container">
-                <div class="item-search-area">
-                    <input type="text" class="item-search-input" placeholder="아이템 이름을 입력하세요">
+            <div class="search_container">
+                <div class="search_area">
+                    <div class="search">
+                        <input type="text" class="search_input" placeholder="아이템 이름을 입력하세요">
+                        <i class="fa-solid fa-magnifying-glass" style="color: var(--main-light-color); margin-left: 8px;"></i>
+                    </div>
                 </div>
+            </div>
 
-                <div class="item-area">
-                    <!-- 필터링된 작업 목록이 여기에 표시됩니다 -->
+            <div class="items_container">
+                <div class="items_area">
+                    <div id="items" class="row">
+                        <!-- 아이템 리스트가 여기에 동적으로 추가됩니다. -->
+                    </div>
+
                 </div>
             </div>
         </div>
