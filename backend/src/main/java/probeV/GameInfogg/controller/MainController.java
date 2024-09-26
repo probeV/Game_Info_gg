@@ -16,8 +16,10 @@ public class MainController {
     }
 
     @GetMapping("/ads.txt")
-    public String get() {
-        return "ads.txt";
+    @ResponseBody
+    public ResponseEntity<Resource> getAdsTxt() {
+        Resource resource = new ClassPathResource("static/ads.txt");
+        return ResponseEntity.ok().body(resource);
     }
 
 }
