@@ -26,14 +26,17 @@ public class ItemController {
 
     // 아이템 목록 조회 및 검색
     @GetMapping("/items")
-    public List<ItemListResponseDto> getItemList(
-        @RequestParam(value = "keyword", required = false) 
-        @Size(max = 255, message = "키워드는 255자 이하여야 합니다.") String keyword) {
-        
-        if (keyword == null || keyword.isEmpty()) {
-            return itemService.getAllItemList();
-        } else {
-            return itemService.getSearchItemList(keyword);
-        }
+    public List<ItemListResponseDto> getAllItems() {
+        return itemService.getAllItemList();
     }
+
+    @GetMapping("/items/search")
+    public List<ItemListResponseDto> searchItems(
+        @RequestParam(value = "keyword") 
+        @Size(max = 255, message = "키워드는 255자 이하여야 합니다.") String keyword) {
+        return itemService.getSearchItemList(keyword);
+    }
+
+
+
 }

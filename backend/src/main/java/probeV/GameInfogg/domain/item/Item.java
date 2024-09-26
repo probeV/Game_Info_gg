@@ -37,10 +37,10 @@ public class Item {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @Column(name = "effect")
+    @Column(name = "effect", nullable = false)
     private String effect;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private String description;
 
     @Builder

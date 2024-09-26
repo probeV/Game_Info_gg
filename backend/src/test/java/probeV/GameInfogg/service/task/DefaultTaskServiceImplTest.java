@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import probeV.GameInfogg.controller.task.dto.response.DefaultTaskListResponseDto;
 import probeV.GameInfogg.domain.task.DefaultTask;
@@ -20,7 +21,7 @@ import java.util.List;
 @Slf4j
 @SpringBootTest
 @Transactional     
-class DefaultTaskServiceImplTest {
+  class DefaultTaskServiceImplTest {
 
     @Autowired
     DefaultTaskService defaultTaskService;

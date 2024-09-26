@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
     // 아이템 이름 검색
-    List<Item> findByItemNameContaining(String keyword);
+    List<Item> findByNameContaining(String keyword);
 }

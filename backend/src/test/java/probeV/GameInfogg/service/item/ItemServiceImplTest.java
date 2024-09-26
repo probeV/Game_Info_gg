@@ -6,59 +6,112 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.transaction.annotation.Transactional;
 
+import lombok.extern.slf4j.Slf4j;
 import probeV.GameInfogg.controller.item.dto.response.ItemListResponseDto;
 import probeV.GameInfogg.domain.item.Item;
 import probeV.GameInfogg.repository.item.ItemRepository;
+import probeV.GameInfogg.service.item.ItemService;
+import probeV.GameInfogg.service.item.ItemServiceImpl;
 
-public class ItemServiceImplTest {
+@Slf4j
+@SpringBootTest
+@Transactional
+public class    ItemServiceImplTest {
 
-    @Mock
+    @Autowired
     private ItemRepository itemRepository;
 
-    @InjectMocks
-    private ItemServiceImpl itemService;
+    @Autowired
+    private ItemService itemService;
 
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.openMocks(this);
+    @AfterEach
+    public void tearDown() {
+        itemRepository.deleteAll();
     }
 
     @Test
-    public void testGetAllItemList() {
+    public void getAllItemList_조회_성공() {
         // Given
-        Item item1 = new Item(1L, "Item1", "Description1");
-        Item item2 = new Item(2L, "Item2", "Description2");
-        when(itemRepository.findAll()).thenReturn(Arrays.asList(item1, item2));
-
+        Item item1 = Item.builder()
+            .name("Item1")
+            .effect("Effect1")
+            .description("Description1")
+            .build();
+        itemRepository.save(item1);
+        Item item2 = Item.builder()
+            .name("Item2")
+            .effect("Effect2")
+            .description("Description2")
+            .build();
+        itemRepository.save(item2);
         // When
         List<ItemListResponseDto> result = itemService.getAllItemList();
 
         // Then
         assertEquals(2, result.size());
-        assertEquals("Item1", result.get(0).getItemName());
-        assertEquals("Item2", result.get(1).getItemName());
+        assertEquals("Item1", result.get(0).getName());
+        assertEquals("Item2", result.get(1).getName());
     }
 
     @Test
-    public void testGetSearchItemList() {
+    public void getSearchItemList_조회_성공() {
         // Given
         String keyword = "Item";
-        Item item1 = new Item(1L, "Item1", "Description1");
-        Item item2 = new Item(2L, "Item2", "Description2");
-        when(itemRepository.findByItemNameContaining(keyword)).thenReturn(Arrays.asList(item1, item2));
+        Item item1 = Item.builder()
+            .name("Item1")
+            .effect("Effect1")
+            .description("Description1")
+            .build();
+        itemRepository.save(item1);
 
+        Item item2 = Item.builder()
+            .name("Item2")
+            .effect("Effect2")
+            .description("Description2")
+            .build();
+        itemRepository.save(item2);
         // When
         List<ItemListResponseDto> result = itemService.getSearchItemList(keyword);
 
         // Then
         assertEquals(2, result.size());
-        assertEquals("Item1", result.get(0).getItemName());
-        assertEquals("Item2", result.get(1).getItemName());
+        assertEquals("Item1", result.get(0).getName());
+        assertEquals("Item2", result.get(1).getName());
+    }
+
+    @Test
+    public void getSearchItemList_조회_실패_keyword_관련없음() {
+        // Given
+        String keyword = "asdf";
+        Item item1 = Item.builder()
+            .name("Item1")
+            .effect("Effect1")
+            .description("Description1")
+            .build();
+        itemRepository.save(item1);
+        
+        Item item2 = Item.builder()
+            .name("Item2")
+            .effect("Effect2")
+            .description("Description2")
+            .build();
+        itemRepository.save(item2);
+        // When
+        List<ItemListResponseDto> result = itemService.getSearchItemList(keyword);
+
+        // Then
+        assertEquals(0, result.size());
     }
 }

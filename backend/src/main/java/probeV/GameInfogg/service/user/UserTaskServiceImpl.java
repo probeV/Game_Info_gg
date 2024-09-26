@@ -37,7 +37,7 @@ public class UserTaskServiceImpl implements UserTaskService {
     @Override
     public List<UserTaskListResponseDto> getAllUserTaskList() {
         // 모든 사용자 작업 목록을 가져오는 로직을 구현합니다.
-        log.info("UserTaskService : getAllTaskList 내 체크리스트 조회");
+        log.info("getAllTaskList 내 체크리스트 조회");
 
         // 유저 찾기
         User user = securityUtil.getUser();
@@ -51,7 +51,7 @@ public class UserTaskServiceImpl implements UserTaskService {
     @Override
     public List<UserTaskListResponseDto> getFilteredByModeUserTaskList(String mode) {
         // 모드에 따라 사용자 작업 목록을 필터링하는 로직을 구현합니다.
-        log.info("UserTaskService : getFilteredByModeTaskList 모드에 따른 체크리스트 조회");
+        log.info("getFilteredByModeTaskList 모드에 따른 체크리스트 조회");
 
         // 유저 찾기
         User user = securityUtil.getUser();
@@ -67,7 +67,7 @@ public class UserTaskServiceImpl implements UserTaskService {
     @Override
     public List<UserTaskListResponseDto> getFilteredByEventUserTaskList(String event) {
         // 이벤트에 따라 사용자 작업 목록을 필터링하는 로직을 구현합니다.
-        log.info("UserTaskService : getFilteredByEventTaskList 이벤트에 따른 체크리스트 조회");
+        log.info("getFilteredByEventTaskList 이벤트에 따른 체크리스트 조회");
 
         // 유저 찾기
         User user = securityUtil.getUser();
@@ -82,7 +82,7 @@ public class UserTaskServiceImpl implements UserTaskService {
     @Override
     public List<UserTaskListResponseDto> getFilteredByModeEventUserTaskList(String mode, String event) {
         // 모드와 이벤트에 따라 사용자 작업 목록을 필터링하는 로직을 구현합니다.
-        log.info("UserTaskService : getFilteredByModeEventTaskList 모드와 이벤트에 따른 체크리스트 조회");
+        log.info("getFilteredByModeEventTaskList 모드와 이벤트에 따른 체크리스트 조회");
 
         // 유저 찾기
         User user = securityUtil.getUser();
@@ -117,7 +117,7 @@ public class UserTaskServiceImpl implements UserTaskService {
             // 이미 존재하는 경우
             if (id != null && userTaskMap.containsKey(id)) {
                 // 수정 로직 호출
-                log.info("유저 " + user.getId() + "의 체크리스트 " + id + " 수정 로직 호출");
+                log.info("user id: " + user.getId() + " userTask id: " + id + " 수정 로직 호출");
 
                 UserTask userTask = userTaskMap.get(id);
                 userTask.update(dto.getName(), 
@@ -129,14 +129,14 @@ public class UserTaskServiceImpl implements UserTaskService {
             // 존재하지 않는 경우
             else if (id == null) {
                 // 생성 로직
-                log.info("유저 " + user.getId() + "의 체크리스트 " + id + " 생성 로직 호출");
+                log.info("user id: " + user.getId() + " userTask id: " + id + " 생성 로직 호출");
 
                 UserTask userTask = dto.toEntity();
                 userTask.setUser(user);
                 userTaskRepository.save(userTask);
             }
             else {
-                log.error("유저 " + user.getId() + "의 체크리스트 " + id + " 오류 발생");
+                log.error("user id: " + user.getId() + " userTask id: " + id + " 오류 발생");
 
                 throw new TaskNotFoundException("Task not found" + id);
             }
@@ -168,13 +168,13 @@ public class UserTaskServiceImpl implements UserTaskService {
 
 
         for (UserTaskListDeleteRequestDto dto : requestDto) {
-            if(userTaskMap.get(dto.getId()) != null) {
-                existingUserTaskIds.remove(dto.getId());
+            if(userTaskMap.get(dto.getUserTaskId()) != null) {
+                existingUserTaskIds.remove(dto.getUserTaskId());
             }
         }
 
         for(Long taskId : existingUserTaskIds) {
-            log.info("유저 " + user.getId() + "의 체크리스트 " + taskId + " 삭제 로직 호출");
+            log.info("user id: " + user.getId() + " userTask id: " + taskId + " 삭제 로직 호출");
             if(userTaskMap.get(taskId) != null) {
                 userTaskRepository.deleteById(taskId);
             }

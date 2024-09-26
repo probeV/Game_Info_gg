@@ -24,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 import probeV.GameInfogg.controller.user.dto.request.UserTaskListDeleteRequestDto;
 import probeV.GameInfogg.controller.user.dto.request.UserTaskListSaveorUpdateRequestDto;
 import probeV.GameInfogg.controller.user.dto.response.UserTaskListResponseDto;
+import probeV.GameInfogg.domain.user.UserItem;
 import probeV.GameInfogg.domain.user.UserTask;
 import probeV.GameInfogg.domain.task.constant.EventType;
 import probeV.GameInfogg.domain.task.constant.FrequencyType;
@@ -283,7 +284,7 @@ public class UserTaskServiceImplTest {
         task1.setUser(user);
         userTaskRepository.save(task1);
         
-        UserTaskListSaveorUpdateRequestDto dto1 = new UserTaskListSaveorUpdateRequestDto(1L, "Task 1", ModeType.PVE.toString(), FrequencyType.WEEKLY.toString(), EventType.TIME.toString(), null, null, null);
+        UserTaskListSaveorUpdateRequestDto dto1 = new UserTaskListSaveorUpdateRequestDto(task1.getId(), "Task 1", ModeType.PVE.toString(), FrequencyType.WEEKLY.toString(), EventType.TIME.toString(), null, null, null);
         UserTaskListSaveorUpdateRequestDto dto2 = new UserTaskListSaveorUpdateRequestDto(null, "Task 2", ModeType.PVE.toString(), FrequencyType.DAILY.toString(), EventType.NORMAL.toString(), null, null, null);
         List<UserTaskListSaveorUpdateRequestDto> requestDto = Arrays.asList(dto1, dto2);
 
@@ -321,7 +322,7 @@ public class UserTaskServiceImplTest {
 
     @Test
     @Transactional
-    public void deleteTasks_삭제_성공() {
+    public void deleteTasks_전체_삭제_성공() {
         // given
         probeV.GameInfogg.domain.user.User user = probeV.GameInfogg.domain.user.User.builder()
             .name("test1")
@@ -335,20 +336,62 @@ public class UserTaskServiceImplTest {
         UserTask task1 = UserTask.builder()
             .name("Task 0")
             .modeType(ModeType.PVP)
-
             .frequencyType(FrequencyType.DAILY)
             .eventType(EventType.NORMAL)
             .build();
         task1.setUser(user);
         userTaskRepository.save(task1);
         
-        List<UserTaskListDeleteRequestDto> requestDto = Arrays.asList();
+        List<UserTaskListDeleteRequestDto> requestDto = List.of();
 
         // when
         userTaskService.deleteTasks(requestDto);
 
         // then
-        List<UserTask> tasks = userTaskRepository.findAll();
+        List<UserTask> tasks = userTaskRepository.findByUserId(user.getId());
         assertThat(0).isEqualTo(tasks.size());
+    }
+
+    @Test
+    @Transactional
+    public void deleteTasks_부분_삭제_성공() {
+        // given
+        probeV.GameInfogg.domain.user.User user = probeV.GameInfogg.domain.user.User.builder()
+                .name("test1")
+                .email("test1")
+                .roleType(RoleType.USER)
+                .provider("test1")
+                .attributeCode("test1")
+                .build();
+        userRepository.save(user);
+
+        UserTask task1 = UserTask.builder()
+                .name("Task 0")
+                .modeType(ModeType.PVP)
+                .frequencyType(FrequencyType.DAILY)
+                .eventType(EventType.NORMAL)
+                .build();
+        task1.setUser(user);
+        userTaskRepository.save(task1);
+
+        UserTask task2 = UserTask.builder()
+                .name("Task 1")
+                .modeType(ModeType.PVE)
+                .frequencyType(FrequencyType.DAILY)
+                .eventType(EventType.NORMAL)
+                .build();
+        task2.setUser(user);
+        userTaskRepository.save(task2);
+
+        UserTaskListDeleteRequestDto dto1 = new UserTaskListDeleteRequestDto(task1.getId());
+
+        List<UserTaskListDeleteRequestDto> requestDto = List.of(dto1);
+
+        // when
+        userTaskService.deleteTasks(requestDto);
+
+        // then
+        List<UserTask> tasks = userTaskRepository.findByUserId(user.getId());
+        assertThat(1).isEqualTo(tasks.size());
     }
 }

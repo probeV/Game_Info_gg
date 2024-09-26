@@ -31,7 +31,7 @@ public class UserItem {
     private Item item;
     
     /* Attribute */
-    @Column(name = "rest_time")
+    @Column(name = "rest_time", nullable = false)
     private LocalDateTime restTime;
 
     @Builder

@@ -32,7 +32,7 @@ public class ItemServiceImpl implements ItemService {
         // 아이템 목록을 검색하는 로직을 구현합니다.
         log.info("getSearchItemList 아이템 검색");
         
-        return itemRepository.findByItemNameContaining(keyword).stream()
+        return itemRepository.findByNameContaining(keyword).stream()
             .map(ItemListResponseDto::new)
             .collect(Collectors.toList());
     }
