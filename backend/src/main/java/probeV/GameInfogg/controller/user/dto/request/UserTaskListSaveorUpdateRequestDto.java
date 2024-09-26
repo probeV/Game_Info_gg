@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import probeV.GameInfogg.domain.task.constant.EventType;
 import probeV.GameInfogg.domain.task.constant.FrequencyType;
 import probeV.GameInfogg.domain.task.constant.ModeType;
-import probeV.GameInfogg.domain.task.UserTask;
+import probeV.GameInfogg.domain.user.UserTask;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 

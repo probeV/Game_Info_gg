@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="~{layout/fragments/header :: header}"></div>
+    <link rel="stylesheet" href="/css/itemlist/itemlist_styles.css" />
+</head>
+<body>
+    <div class="wrap">
+        <div class="app">
+            <div class="main_navbar_container" th:replace="~{layout/fragments/navbar/main_navbar :: main_navbar}"/>
+            <h1 class="title-head">메메틱 마스터리 아이템 도감</h1>
+            <div class="inner_navbar_container" th:replace="~{layout/fragments/navbar/inner_navbar :: inner_navbar}"/>
+            <div style="margin-top: 24px;"></div>
+
+            <div class="search_container">
+                <div class="search_area">
+                    <div class="search">
+                        <input type="text" class="search_input" placeholder="아이템 이름을 입력하세요">
+                        <i class="fa-solid fa-magnifying-glass" style="color: var(--main-light-color); margin-left: 8px;"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="items_container">
+                <div class="items_area">
+                    <div id="items" class="row">
+                        <!-- 아이템 리스트가 여기에 동적으로 추가됩니다. -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div th:replace="~{layout/fragments/footer :: footer}"></div>
+    <script type="module" src="/js/itemlist/itemlist.js"></script>
+</body>
+</html>

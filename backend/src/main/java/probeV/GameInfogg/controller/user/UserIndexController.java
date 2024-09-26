@@ -20,6 +20,16 @@ public class UserIndexController {
     public String getUserTaskSetting(){
         return "pages/tasklist/user_tasklist_setting";
     }
+
+    @GetMapping("/user/item")
+    public String getUserItem(){
+        return "pages/itemlist/user_itemlist";
+    }
+
+    @GetMapping("/user/item/setting")
+    public String getUserItemSetting(){
+        return "pages/itemlist/user_itemlist_setting";
+    }
 }
 
 

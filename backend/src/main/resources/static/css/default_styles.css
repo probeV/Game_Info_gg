@@ -1,12 +1,13 @@
 :root {
-    --white-color: #fdfdfd;
-    --gray-1-color: #f3f3f3;
-    --gray-2-color: #d9d9d9;
-    --gray-3-color: #a9a9a9;
+    --white-color: #fefefe;
+    --gray-1-color: #f4f4f4;
+    --gray-2-color: #d4d4d4;
+    --gray-3-color: #b4b4b4;
     --border-color: #cccccc;
     --main-color: #8540ef;
     --main-light-color: #c39ff6;
-
+    --main-more-light-color: #e1cffa;
+/* F4F4F4, d4d4d4, b4b4b4 */
 }
 
 body {

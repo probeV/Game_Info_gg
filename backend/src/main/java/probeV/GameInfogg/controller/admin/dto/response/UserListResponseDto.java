@@ -27,6 +27,7 @@ public class UserListResponseDto {
         this.provider = provider;
         this.createdDate = createdDate;
     }
+    
     public UserListResponseDto(User entity) {
         this.id = entity.getId();
         this.email = entity.getEmail();

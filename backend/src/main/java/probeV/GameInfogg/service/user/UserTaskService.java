@@ -1,4 +1,4 @@
-package probeV.GameInfogg.service.task;
+package probeV.GameInfogg.service.user;
 
 import java.util.List;
 
@@ -14,7 +14,8 @@ public interface UserTaskService {
     List<UserTaskListResponseDto> getFilteredByEventUserTaskList(String event);
     List<UserTaskListResponseDto> getFilteredByModeEventUserTaskList(String mode, String event);
 
-    //UserTask 생성, 수정, 삭제
+    //UserTask 생성, 수정
     void saveTasks(List<UserTaskListSaveorUpdateRequestDto> requestDto);
+    //UserTask 삭제 (UserTaskListDeleteRequestDto에는 현재 남아있는 Task의 ID만 담아서 보냄 즉, dto에 없는 애들만 삭제)
     void deleteTasks(List<UserTaskListDeleteRequestDto> requestDto);
 } 
