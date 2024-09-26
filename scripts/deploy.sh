@@ -10,6 +10,8 @@ cp $BUILD_JAR $REPOSITORY/
 echo ">>> 현재 실행중인 애플리케이션 pid 확인 후 일괄 종료"
 sudo ps -ef | grep java | awk '{print $2}' | xargs kill -15
 
+sleep 5
+
 echo "> 새 어플리케이션 배포"
 cd $REPOSITORY
 JAR_NAME=$(ls -tr $REPOSITORY/*.jar | tail -n 1)
