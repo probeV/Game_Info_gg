@@ -50,4 +50,11 @@ public class Item {
         this.effect = effect;
         this.description = description;
     }
+
+    public void update(String url, String name, String effect, String description) {
+        this.name = name;
+        this.effect = effect;
+        this.description = description;
+        this.imageUrl = url;
+    }
 }
