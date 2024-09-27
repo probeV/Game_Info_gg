@@ -10,6 +10,7 @@ import probeV.GameInfogg.domain.task.DefaultTask;
 import probeV.GameInfogg.repository.task.DefaultTaskRepository;
 import probeV.GameInfogg.repository.user.UserRepository;
 import probeV.GameInfogg.domain.task.constant.EventType;
+import probeV.GameInfogg.exception.item.ItemNotFoundException;
 import probeV.GameInfogg.exception.task.TaskNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -17,14 +18,20 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import probeV.GameInfogg.domain.user.User;
-import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListDeleteDto;
+import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListDeleteRequestDto;
 import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListSaveorUpdateRequestDto;
+import probeV.GameInfogg.controller.admin.dto.request.ItemDeleteRequestDto;
+import probeV.GameInfogg.controller.admin.dto.request.ItemSaveRequestDto;
+import probeV.GameInfogg.controller.admin.dto.request.ItemUpdateRequestDto;
 import probeV.GameInfogg.controller.admin.dto.response.UserPageResponseDto;
 
 import java.util.Set;
 import java.util.Map;
 import java.util.function.Function;
 import org.springframework.transaction.annotation.Transactional;
+
+import probeV.GameInfogg.domain.item.Item;
+import probeV.GameInfogg.repository.item.ItemRepository;
 
 
 @Slf4j
@@ -34,7 +41,7 @@ public class AdminServiceImpl implements AdminService {
 
     private final DefaultTaskRepository defaultTaskRepository;
     private final UserRepository userRepository;
-
+    private final ItemRepository itemRepository;
     // 기본 숙제 체크 리스트 항목 생성
     @Override
     @Transactional
@@ -82,7 +89,7 @@ public class AdminServiceImpl implements AdminService {
     // requestDto는 현재 존재하는 모든 Task의 ID를 가지고 있음, 따라서 db에는 있고, requestDto에는 없는 경우 삭제    
     @Override
     @Transactional
-    public void deleteTasks(List<DefaultTaskListDeleteDto> requestDto) {
+    public void deleteTasks(List<DefaultTaskListDeleteRequestDto> requestDto) {
         log.info("AdminService : deleteTasks");
 
         List<DefaultTask> existingTasks = defaultTaskRepository.findAll();
@@ -96,7 +103,7 @@ public class AdminServiceImpl implements AdminService {
         Map<Integer, DefaultTask> taskMap = existingTasks.stream()
             .collect(Collectors.toMap(DefaultTask::getId, Function.identity()));
 
-        for (DefaultTaskListDeleteDto dto : requestDto) {
+        for (DefaultTaskListDeleteRequestDto dto : requestDto) {
             if(taskMap.get(dto.getId()) != null) {
                 existingTaskIds.remove(dto.getId());
             }
@@ -113,12 +120,46 @@ public class AdminServiceImpl implements AdminService {
     // 유저 목록 조회
     @Override
     public UserPageResponseDto getUserList(int page) {
-        log.info("AdminService : getUserList");
+        log.info("getUserList 유저 목록 조회");
 
         Pageable pageable = PageRequest.of(page, 10);
 
         Page<User> entities = userRepository.findAll(pageable);
 
         return new UserPageResponseDto(entities);
+    }
+
+    // 아이템 항목 생성
+    @Override
+    public void createItems(String url, ItemSaveRequestDto requestDto) {
+        // 아이템 항목을 생성하는 로직을 구현합니다.
+        log.info("createItems 아이템 항목 생성");
+
+        Item item = requestDto.toEntity(url);
+        itemRepository.save(item);
+    }
+
+    // 아이템 항목 수정
+    @Override
+    public void updateItems(Long itemId, String url, ItemUpdateRequestDto requestDto) {
+        // 아이템 항목을 수정하는 로직을 구현합니다.
+        log.info("updateItems 아이템 항목 수정");
+
+        Item item = itemRepository.findById(itemId)
+            .orElseThrow(() -> new ItemNotFoundException("Item not found"));
+
+        item.update(url, requestDto.getName(), requestDto.getEffect(), requestDto.getDescription());
+    }
+
+    // 아이템 항목 삭제
+    @Override
+    public void deleteItems(Long itemId) {
+        // 아이템 항목을 삭제하는 로직을 구현합니다.
+        log.info("deleteItems 아이템 항목 삭제");
+
+        Item item = itemRepository.findById(itemId)
+            .orElseThrow(() -> new ItemNotFoundException("Item not found"));
+
+        itemRepository.delete(item);
     }
 }

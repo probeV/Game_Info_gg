@@ -18,7 +18,7 @@ import probeV.GameInfogg.domain.user.User;
 import probeV.GameInfogg.domain.user.constant.RoleType;
 import probeV.GameInfogg.repository.task.DefaultTaskRepository;
 import probeV.GameInfogg.repository.user.UserRepository;
-import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListDeleteDto;
+import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListDeleteRequestDto;
 import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListSaveorUpdateRequestDto;
 import probeV.GameInfogg.controller.admin.dto.response.UserPageResponseDto;
 import probeV.GameInfogg.exception.task.TaskNotFoundException;
@@ -117,7 +117,7 @@ class AdminServiceImplTest {
                 .build();
         defaultTaskRepository.save(task1);
 
-        List<DefaultTaskListDeleteDto> requestDto = Arrays.asList();
+        List<DefaultTaskListDeleteRequestDto> requestDto = Arrays.asList();
 
         // When
         adminService.deleteTasks(requestDto);
