@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="~{layout/fragments/header :: header}"></div>
+    <link rel="stylesheet" href="/css/admin/itemlist_setting_styles.css"/>
+</head>
+<body>
+    <div class="wrap">
+        <div class="app">
+            <div class="admin_navbar_fragment" th:replace="~{layout/fragments/navbar/admin_navbar :: admin_navbar}"/>
+
+            <div class="item-list-container">
+                <div class="item-list-area" style="margin-left: 290px; margin-right: 40px; background-color: #ffffffee; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                    <div class="item-list-head pt-4 pl-5 pr-5">
+                        <h2>메메틱 마스터리 아이템 관리</h2>
+                    </div>
+                    <hr>
+
+                    <div class="search_container">
+                        <div class="search_area">
+                            <div class="search">
+                                <input type="text" class="search_input" placeholder="아이템 이름을 입력하세요">
+                                <i class="fa-solid fa-magnifying-glass" style="color: var(--main-light-color); margin-left: 8px;"></i>
+                            </div>
+                            <button class="new_item_button" style="font-weight: bold;">새 아이템 추가</button>
+                        </div>
+                    </div>
+
+                    <div class="items-container pl-5 pr-5 pb-5">
+                        <div class="items-area">
+                            <div id="items" class="row">
+                                <!-- 아이템 리스트가 여기에 동적으로 추가됩니다. -->
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{layout/fragments/footer :: footer}"></div>
+    <script type="module" src="/js/admin/itemlistSetting.js"></script>
+</body>
+</html>

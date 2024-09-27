@@ -13,20 +13,22 @@ public class ItemSaveRequestDto {
     private String name;
     private String effect;
     private String description;
+    private String imageUrl;
 
     @Builder
-    public ItemSaveRequestDto(String name, String effect, String description) {
+    public ItemSaveRequestDto(String name, String effect, String description, String imageUrl) {
         this.name = name;
         this.effect = effect;
         this.description = description;
+        this.imageUrl = imageUrl;
     }
 
-    public Item toEntity(String url) {
+    public Item toEntity() {
         return Item.builder()
             .name(name)
             .effect(effect)
             .description(description)
-            .imageUrl(url)
+            .imageUrl(imageUrl)
             .build();
     }
 }

@@ -1,20 +1,14 @@
 package probeV.GameInfogg.controller.admin;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-
-import jakarta.validation.Valid;
-
 import org.springframework.web.multipart.MultipartFile;
-import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListDeleteRequestDto;
-import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListSaveorUpdateRequestDto;
-import probeV.GameInfogg.controller.admin.dto.request.ItemDeleteRequestDto;
-import probeV.GameInfogg.controller.admin.dto.request.ItemSaveRequestDto;
-import probeV.GameInfogg.controller.admin.dto.request.ItemUpdateRequestDto;
+import probeV.GameInfogg.controller.admin.dto.request.*;
+import probeV.GameInfogg.controller.admin.dto.response.UserPageResponseDto;
 import probeV.GameInfogg.service.StorageService;
 import probeV.GameInfogg.service.admin.AdminService;
-import probeV.GameInfogg.controller.admin.dto.response.UserPageResponseDto;
 
 import java.io.IOException;
 import java.util.List;
@@ -60,13 +54,9 @@ public class AdminController {
     // 아이템 항목 생성
     @PostMapping("/admins/items")
     public void createItems(
-        @RequestParam(value = "file")MultipartFile file,
         @RequestBody ItemSaveRequestDto requestDto
-    ) throws IOException{
-        String directory = "items";
-        String url = storageService.createFile(file, directory);
-
-        adminService.createItems(url, requestDto);
+    ){
+        adminService.createItems(requestDto);
     }
 
 
@@ -74,23 +64,44 @@ public class AdminController {
     @PutMapping("/admins/items/{id}")
     public void updateItems(
             @PathVariable(value = "id") Long itemId,
-            @RequestParam(value = "file")MultipartFile file,
             @RequestBody ItemUpdateRequestDto requestDto
-    ) throws IOException{
-        String directory = "items";
-        String url = storageService.updateFile(file, requestDto.getPreImageUrl(), directory);
-
-        adminService.updateItems(itemId, url, requestDto);
+    ){
+        adminService.updateItems(itemId, requestDto);
     }
 
     // 아이템 항목 삭제
     @DeleteMapping("/admins/items/{id}")
     public void deleteItems(
-        @PathVariable(value = "id") Long itemId,
-        @RequestBody ItemDeleteRequestDto requestDto
-    ) throws IOException{
-        storageService.deleteFile(requestDto.getUrl());
+        @PathVariable(value = "id") Long itemId
+    ){
         adminService.deleteItems(itemId);
+    }
+
+    // 파일 생성
+    @PostMapping("/admins/files")
+    public String createImages(
+            @RequestPart(value = "file") MultipartFile file,
+            @RequestPart(value = "FileSaveRequestDto") FileSaveRequestDto requestDto
+    ) throws IOException{
+        return storageService.createImageFile(file, requestDto.getDirectoryPath());
+    }
+
+    // 파일 수정
+    @PutMapping("/admins/files")
+    public String updateImages(
+            @RequestPart(value = "file") MultipartFile file,
+            @RequestPart(value = "FileUpdateRequestDto") FileUpdateRequestDto requestDto
+    ) throws IOException{
+        return storageService.updateFile(file,requestDto.getPreFileUrl(), requestDto.getDirectoryPath());
+    }
+
+
+    // 파일 삭제
+    @DeleteMapping("/admins/files")
+    public void deleteImages(
+            @RequestBody FileDeleteRequestDto requestDto
+    )throws IOException{
+        storageService.deleteFile(requestDto.getImageUrl());
     }
 
 }

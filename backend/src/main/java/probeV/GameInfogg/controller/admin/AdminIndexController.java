@@ -43,7 +43,7 @@ public class AdminIndexController {
     // 관리자 페이지 아이템 도감 페이지
     @GetMapping("/admin/item")
     public String AdminItemPage(){
-        return "pages/admin/itemlist";
+        return "pages/admin/itemlist_setting";
     }
 
 }

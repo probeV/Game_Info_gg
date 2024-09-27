@@ -1,16 +1,16 @@
 package probeV.GameInfogg.controller.admin.dto.request;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Builder;
+
 @Getter
 @NoArgsConstructor
-public class ItemDeleteRequestDto {
+public class FileDeleteRequestDto {
     private String imageUrl;
 
     @Builder
-    public ItemDeleteRequestDto(String imageUrl) {
+    public FileDeleteRequestDto(String imageUrl) {
         this.imageUrl = imageUrl;
     }
 }
