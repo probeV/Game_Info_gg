@@ -1,0 +1,132 @@
+.button_container{
+
+}
+
+.button_area{
+    margin: 0 20%;
+    margin-bottom: 10px;
+}
+
+.button{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    gap: 10px;
+}
+
+.help{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--main-more-light-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.help::after {
+    content: "가방의 아이템은 최대 10개까지 보유할 수 있습니다.\A 설정의 초기화 버튼을 누르면 남은 시간이 14일로 초기화됩니다.";
+    white-space: pre;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--white-color);
+    color: black;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none;
+    line-height: 1.5; /* 줄 간격 추가 */
+}
+
+.help:hover::after {
+    display: block;
+}
+
+.btn-setting{
+    border-color: var(--border-color);
+    background-color: var(--white-color);
+}
+
+/* 아이템 관련 */
+.items_container{
+
+}
+
+.items_area{
+    margin: 0 20%;
+    display: flex;
+    flex-direction: column;
+}
+
+.items_area{
+    background-color: var(--white-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    flex-direction: column;
+    margin: 0 20%;
+    padding: 10px;
+}
+
+.item{
+    width: 100%;
+    height: 100%;
+    background-color: var(--gray-1-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 5px 0 5px 5px;
+}
+
+.item_area{
+    display: flex;
+    flex-direction: row;
+}
+
+.item_image{
+    width: 112px;
+    height: 112px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.item_info{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.item_name_area{
+    width: 100%;
+    height: 40px;
+    background-color: var(--main-more-light-color);
+    display: flex;
+    align-items: center;
+}
+
+.item_name{
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 10px;
+    margin: 0;
+}
+
+.item_info_label{
+    font-size: 14px;
+    width: 100%;
+    margin: 0 0 0 10px;
+}
+
+.item_reset_time{
+    font-size: 30px;
+    font-weight: bold;
+    width: 100%;
+    margin: 0 0 0 10px;
+}
