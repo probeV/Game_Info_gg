@@ -1,37 +1,32 @@
 package probeV.GameInfogg.service.admin;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
-import probeV.GameInfogg.domain.task.DefaultTask;
-import probeV.GameInfogg.repository.task.DefaultTaskRepository;
-import probeV.GameInfogg.repository.user.UserRepository;
-import probeV.GameInfogg.domain.task.constant.EventType;
-import probeV.GameInfogg.exception.item.ItemNotFoundException;
-import probeV.GameInfogg.exception.task.TaskNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-
-import probeV.GameInfogg.domain.user.User;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListDeleteRequestDto;
 import probeV.GameInfogg.controller.admin.dto.request.DefaultTaskListSaveorUpdateRequestDto;
-import probeV.GameInfogg.controller.admin.dto.request.ItemDeleteRequestDto;
 import probeV.GameInfogg.controller.admin.dto.request.ItemSaveRequestDto;
 import probeV.GameInfogg.controller.admin.dto.request.ItemUpdateRequestDto;
 import probeV.GameInfogg.controller.admin.dto.response.UserPageResponseDto;
-
-import java.util.Set;
-import java.util.Map;
-import java.util.function.Function;
-import org.springframework.transaction.annotation.Transactional;
-
 import probeV.GameInfogg.domain.item.Item;
+import probeV.GameInfogg.domain.task.DefaultTask;
+import probeV.GameInfogg.domain.task.constant.EventType;
+import probeV.GameInfogg.domain.user.User;
+import probeV.GameInfogg.exception.item.ItemNotFoundException;
+import probeV.GameInfogg.exception.task.TaskNotFoundException;
 import probeV.GameInfogg.repository.item.ItemRepository;
+import probeV.GameInfogg.repository.task.DefaultTaskRepository;
+import probeV.GameInfogg.repository.user.UserRepository;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -131,28 +126,32 @@ public class AdminServiceImpl implements AdminService {
 
     // 아이템 항목 생성
     @Override
-    public void createItems(String url, ItemSaveRequestDto requestDto) {
+    @Transactional
+    public void createItems(ItemSaveRequestDto requestDto) {
         // 아이템 항목을 생성하는 로직을 구현합니다.
         log.info("createItems 아이템 항목 생성");
 
-        Item item = requestDto.toEntity(url);
+        Item item = requestDto.toEntity();
         itemRepository.save(item);
     }
 
     // 아이템 항목 수정
     @Override
-    public void updateItems(Long itemId, String url, ItemUpdateRequestDto requestDto) {
+    @Transactional
+    public void updateItems(Long itemId, ItemUpdateRequestDto requestDto) {
         // 아이템 항목을 수정하는 로직을 구현합니다.
         log.info("updateItems 아이템 항목 수정");
 
         Item item = itemRepository.findById(itemId)
             .orElseThrow(() -> new ItemNotFoundException("Item not found"));
 
-        item.update(url, requestDto.getName(), requestDto.getEffect(), requestDto.getDescription());
+        log.info(item.getId() + " " + item.getName());
+        item.update(requestDto.getName(), requestDto.getEffect(), requestDto.getDescription(), requestDto.getImageUrl());
     }
 
     // 아이템 항목 삭제
     @Override
+    @Transactional
     public void deleteItems(Long itemId) {
         // 아이템 항목을 삭제하는 로직을 구현합니다.
         log.info("deleteItems 아이템 항목 삭제");

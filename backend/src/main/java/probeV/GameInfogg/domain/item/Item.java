@@ -1,20 +1,14 @@
 package probeV.GameInfogg.domain.item;
 
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
-import jakarta.persistence.OneToMany;
+import probeV.GameInfogg.domain.user.UserItem;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import probeV.GameInfogg.domain.user.UserItem;
 
 @Getter @Setter
 @NoArgsConstructor
@@ -51,10 +45,11 @@ public class Item {
         this.description = description;
     }
 
-    public void update(String url, String name, String effect, String description) {
+    public void update(String name, String effect, String description, String imageUrl) {
         this.name = name;
         this.effect = effect;
         this.description = description;
-        this.imageUrl = url;
+        this.imageUrl = imageUrl;
     }
+
 }

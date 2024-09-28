@@ -10,14 +10,14 @@ public class ItemUpdateRequestDto {
     private String name;
     private String effect;
     private String description;
-    private String preImageUrl;
+    private String imageUrl;
 
     @Builder
-    public ItemUpdateRequestDto(String name, String effect, String description, String preImageUrl) {
+    public ItemUpdateRequestDto(String name, String effect, String description, String imageUrl) {
         this.name = name;
         this.effect = effect;
         this.description = description;
-        this.preImageUrl = preImageUrl;
+        this.imageUrl = imageUrl;
     }
 
 }

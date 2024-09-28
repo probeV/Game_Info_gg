@@ -47,7 +47,7 @@ class StorageServiceTest {
         MultipartFile multipartFile = new MockMultipartFile(originalFilename, originalFilename, "text/plain", "test content".getBytes());
 
         // when
-        String result = storageService.createFile(multipartFile, path);
+        String result = storageService.createImageFile(multipartFile, path);
 
         //then
         assertTrue(result.contains(path));
@@ -63,10 +63,10 @@ class StorageServiceTest {
         MultipartFile multipartFile = new MockMultipartFile(originalFilename, originalFilename, "text/plain", "test content".getBytes());
 
         // when
-        storageService.createFile(multipartFile, path);
+        storageService.createImageFile(multipartFile, path);
 
         // then
-        assertThrows(IOException.class, () -> storageService.createFile(multipartFile, path));
+        assertThrows(IOException.class, () -> storageService.createImageFile(multipartFile, path));
     }
 
     @Test
@@ -78,7 +78,7 @@ class StorageServiceTest {
 
         MultipartFile multipartFile = new MockMultipartFile(originalFilename, originalFilename, "text/plain", "test content".getBytes());
 
-        String preImageUrl = storageService.createFile(multipartFile, path);
+        String preImageUrl = storageService.createImageFile(multipartFile, path);
 
         //when
         String result = storageService.updateFile(multipartFile, preImageUrl, path);
@@ -110,7 +110,7 @@ class StorageServiceTest {
         String originalFilename = "deleteFile_delete_success.txt";
         MultipartFile multipartFile = new MockMultipartFile(originalFilename, originalFilename, "text/plain", "test content".getBytes());
         
-        String url = storageService.createFile(multipartFile, path);
+        String url = storageService.createImageFile(multipartFile, path);
 
         // when
         storageService.deleteFile(url);
