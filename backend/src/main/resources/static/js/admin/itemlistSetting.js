@@ -223,7 +223,6 @@ function createFile(directoryPath, selectedImageFile){
         console.error('Error creating file:', error);
         alert('파일 생성 중 오류가 발생했습니다.');
     });
-
 }
 
 // 검색 버튼 클릭 이벤트
