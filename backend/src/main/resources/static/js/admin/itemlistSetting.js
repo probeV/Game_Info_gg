@@ -185,7 +185,7 @@ function updateFile(preImageUrl, directoryPath, selectedImageFile){
     formData.append('FileUpdateRequestDto', new Blob([JSON.stringify(FileUpdateRequestDto)], { type: "application/json" }));
 
     // S3 파일 수정
-    $.ajax({
+    return $.ajax({
         url: `/api/v1/admins/files`,
         type: 'PUT',
         data: formData,
@@ -193,7 +193,6 @@ function updateFile(preImageUrl, directoryPath, selectedImageFile){
         contentType: false,
         success: function(response) {
             console.log('File updated successfully:', response);
-            return response;
         },
         error: function(error) {
             console.error('Error updating file:', error);
@@ -214,7 +213,7 @@ function createFile(directoryPath, selectedImageFile){
     formData.append('FileSaveRequestDto', new Blob([JSON.stringify(FileSaveRequestDto)], { type: "application/json" }));
 
     // S3 파일 생성
-    $.ajax({
+    return $.ajax({
         url: `/api/v1/admins/files`,
         type: 'POST',
         data: formData,
@@ -222,7 +221,6 @@ function createFile(directoryPath, selectedImageFile){
         contentType: false,
         success: function(response) {
             console.log('File created successfully:', response);
-            return response;
         },
         error: function(error) {
             console.error('Error creating file:', error);

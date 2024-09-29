@@ -130,6 +130,7 @@ public class AdminServiceImpl implements AdminService {
     public void createItems(ItemSaveRequestDto requestDto) {
         // 아이템 항목을 생성하는 로직을 구현합니다.
         log.info("createItems 아이템 항목 생성");
+        log.info(requestDto.getImageUrl());
 
         Item item = requestDto.toEntity();
         itemRepository.save(item);
@@ -141,6 +142,7 @@ public class AdminServiceImpl implements AdminService {
     public void updateItems(Long itemId, ItemUpdateRequestDto requestDto) {
         // 아이템 항목을 수정하는 로직을 구현합니다.
         log.info("updateItems 아이템 항목 수정");
+        log.info(requestDto.getImageUrl());
 
         Item item = itemRepository.findById(itemId)
             .orElseThrow(() -> new ItemNotFoundException("Item not found"));
