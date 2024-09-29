@@ -99,29 +99,28 @@ $(document).ready(function() {
         console.log(preImageUrl);
         console.log(selectedImageFile);
 
-        let imageUrl;
+        let imageUrlPromise;
 
         if(selectedImageFile!=null && preImageUrl !== ""){
             // 새로 들어온 File 이 존재할 때 + 이전에 저장되어있던 File (preImageUrl) 이 존재 할 때
             // 파일 수정 로직
-            imageUrl = updateFile(preImageUrl, "items", selectedImageFile);
+            imageUrlPromise = updateFile(preImageUrl, "items", selectedImageFile);
         }
         else if(selectedImageFile!=null && preImageUrl === ""){
             // 새로 들어온 File 이 존재할 때 + 이전에 저장되어있던 File 이 없을 때
             // 파일 생성 로직   
-            imageUrl = createFile("items", selectedImageFile);
+            imageUrlPromise = createFile("items", selectedImageFile);
         }
         else{
             // 새로 들어온 File 이 없을 때
             // 파일 로직 x, preImageUrl 이용 
-            imageUrl = preImageUrl;
+            imageUrlPromise = Promise.resolve(preImageUrl);
         }
 
-        console.log(imageUrl);
-
-        imageUrl.then(function(response){
-            console.log(response);
-
+        imageUrlPromise.then(function(response){
+            const imageUrl = response;
+            console.log(imageUrl);
+            
             // itemId가 있다면 수정 로직
             if (itemId) {
                 const ItemUpdateRequestDto={
