@@ -19,6 +19,6 @@ public class UserItemListResponseDto {
         this.itemId = userItem.getItem().getId();
         this.name = userItem.getItem().getName();
         this.imageUrl = userItem.getItem().getImageUrl();
-        this.resetTime = userItem.getRestTime();
+        this.resetTime = userItem.getResetTime();
     }
 }

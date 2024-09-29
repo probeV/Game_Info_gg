@@ -1,15 +1,13 @@
 package probeV.GameInfogg.domain.user;
 
-import probeV.GameInfogg.domain.item.Item;
-
-import java.time.LocalDateTime;
-
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import probeV.GameInfogg.domain.item.Item;
 
-import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter @Setter
 @NoArgsConstructor
@@ -31,12 +29,12 @@ public class UserItem {
     private Item item;
     
     /* Attribute */
-    @Column(name = "rest_time", nullable = false)
-    private LocalDateTime restTime;
+    @Column(name = "reset_time", nullable = false)
+    private LocalDateTime resetTime;
 
     @Builder
-    public UserItem(LocalDateTime restTime) {
-        this.restTime = restTime;
+    public UserItem(LocalDateTime resetTime) {
+        this.resetTime = resetTime;
     }
 
     public void setUser(User user) {
@@ -50,6 +48,6 @@ public class UserItem {
     }
 
     public void updateUserItem(LocalDateTime restTime) {
-        this.restTime = restTime;
+        this.resetTime = restTime;
     }
 }
