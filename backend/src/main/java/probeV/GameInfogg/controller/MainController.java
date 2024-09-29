@@ -12,7 +12,7 @@ public class MainController {
 
     @GetMapping("/")
     public String redirectToTaskListPage() {
-        return "redirect:/task";
+        return "pages/main";
     }
 
 
