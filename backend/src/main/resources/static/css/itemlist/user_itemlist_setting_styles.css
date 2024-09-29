@@ -1,0 +1,240 @@
+hr {
+    margin: 0 20%;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    border: 1px solid var(--main-light-color);
+}
+
+/* 
+
+    내 가방 설정 관련
+
+
+*/
+
+.button_area{
+    margin: 0 20%;
+    margin-bottom: 10px;
+}
+
+.button{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 아이템 관련 */
+.user_items_container {
+    
+    .user_items_area{
+        background-color: var(--white-color);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+        display: flex;
+        flex-direction: column;
+        margin: 0 20%;
+        padding: 10px;
+    }
+    
+    .item{
+        width: 100%;
+        height: 100%;
+        background-color: var(--gray-1-color);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 5px 0 5px 5px;
+    }
+    
+    .item_area{
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .item_image{
+        width: 112px;
+        height: 112px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    
+    .item_info{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .item_name_area{
+        width: 100%;
+        height: 40px;
+        background-color: var(--main-more-light-color);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .btn-remove{
+        cursor: pointer;
+    }
+    
+    .item_name{
+        font-size: 20px;
+        font-weight: bold;
+        padding-left: 10px;
+        margin: 0;
+    }
+    
+    .item_info_label{
+        font-size: 14px;
+        width: 100%;
+        margin: 0 0 0 10px;
+    }
+    
+    .item_reset_time{
+        font-size: 30px;
+        font-weight: bold;
+        width: 100%;
+        margin: 0 0 0 10px;
+    }    
+}
+
+
+
+
+/* 
+
+    내 가방에 추가하기 관련
+
+*/
+.item_select_container{
+
+    .title{
+        font-size: 30px;
+        font-weight: bold;
+        margin: 0;
+        text-align: center;
+    }
+
+    .item_select_area{
+        background-color: var(--white-color);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+        display: flex;
+        flex-direction: column;
+        margin: 0 20%;
+        padding: 10px;
+    }
+
+    /* 검색 관련 */
+    .search_container{
+        .search_area{
+            margin: 0 35%;
+            margin-top: 24px;
+        }
+        
+        .search{
+            width: 100%;
+            height: 40px;
+            background-color: var(--white-color);
+            border: 2px solid var(--main-light-color);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .search_input{
+            width: 95%;
+            height: 100%;
+            background-color: var(--white-color);
+            border: none;
+        }
+        
+        .search i{
+            padding-right: 5px;
+            cursor: pointer;
+        }
+    }
+    
+    /* 아이템 관련 */
+    .items_container{
+        
+        .item{
+            width: 100%;
+            height: 110%;
+            background-color: var(--gray-1-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .item_head_area{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            padding: 10px 0 0 10px;
+        
+        }
+        
+        .item_head_image{
+            width: 112px;
+            height: 112px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 0;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+        
+        .item_head_info{
+            width: 100%;
+        }
+        
+        .item_head_name_area{
+            height: 40px;
+            background-color: var(--main-more-light-color);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        
+        .item_head_name{
+            font-size: 20px;
+            font-weight: bold;
+            padding-left: 10px;
+            margin: 0;
+        }
+        
+        
+        .item_head_effect{
+            padding-left: 10px;
+            padding-right: 10px;
+            font-size: 14px;
+            margin: 0;
+        }
+        
+        .btn-add{
+            width: 30px;
+            height: 30px;
+            background-color: var(--main-light-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            bottom: 20px; 
+            right: 20px; 
+            transform: translateY(100%);
+        }
+    
+    }
+    
+
+    
+
+}

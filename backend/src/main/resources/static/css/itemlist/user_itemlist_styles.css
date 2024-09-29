@@ -130,3 +130,17 @@
     width: 100%;
     margin: 0 0 0 10px;
 }
+
+.btn-reset-time {
+    width: 40px;
+    height: 40px;
+    background-color: var(--gray-2-color);
+    cursor: pointer;
+    position: absolute; /* 추가: 절대 위치 설정 */
+    border-radius: 50%; /* 추가: 둥근 모서리 설정 */
+    bottom: 15px; /* 아래쪽 여백 */
+    right: 20px; /* 오른쪽 여백 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

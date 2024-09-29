@@ -8,13 +8,15 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 public class UserItemListResponseDto {
-    private Long id;
+    private Long userItemId;
+    private Long itemId;
     private String name;
     private String imageUrl;
     private LocalDateTime resetTime;
 
     public UserItemListResponseDto(UserItem userItem){
-        this.id = userItem.getId();
+        this.userItemId = userItem.getId();
+        this.itemId = userItem.getItem().getId();
         this.name = userItem.getItem().getName();
         this.imageUrl = userItem.getItem().getImageUrl();
         this.resetTime = userItem.getRestTime();
