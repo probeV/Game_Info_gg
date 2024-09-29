@@ -99,7 +99,7 @@ $(document).ready(function() {
         console.log(preImageUrl);
         console.log(selectedImageFile);
 
-        let imageUrl = "";
+        let imageUrl;
 
         if(selectedImageFile!=null && preImageUrl !== ""){
             // 새로 들어온 File 이 존재할 때 + 이전에 저장되어있던 File (preImageUrl) 이 존재 할 때
@@ -184,8 +184,10 @@ function updateFile(preImageUrl, directoryPath, selectedImageFile){
     formData.append('file', selectedImageFile);
     formData.append('FileUpdateRequestDto', new Blob([JSON.stringify(FileUpdateRequestDto)], { type: "application/json" }));
 
+    let imageUrl;
+
     // S3 파일 수정
-    return $.ajax({
+    $.ajax({
         url: `/api/v1/admins/files`,
         type: 'PUT',
         data: formData,
@@ -193,12 +195,15 @@ function updateFile(preImageUrl, directoryPath, selectedImageFile){
         contentType: false,
         success: function(response) {
             console.log('File updated successfully:', response);
+            imageUrl = response;
         },
         error: function(error) {
             console.error('Error updating file:', error);
             alert('파일 수정 중 오류가 발생했습니다.')
         }
     });
+
+    return imageUrl;
 }
 
 // S3 File 생성 API
@@ -212,8 +217,10 @@ function createFile(directoryPath, selectedImageFile){
     formData.append('file', selectedImageFile);
     formData.append('FileSaveRequestDto', new Blob([JSON.stringify(FileSaveRequestDto)], { type: "application/json" }));
 
+    let imageUrl;
+
     // S3 파일 생성
-    return $.ajax({
+    $.ajax({
         url: `/api/v1/admins/files`,
         type: 'POST',
         data: formData,
@@ -221,12 +228,15 @@ function createFile(directoryPath, selectedImageFile){
         contentType: false,
         success: function(response) {
             console.log('File created successfully:', response);
+            imageUrl = response;
         },
         error: function(error) {
             console.error('Error creating file:', error);
             alert('파일 생성 중 오류가 발생했습니다.')
         }
     });
+
+    return imageUrl;
 }
 
 // 검색 버튼 클릭 이벤트
