@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="~{layout/fragments/header :: header}"></div>
+</head>
+<body>
+    <div class="wrap">
+        <div class="app">
+            <div class="main-navbar-container" th:replace="~{layout/fragments/navbar/main_navbar :: main_navbar}"/>
+            <div class="logo-container d-flex justify-content-center align-items-center">
+                <div class="logo" onclick="location.href='/'" style="cursor: pointer; width: 400px; height: 200px; margin-bottom: 24px;"></div> 
+            </div>
+            <div class="inner-navbar-container" th:replace="~{layout/fragments/navbar/inner_navbar :: inner_navbar}"/>
+
+            
+        </div>
+    </div>
+    
+    <div th:replace="~{layout/fragments/footer :: footer}"></div>
+</body>
+</html>

@@ -1,0 +1,127 @@
+.search_area{
+    margin: 0 35%;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.search{
+    width: 100%;
+    height: 40px;
+    background-color: var(--white-color);
+    border: 2px solid var(--main-light-color);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.search_input{
+    width: 95%;
+    height: 100%;
+    background-color: var(--white-color);
+    border: none;
+}
+
+.search i{
+    padding-right: 5px;
+    cursor: pointer;
+}
+
+/* 아이템 관련 */
+.items_area{
+    margin: 0 20%;
+    display: flex;
+    flex-direction: column;
+}
+
+.item{
+    width: 100%;
+    height: 100%;
+    background-color: var(--gray-1-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.item_head_area{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+
+.image{
+    width: 112px;
+    height: 112px;
+    border-radius: 10px;
+}
+
+.item_head_info{
+    width: 100%;
+    margin-left: 5px;
+}
+
+.item_head_name_area{
+    width: 100%;
+    height: 40px;
+}
+
+/* item.name */
+.item_head_name{
+    width: 100%;
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 10px;
+    margin: 0;
+}
+
+/* item.effect */
+.item_head_effect{
+    width: 100%;
+    height: 70px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 14px;
+    margin: 0;
+}
+
+
+.item_body_area{
+    width: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.item_body_info{
+    width: 100%;
+    height: 100px;
+}
+
+/* item.description */
+.item_body_info_description{
+    width: 100%;
+    height: 100px;
+    font-size: 13px;
+}
+
+.item_button_area{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    gap: 5px;
+    margin-top: 5px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+}
+
+.item_button_area button{
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.item_highlight_button{
+    background-color: var(--main-light-color);
+}
+

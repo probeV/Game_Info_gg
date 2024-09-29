@@ -2,7 +2,7 @@ package probeV.GameInfogg.controller.user.dto.response;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import probeV.GameInfogg.domain.task.UserTask;
+import probeV.GameInfogg.domain.user.UserTask;
 import probeV.GameInfogg.domain.task.constant.ModeType;
 import probeV.GameInfogg.domain.task.constant.FrequencyType;
 import probeV.GameInfogg.domain.task.constant.EventType;

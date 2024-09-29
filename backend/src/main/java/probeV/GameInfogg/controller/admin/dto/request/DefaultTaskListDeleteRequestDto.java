@@ -6,11 +6,11 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class DefaultTaskListDeleteDto {
+public class DefaultTaskListDeleteRequestDto {
     private Integer id;
 
     @Builder
-    public DefaultTaskListDeleteDto(Integer id) {
+    public DefaultTaskListDeleteRequestDto(Integer id) {
         this.id = id;
     }
 }

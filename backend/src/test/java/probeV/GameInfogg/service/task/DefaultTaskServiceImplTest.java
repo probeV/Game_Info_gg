@@ -20,7 +20,7 @@ import java.util.List;
 @Slf4j
 @SpringBootTest
 @Transactional     
-class DefaultTaskServiceImplTest {
+  class DefaultTaskServiceImplTest {
 
     @Autowired
     DefaultTaskService defaultTaskService;

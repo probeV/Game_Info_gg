@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 public class UserTaskListDeleteRequestDto {
-    private Long id;
+    private Long userTaskId;
 
     @Builder
-    public UserTaskListDeleteRequestDto(Long id) {
-        this.id = id;
+    public UserTaskListDeleteRequestDto(Long userTaskId) {
+        this.userTaskId = userTaskId;
     }
 }
 
