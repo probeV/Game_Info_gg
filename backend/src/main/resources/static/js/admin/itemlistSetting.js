@@ -119,14 +119,17 @@ $(document).ready(function() {
 
         console.log(imageUrl);
 
-        // itemId가 있다면 수정 로직
-        if (itemId) {
-            const ItemUpdateRequestDto={
-                name: itemName,
-                effect: itemEffect,
-                description: itemDescription,
-                imageUrl: imageUrl
-            }
+        imageUrl.then(function(response){
+            console.log(response);
+
+            // itemId가 있다면 수정 로직
+            if (itemId) {
+                const ItemUpdateRequestDto={
+                    name: itemName,
+                    effect: itemEffect,
+                    description: itemDescription,
+                    imageUrl: imageUrl
+                }
 
             // 아이템 항목 수정 API
             $.ajax({
@@ -142,33 +145,34 @@ $(document).ready(function() {
                     console.error('Error updating file:', error);
                     alert('아이템 수정 중 오류가 발생했습니다.')
                 }
-            })
-        }
-        // itemId가 없다면 아이템 생성 로직
-        else {
-            const ItemSaveRequestDto = {
-                name: itemName,
-                effect: itemEffect,
-                description: itemDescription,
-                imageUrl: imageUrl
+                })
             }
-
-            // 아이템 항목 생성 API
-            $.ajax({
-                url: '/api/v1/admins/items',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(ItemSaveRequestDto),
-                success: function(response) {
-                    alert('아이템이 성공적으로 생성되었습니다.');
-                    fetchItems();
-                },
-                error: function(error) {
-                    console.error('Error creating item:', error);
-                    alert('아이템 생성 중 오류가 발생했습니다.');
+            // itemId가 없다면 아이템 생성 로직
+            else {
+                const ItemSaveRequestDto = {
+                    name: itemName,
+                    effect: itemEffect,
+                    description: itemDescription,
+                    imageUrl: imageUrl
                 }
-            });
-        }
+
+                // 아이템 항목 생성 API
+                $.ajax({
+                    url: '/api/v1/admins/items',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(ItemSaveRequestDto),
+                    success: function(response) {
+                        alert('아이템이 성공적으로 생성되었습니다.');
+                        fetchItems();
+                    },
+                    error: function(error) {
+                        console.error('Error creating item:', error);
+                        alert('아이템 생성 중 오류가 발생했습니다.');
+                    }
+                });
+            }
+        })
     });
 });
 
@@ -184,26 +188,17 @@ function updateFile(preImageUrl, directoryPath, selectedImageFile){
     formData.append('file', selectedImageFile);
     formData.append('FileUpdateRequestDto', new Blob([JSON.stringify(FileUpdateRequestDto)], { type: "application/json" }));
 
-    let imageUrl;
-
     // S3 파일 수정
-    $.ajax({
+    return $.ajax({
         url: `/api/v1/admins/files`,
         type: 'PUT',
         data: formData,
         processData: false,
-        contentType: false,
-        success: function(response) {
-            console.log('File updated successfully:', response);
-            imageUrl = response;
-        },
-        error: function(error) {
-            console.error('Error updating file:', error);
-            alert('파일 수정 중 오류가 발생했습니다.')
-        }
+        contentType: false
+    }).fail(function(error) {
+        console.error('Error updating file:', error);
+        alert('파일 수정 중 오류가 발생했습니다.');
     });
-
-    return imageUrl;
 }
 
 // S3 File 생성 API
@@ -217,29 +212,17 @@ function createFile(directoryPath, selectedImageFile){
     formData.append('file', selectedImageFile);
     formData.append('FileSaveRequestDto', new Blob([JSON.stringify(FileSaveRequestDto)], { type: "application/json" }));
 
-    let imageUrl;
-
     // S3 파일 생성
-    $.ajax({
+    return $.ajax({
         url: `/api/v1/admins/files`,
         type: 'POST',
         data: formData,
         processData: false,
-        contentType: false,
-        success: function(response) {
-            console.log('File created successfully:', response);
-            console.log(response);
-            imageUrl = response;
-        },
-        error: function(error) {
-            console.error('Error creating file:', error);
-            alert('파일 생성 중 오류가 발생했습니다.')
-        }
+        contentType: false
+    }).fail(function(error) {
+        console.error('Error creating file:', error);
+        alert('파일 생성 중 오류가 발생했습니다.');
     });
-
-    console.log(imageUrl);
-
-    return imageUrl;
 }
 
 // 검색 버튼 클릭 이벤트
