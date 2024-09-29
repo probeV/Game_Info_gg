@@ -22,7 +22,7 @@ public class UserItemListUpdateRequestDto {
 
     public UserItem toEntity() {
         return UserItem.builder()
-            .restTime(LocalDateTime.parse(resetTime))
+            .resetTime(LocalDateTime.parse(resetTime))
             .build();
     }
 }
