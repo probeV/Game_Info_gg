@@ -1,31 +1,28 @@
 package probeV.GameInfogg.controller.user.dto.request;
 
-import java.time.LocalDateTime;
-
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import probeV.GameInfogg.domain.user.UserItem;
 
-import lombok.Builder;
-import jakarta.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 @Getter @Setter
 @NoArgsConstructor
 public class UserItemListUpdateRequestDto {
-    private Long userItemid;
-    @NotBlank(message = "남은 시간은 필수 입력 항목입니다.")
-    private String restTime;
+    private Long userItemId;
+    private String resetTime;
 
     @Builder
-    public UserItemListUpdateRequestDto(Long userItemid, String restTime) {
-        this.userItemid = userItemid;
-        this.restTime = restTime;
+    public UserItemListUpdateRequestDto(Long userItemId, String resetTime) {
+        this.userItemId = userItemId;
+        this.resetTime = resetTime;
     }
 
     public UserItem toEntity() {
         return UserItem.builder()
-            .restTime(LocalDateTime.parse(restTime))
+            .restTime(LocalDateTime.parse(resetTime))
             .build();
     }
 }

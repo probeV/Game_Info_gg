@@ -117,8 +117,8 @@ public class UserItemServiceImplTest {
 
         // Then
         assertEquals(2, result.size());
-        assertEquals(userItem1.getId(), result.get(0).getId());
-        assertEquals(userItem2.getId(), result.get(1).getId());
+        assertEquals(userItem1.getId(), result.get(0).getUserItemId());
+        assertEquals(userItem2.getId(), result.get(1).getUserItemId());
     }
 
     @Test
@@ -164,7 +164,7 @@ public class UserItemServiceImplTest {
         assertEquals(2, userItemRepository.findByUserId(user.getId()).size());
         assertEquals(userItem1.getId(), userItemRepository.findByUserId(user.getId()).get(0).getId());
         assertEquals(dto2.getItemId(), userItemRepository.findByUserId(user.getId()).get(1).getItem().getId());
-        assertEquals(LocalDateTime.parse(dto2.getRestTime()), userItemRepository.findByUserId(user.getId()).get(1).getRestTime());
+        assertEquals(LocalDateTime.parse(dto2.getResetTime()), userItemRepository.findByUserId(user.getId()).get(1).getRestTime());
     }
 
     @Test
@@ -261,10 +261,10 @@ public class UserItemServiceImplTest {
         userItemService.updateItems(requestDto);
 
         // Then
-        assertEquals(dto1.getUserItemid(), userItemRepository.findByUserId(user.getId()).get(0).getId());
-        assertEquals(dto2.getUserItemid(), userItemRepository.findByUserId(user.getId()).get(1).getId());
-        assertEquals(LocalDateTime.parse(dto1.getRestTime()), userItemRepository.findByUserId(user.getId()).get(0).getRestTime());
-        assertEquals(LocalDateTime.parse(dto2.getRestTime()), userItemRepository.findByUserId(user.getId()).get(1).getRestTime());
+        assertEquals(dto1.getUserItemId(), userItemRepository.findByUserId(user.getId()).get(0).getId());
+        assertEquals(dto2.getUserItemId(), userItemRepository.findByUserId(user.getId()).get(1).getId());
+        assertEquals(LocalDateTime.parse(dto1.getResetTime()), userItemRepository.findByUserId(user.getId()).get(0).getRestTime());
+        assertEquals(LocalDateTime.parse(dto2.getResetTime()), userItemRepository.findByUserId(user.getId()).get(1).getRestTime());
     }
 
     @Test

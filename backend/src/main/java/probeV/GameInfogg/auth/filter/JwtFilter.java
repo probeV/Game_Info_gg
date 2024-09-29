@@ -50,12 +50,9 @@ public class JwtFilter extends OncePerRequestFilter {
             .anyMatch(token -> token.endsWith("/*") && requestURI.startsWith(token.substring(0, token.length() - 2)));
 
         if(isIgnoreUrl){
-            log.info("JwtFilter 무시");
             filterChain.doFilter(request, response);
             return;
         }
-
-        log.info("현재 URI : " + requestURI);
 
         boolean isUserActive = userActiveToken.stream()
             .anyMatch(token -> token.endsWith("/*") && requestURI.startsWith(token.substring(0, token.length() - 2)));
@@ -64,16 +61,14 @@ public class JwtFilter extends OncePerRequestFilter {
 
         // 토큰이 필요없는 경우, 권한이 필요없는 요청 
         if(!isUserActive && !isAdminActive){
-            log.info("권한이 필요없는 요청 or 페이지 로딩");
+            log.info("권한이 필요없는 요청 or 페이지 로딩 -> 현재 URI : " + requestURI);
             filterChain.doFilter(request, response);
             return;
         }
 
-        log.info("JWT 토큰이 필요한 URI : " + requestURI);
+        log.info("JWT 토큰이 필요한 URI -> 현재 URI : " + requestURI);
         
         String accessToken = request.getHeader("Authorization") != null ? request.getHeader("Authorization").substring(7) : null;
-
-        log.info("AccessToken : " + accessToken);
 
         // accessToken이 유효하다면
         if (accessToken != null && jwtTokenProvider.validateToken(accessToken)) {

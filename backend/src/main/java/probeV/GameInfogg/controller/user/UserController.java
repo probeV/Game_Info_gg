@@ -74,14 +74,14 @@ public class UserController {
 
     // 내 아이템 항목 생성
     @PostMapping("/users/items")
-    public ResponseEntity<Void> createUserItem(@Valid @RequestBody List<UserItemListSaveRequestDto> requestDto){
+    public ResponseEntity<Void> createUserItem(@RequestBody List<UserItemListSaveRequestDto> requestDto){
         userItemService.saveItems(requestDto);
         return ResponseEntity.ok().build();
     }
 
     // 내 아이템 항목 수정
     @PutMapping("/users/items")
-    public ResponseEntity<Void> updateUserItem(@Valid @RequestBody List<UserItemListUpdateRequestDto> requestDto){
+    public ResponseEntity<Void> updateUserItem(@RequestBody List<UserItemListUpdateRequestDto> requestDto){
         userItemService.updateItems(requestDto);
         return ResponseEntity.ok().build();
     }

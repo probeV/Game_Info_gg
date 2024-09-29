@@ -4,15 +4,17 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import probeV.GameInfogg.controller.user.dto.request.UserItemListSaveRequestDto;
-import probeV.GameInfogg.controller.user.dto.response.UserItemListResponseDto;
-import probeV.GameInfogg.controller.user.dto.request.UserItemListUpdateRequestDto;
+import probeV.GameInfogg.auth.SecurityUtil;
 import probeV.GameInfogg.controller.user.dto.request.UserItemListDeleteRequestDto;
+import probeV.GameInfogg.controller.user.dto.request.UserItemListSaveRequestDto;
+import probeV.GameInfogg.controller.user.dto.request.UserItemListUpdateRequestDto;
+import probeV.GameInfogg.controller.user.dto.response.UserItemListResponseDto;
 import probeV.GameInfogg.domain.item.Item;
+import probeV.GameInfogg.domain.user.User;
+import probeV.GameInfogg.domain.user.UserItem;
+import probeV.GameInfogg.exception.item.ItemNotFoundException;
 import probeV.GameInfogg.repository.item.ItemRepository;
 import probeV.GameInfogg.repository.user.UserItemRepository;
-import probeV.GameInfogg.auth.SecurityUtil;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,10 +22,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import probeV.GameInfogg.domain.user.User;
-import probeV.GameInfogg.domain.user.UserItem;
-import probeV.GameInfogg.exception.item.ItemNotFoundException;
 
 
 
@@ -92,7 +90,7 @@ public class UserItemServiceImpl implements UserItemService {
             .collect(Collectors.toMap(UserItem::getId, Function.identity()));
 
         for (UserItemListUpdateRequestDto dto : requestDto) {
-            Long id = dto.getUserItemid();
+            Long id = dto.getUserItemId();
 
             // 수정 로직
             log.info("user id: " + user.getId() + " userItem id: " + id + " 수정 로직 호출");
@@ -100,7 +98,7 @@ public class UserItemServiceImpl implements UserItemService {
             // UserItem 찾기
             UserItem userItem = userItemMap.get(id);
             if (userItem != null) {
-                userItem.updateUserItem(LocalDateTime.parse(dto.getRestTime()));
+                userItem.updateUserItem(LocalDateTime.parse(dto.getResetTime()));
             }
             // UserItem 존재하지 않을 때
             else {
