@@ -2,7 +2,6 @@ package probeV.GameInfogg.controller.admin.dto.request;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.Builder;
 @Getter
 @NoArgsConstructor
