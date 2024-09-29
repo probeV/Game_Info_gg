@@ -159,4 +159,5 @@ class AdminServiceImplTest {
         assertThat(result.getUserList().get(0).getName()).isEqualTo("test1");
         assertThat(result.getUserList().get(1).getName()).isEqualTo("test2");
     }
+
 }
