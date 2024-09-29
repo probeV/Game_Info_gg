@@ -228,6 +228,7 @@ function createFile(directoryPath, selectedImageFile){
         contentType: false,
         success: function(response) {
             console.log('File created successfully:', response);
+            console.log(response);
             imageUrl = response;
         },
         error: function(error) {
@@ -235,6 +236,8 @@ function createFile(directoryPath, selectedImageFile){
             alert('파일 생성 중 오류가 발생했습니다.')
         }
     });
+
+    console.log(imageUrl);
 
     return imageUrl;
 }
