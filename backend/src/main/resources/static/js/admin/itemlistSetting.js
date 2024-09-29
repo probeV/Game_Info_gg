@@ -117,6 +117,7 @@ $(document).ready(function() {
             imageUrl = preImageUrl;
         }
 
+        console.log(imageUrl);
 
         // itemId가 있다면 수정 로직
         if (itemId) {
@@ -184,7 +185,7 @@ function updateFile(preImageUrl, directoryPath, selectedImageFile){
     formData.append('FileUpdateRequestDto', new Blob([JSON.stringify(FileUpdateRequestDto)], { type: "application/json" }));
 
     // S3 파일 수정
-    return $.ajax({
+    $.ajax({
         url: `/api/v1/admins/files`,
         type: 'PUT',
         data: formData,
@@ -213,7 +214,7 @@ function createFile(directoryPath, selectedImageFile){
     formData.append('FileSaveRequestDto', new Blob([JSON.stringify(FileSaveRequestDto)], { type: "application/json" }));
 
     // S3 파일 생성
-    return $.ajax({
+    $.ajax({
         url: `/api/v1/admins/files`,
         type: 'POST',
         data: formData,
