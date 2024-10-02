@@ -99,14 +99,14 @@ public class UserItemServiceImplTest {
         itemRepository.save(item2);
 
         UserItem userItem1 = UserItem.builder()
-            .restTime(LocalDateTime.now())
+            .resetTime(LocalDateTime.now())
             .build();
         userItem1.setUser(user);
         userItem1.setItem(item1);
         userItemRepository.save(userItem1);
 
         UserItem userItem2 = UserItem.builder()
-            .restTime(LocalDateTime.now())
+            .resetTime(LocalDateTime.now())
             .build();
         userItem2.setUser(user);
         userItem2.setItem(item2);
@@ -148,7 +148,7 @@ public class UserItemServiceImplTest {
         itemRepository.save(item2);
 
         UserItem userItem1 = UserItem.builder()
-            .restTime(LocalDateTime.now())
+            .resetTime(LocalDateTime.now())
             .build();
         userItem1.setUser(user);
         userItem1.setItem(item1);
@@ -194,14 +194,14 @@ public class UserItemServiceImplTest {
         itemRepository.save(item2);
 
         UserItem userItem1 = UserItem.builder()
-                .restTime(LocalDateTime.now())
+                .resetTime(LocalDateTime.now())
                 .build();
         userItem1.setUser(user);
         userItem1.setItem(item1);
         userItemRepository.save(userItem1);
 
         UserItem userItem2 = UserItem.builder()
-                .restTime(LocalDateTime.now())
+                .resetTime(LocalDateTime.now())
                 .build();
         userItem2.setUser(user);
         userItem2.setItem(item2);
@@ -240,14 +240,14 @@ public class UserItemServiceImplTest {
         itemRepository.save(item2);
 
         UserItem userItem1 = UserItem.builder()
-            .restTime(LocalDateTime.now())
+            .resetTime(LocalDateTime.now())
             .build();
         userItem1.setUser(user);
         userItem1.setItem(item1);
         userItemRepository.save(userItem1);
 
         UserItem userItem2 = UserItem.builder()
-            .restTime(LocalDateTime.now())
+            .resetTime(LocalDateTime.now())
             .build();
         userItem2.setUser(user);
         userItem2.setItem(item2);
@@ -294,14 +294,14 @@ public class UserItemServiceImplTest {
         itemRepository.save(item2);
 
         UserItem userItem1 = UserItem.builder()
-                .restTime(LocalDateTime.now())
+                .resetTime(LocalDateTime.now())
                 .build();
         userItem1.setUser(user);
         userItem1.setItem(item1);
         userItemRepository.save(userItem1);
 
         UserItem userItem2 = UserItem.builder()
-                .restTime(LocalDateTime.now())
+                .resetTime(LocalDateTime.now())
                 .build();
         userItem2.setUser(user);
         userItem2.setItem(item2);
@@ -340,14 +340,14 @@ public class UserItemServiceImplTest {
         itemRepository.save(item2);
 
         UserItem userItem1 = UserItem.builder()
-                .restTime(LocalDateTime.now())
+                .resetTime(LocalDateTime.now())
                 .build();
         userItem1.setUser(user);
         userItem1.setItem(item1);
         userItemRepository.save(userItem1);
 
         UserItem userItem2 = UserItem.builder()
-                .restTime(LocalDateTime.now())
+                .resetTime(LocalDateTime.now())
                 .build();
         userItem2.setUser(user);
         userItem2.setItem(item2);
@@ -387,14 +387,14 @@ public class UserItemServiceImplTest {
         itemRepository.save(item2);
 
         UserItem userItem1 = UserItem.builder()
-            .restTime(LocalDateTime.now())
+            .resetTime(LocalDateTime.now())
             .build();
         userItem1.setUser(user);
         userItem1.setItem(item1);
         userItemRepository.save(userItem1);
 
         UserItem userItem2 = UserItem.builder()
-            .restTime(LocalDateTime.now())
+            .resetTime(LocalDateTime.now())
             .build();
         userItem2.setUser(user);
         userItem2.setItem(item2);
@@ -439,7 +439,7 @@ public class UserItemServiceImplTest {
         itemRepository.save(item2);
 
         UserItem userItem1 = UserItem.builder()
-            .restTime(LocalDateTime.now())
+            .resetTime(LocalDateTime.now())
             .build();
         userItem1.setUser(user);
         userItem1.setItem(item1);

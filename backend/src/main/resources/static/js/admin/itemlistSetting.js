@@ -1,4 +1,10 @@
+import { createFile, updateFile, deleteFile } from "./FileUtil.js";
+import { searchEnterEvent, searchIconClickEvent } from "./layout/fragment/SearchBar.js";
+
 $(document).ready(function() {
+    searchEnterEvent(fetchItems);
+    searchIconClickEvent(fetchItems);
+
     // 초기 아이템 리스트 로드
     fetchItems();
 
@@ -11,25 +17,9 @@ $(document).ready(function() {
         if (itemId) {
             if (confirm('정말로 삭제하겠습니까?')) { // 삭제 확인
 
-                // S3 파일 삭제 API / imageUrl 이 존재할 때
+                // imageUrl 이 존재할 때
                 if(preImageUrl !== "") {
-                    const FileDeleteRequestDto = {
-                        imageUrl: preImageUrl
-                    };
-
-                    $.ajax({
-                        url: `/api/v1/admins/files`,
-                        type: 'DELETE',
-                        contentType: 'application/json',
-                        data: JSON.stringify(FileDeleteRequestDto),
-                        success: function (response) {
-
-                        },
-                        error: function (error) {
-                            console.error('Error deleting item:', error);
-                            alert('파일 삭제 중 오류가 발생했습니다.')
-                        }
-                    })
+                    deleteFile(preImageUrl);
                 }
 
                 // 아이템 항목 삭제 API
@@ -104,6 +94,7 @@ $(document).ready(function() {
         if(selectedImageFile!=null && preImageUrl !== ""){
             // 새로 들어온 File 이 존재할 때 + 이전에 저장되어있던 File (preImageUrl) 이 존재 할 때
             // 파일 수정 로직
+            
             imageUrl = updateFile(preImageUrl, "items", selectedImageFile);
         }
         else if(selectedImageFile!=null && preImageUrl === ""){
@@ -171,78 +162,6 @@ $(document).ready(function() {
     });
 });
 
-// S3 File 수정 API
-function updateFile(preImageUrl, directoryPath, selectedImageFile){
-    const formData = new FormData();
-
-    const FileUpdateRequestDto = {
-        preFileUrl: preImageUrl,
-        directoryPath: directoryPath
-    };
-
-    formData.append('file', selectedImageFile);
-    formData.append('FileUpdateRequestDto', new Blob([JSON.stringify(FileUpdateRequestDto)], { type: "application/json" }));
-
-    // S3 파일 수정
-    return $.ajax({
-        url: `/api/v1/admins/files`,
-        type: 'PUT',
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function(response) {
-            console.log('File updated successfully:', response);
-            return response;
-        },
-        error: function(error) {
-            console.error('Error updating file:', error);
-            alert('파일 수정 중 오류가 발생했습니다.')
-        }
-    });
-}
-
-// S3 File 생성 API
-function createFile(directoryPath, selectedImageFile){
-    const formData = new FormData();
-
-    const FileSaveRequestDto = {
-        directoryPath: directoryPath
-    };
-
-    formData.append('file', selectedImageFile);
-    formData.append('FileSaveRequestDto', new Blob([JSON.stringify(FileSaveRequestDto)], { type: "application/json" }));
-
-    // S3 파일 생성
-    return $.ajax({
-        url: `/api/v1/admins/files`,
-        type: 'POST',
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function(response) {
-            console.log('File created successfully:', response);
-            return response;
-        },
-        error: function(error) {
-            console.error('Error creating file:', error);
-            alert('파일 생성 중 오류가 발생했습니다.')
-        }
-    });
-}
-
-// 검색 버튼 클릭 이벤트
-$('.search i').on('click', function() {
-    fetchItems();
-});
-
-// 엔터 키 이벤트
-$('.search input').on('keydown', function(event) {
-    if (event.key === 'Enter') {
-        event.preventDefault(); // 기본 엔터키 동작 방지
-        fetchItems();
-    }
-});
-
 // 새 아이템 추가 버튼 클릭 이벤트
 $(document).on('click', '.new_item_button', function() {
     const itemElement = $(`
@@ -279,10 +198,9 @@ $(document).on('click', '.new_item_button', function() {
     $('#items').append(itemElement);
 });
 
-function fetchItems() {
+function fetchItems(keyword) {
 
-    let url=null;
-    const keyword = $('.search input').val().trim() || null;
+    let url;
     if (keyword) {
         url=`/api/v1/items/search?keyword=${keyword}`;
     }
