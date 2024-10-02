@@ -37,15 +37,8 @@
 
                     <h1 class="title">추가하기</h1>
 
-                    <div class="search_container">
-                        <div class="search_area">
-                            <div class="search">
-                                <input type="text" class="search_input" placeholder="아이템 이름을 입력하세요">
-                                <i class="fa-solid fa-magnifying-glass" style="color: var(--main-light-color); margin-left: 8px;"></i>
-                            </div>
-                        </div>
-                    </div>
-        
+                    <div th:replace="~{layout/fragments/search/search_bar :: search_bar}"></div>
+            
                     <div class="items_container">
                         <div class="items_area">
                             <div id="items" class="row">

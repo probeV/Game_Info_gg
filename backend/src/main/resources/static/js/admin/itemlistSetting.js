@@ -1,6 +1,10 @@
 import { createFile, updateFile, deleteFile } from "./FileUtil.js";
+import { searchEnterEvent, searchIconClickEvent } from "./layout/fragment/SearchBar.js";
 
 $(document).ready(function() {
+    searchEnterEvent(fetchItems);
+    searchIconClickEvent(fetchItems);
+
     // 초기 아이템 리스트 로드
     fetchItems();
 
@@ -157,19 +161,6 @@ $(document).ready(function() {
     });
 });
 
-// 검색 버튼 클릭 이벤트
-$('.search i').on('click', function() {
-    fetchItems();
-});
-
-// 엔터 키 이벤트
-$('.search input').on('keydown', function(event) {
-    if (event.key === 'Enter') {
-        event.preventDefault(); // 기본 엔터키 동작 방지
-        fetchItems();
-    }
-});
-
 // 새 아이템 추가 버튼 클릭 이벤트
 $(document).on('click', '.new_item_button', function() {
     const itemElement = $(`
@@ -206,10 +197,9 @@ $(document).on('click', '.new_item_button', function() {
     $('#items').append(itemElement);
 });
 
-function fetchItems() {
+function fetchItems(keyword) {
 
-    let url=null;
-    const keyword = $('.search input').val().trim() || null;
+    let url;
     if (keyword) {
         url=`/api/v1/items/search?keyword=${keyword}`;
     }
