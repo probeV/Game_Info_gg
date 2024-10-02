@@ -28,11 +28,11 @@ export function createFile(directoryPath, selectedImageFile){
 }
 
 // S3 File 수정 API
-export function updateFile(preImageUrl, directoryPath, selectedImageFile){
+export function updateFile(preFileUrl, directoryPath, selectedImageFile){
     const formData = new FormData();
 
     const FileUpdateRequestDto = {
-        preFileUrl: preImageUrl,
+        preFileUrl: preFileUrl,
         directoryPath: directoryPath
     };
 
@@ -58,9 +58,9 @@ export function updateFile(preImageUrl, directoryPath, selectedImageFile){
 }
 
 // S3 File 삭제 API
-export function deleteFile(preUrl){
+export function deleteFile(preFileUrl){
     const FileDeleteRequestDto = {
-        imageUrl: preUrl
+        imageUrl: preFileUrl
     };
 
     $.ajax({

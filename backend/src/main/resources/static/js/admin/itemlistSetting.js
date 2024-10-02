@@ -94,6 +94,7 @@ $(document).ready(function() {
         if(selectedImageFile!=null && preImageUrl !== ""){
             // 새로 들어온 File 이 존재할 때 + 이전에 저장되어있던 File (preImageUrl) 이 존재 할 때
             // 파일 수정 로직
+            
             imageUrl = updateFile(preImageUrl, "items", selectedImageFile);
         }
         else if(selectedImageFile!=null && preImageUrl === ""){
